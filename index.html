@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy & Legal Disclaimer — Rhythm</title>
+    <style>
+        :root {
+            --primary: #6200EE;
+            --primary-soft: #F3E8FF;
+            --bg: #FAFAFC;
+            --card: #FFFFFF;
+            --text: #1F1F24;
+            --muted: #5A5A66;
+            --border: #E6E6F0;
+            --warn-bg: #FFF8F6;
+            --warn-border: #F5C2B8;
+            --warn-text: #8C2D19;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            padding: 32px 16px 64px;
+        }
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        header {
+            background: linear-gradient(135deg, #6200EE 0%, #4B00B5 100%);
+            color: #FFFFFF;
+            padding: 36px 32px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(98, 0, 238, 0.12);
+        }
+        header h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+        }
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .badge {
+            background: rgba(255, 255, 255, 0.16);
+            color: #FFFFFF;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 999px;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px 32px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+        .disclaimer-box {
+            background: var(--warn-bg);
+            border: 1px solid var(--warn-border);
+            color: var(--warn-text);
+            border-radius: 18px;
+            padding: 24px 28px;
+            margin-bottom: 20px;
+        }
+        .disclaimer-box h2 {
+            color: var(--warn-text);
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        p {
+            margin-bottom: 12px;
+            color: var(--text);
+            font-size: 0.96rem;
+        }
+        p:last-child { margin-bottom: 0; }
+        ul {
+            margin: 8px 0 12px 20px;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+        li { margin-bottom: 8px; }
+        code {
+            background: var(--primary-soft);
+            color: var(--primary);
+            padding: 2px 6px;
+            border-radius: 5px;
+            font-size: 0.88em;
+        }
+        footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-top: 32px;
+        }
+        a { color: var(--primary); text-decoration: none; font-weight: 600; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Rhythm — Privacy Policy &amp; Terms</h1>
+            <p>Effective &amp; Last Updated: November 13, 2026</p>
+            <div class="badge-row">
+                <span class="badge">100% On-Device Storage</span>
+                <span class="badge">SQLCipher 256-Bit AES Encrypted</span>
+                <span class="badge">Zero Internet Permission</span>
+                <span class="badge">No Ads or Trackers</span>
+            </div>
+        </header>
+
+        <section class="disclaimer-box">
+            <h2>Important Medical, Contraception &amp; Emergency Disclaimer</h2>
+            <p><strong>Not a Medical Device or Contraceptive Method:</strong> Rhythm is designed solely for personal wellness awareness and informational cycle logging. It is <strong>not</strong> a certified medical device, clinical diagnostic tool, or healthcare service.</p>
+            <p><strong>Strictly Not for Birth Control:</strong> Do not rely on Rhythm's cycle estimates, ovulation projections, or fertile window calculations to prevent or achieve pregnancy. Biological cycles fluctuate due to stress, illness, hormonal shifts, and conditions such as PCOS. Always consult a qualified healthcare professional for medical advice, diagnosis, contraception, or treatment.</p>
+            <p><strong>Medical Emergencies:</strong> If you experience severe pelvic or abdominal pain, abnormal heavy bleeding, dizziness, fainting, or any acute medical symptoms, call your local emergency services (such as 112 or 911) or seek immediate emergency medical care.</p>
+        </section>
+
+        <section class="card">
+            <h2>1. Zero External Data Collection (Air-Gapped Architecture)</h2>
+            <p>Rhythm is engineered with a strict offline-first, zero-cloud architecture. We do not operate backend servers, user accounts, or remote databases. Furthermore, the Android <code>android.permission.INTERNET</code> capability is explicitly stripped from the application manifest, making it technically impossible for Rhythm to transmit your health records over the internet.</p>
+        </section>
+
+        <section class="card">
+            <h2>2. On-Device Encrypted Storage</h2>
+            <p>All information you log inside Rhythm is stored exclusively on your physical device:</p>
+            <ul>
+                <li><strong>Cycle &amp; Wellness Logs:</strong> Period dates, flow intensity, symptoms, mood, energy, sleep quality, hydration, cervical mucus observations, and personal notes are stored in a local Room SQLite database encrypted at rest using <strong>SQLCipher (256-bit AES)</strong> backed by the Android Hardware Keystore.</li>
+                <li><strong>Profile &amp; Preferences:</strong> Optional profile parameters (such as display name, age, height, weight, and tracking mode) and app settings are stored strictly inside Android's sandboxed local DataStore.</li>
+                <li><strong>OS Cloud Backups Disabled:</strong> Automatic operating-system cloud backups (Google Drive device backup) and ADB device-to-device transfers are explicitly disabled for Rhythm's database and preference directories to ensure your encrypted health data never leaves your phone silently.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>3. No Advertising, Analytics, or Third-Party Sharing</h2>
+            <ul>
+                <li>We do <strong>not</strong> integrate advertising networks or behavioral profiling SDKs.</li>
+                <li>We do <strong>not</strong> include third-party telemetry, crash-reporting, or analytics trackers.</li>
+                <li>We never sell, rent, trade, or share your personal or reproductive health information with any third party.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>4. Device Security, Permissions &amp; PIN Loss Notice</h2>
+            <ul>
+                <li><strong>Biometric &amp; PIN Shield:</strong> Optional app-lock features use Android's native <code>BiometricPrompt</code> API and hardware-backed cryptographic verification. We never access or store your raw biometric fingerprint or facial data.</li>
+                <li><strong>No Remote PIN Recovery:</strong> Because Rhythm has no servers or user accounts, there is no remote "Forgot PIN" reset option. If you forget your 4-digit PIN without Biometric Lock enabled, you will need to clear the application's storage to regain access, which erases local data.</li>
+                <li><strong>Screen Capture Protection:</strong> When App Lock or Discreet Mode is active, Rhythm enforces Android's <code>FLAG_SECURE</code> window protection to block screenshots, screen recording, and recent-app thumbnail previews.</li>
+                <li><strong>Local Notifications:</strong> If enabled, cycle reminders and daily check-in nudges (<code>POST_NOTIFICATIONS</code>) are scheduled and evaluated 100% locally on your device using Android WorkManager.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>5. User-Initiated Exports (PDF, CSV, &amp; JSON Backups)</h2>
+            <p>Rhythm gives you full portability over your records:</p>
+            <ul>
+                <li><strong>PDF Health Reports &amp; CSV Tables:</strong> Reports are generated entirely on-device. They are only shared or saved when you explicitly trigger an export via Android's system share sheet or file picker.</li>
+                <li><strong>Manual JSON Backups:</strong> You may export and restore local JSON backup files using Android's Storage Access Framework (system file picker). Once you export an unencrypted backup or report outside Rhythm's encrypted sandbox onto your phone storage or third-party cloud drive, you are solely responsible for safeguarding that file.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>6. Optional In-App Support (Google Play Billing)</h2>
+            <p>Rhythm includes an optional tip jar powered by the official <strong>Google Play Billing Library</strong>. If you choose to make a voluntary contribution, the payment transaction is processed directly by Google Play under Google's Privacy Policy. Rhythm never receives, processes, or stores your credit card, UPI, or banking details, and your health logs are never linked to billing transactions.</p>
+        </section>
+
+        <section class="card">
+            <h2>7. Data Retention &amp; Instant Erasure ("Wipe All Data")</h2>
+            <p>Because Rhythm does not maintain user accounts or remote servers, we hold zero copies of your data. You can permanently and irreversibly erase all cycle history, daily logs, and preferences at any time by:</p>
+            <ul>
+                <li>Tapping <strong>Settings &rarr; Wipe All Data</strong> inside the application; or</li>
+                <li>Clearing the application's storage or uninstalling Rhythm via your Android system settings.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>8. Age Requirement (13+) &amp; Minor Privacy</h2>
+            <p>Rhythm is designed for users aged <strong>13 and older</strong>. We do not knowingly market to or direct the application toward children under the age of 13.</p>
+            <ul>
+                <li><strong>Users Aged 13 to 17 (Minors):</strong> If you are between the ages of 13 and 18 (or under the age of legal majority in your jurisdiction), you must review this Privacy Policy and the Medical Disclaimer with a parent or legal guardian to ensure you both understand that Rhythm is an informational wellness tool and not a medical or contraceptive device. Optional in-app contributions via Google Play Billing require the permission of the parent or legal account holder.</li>
+                <li><strong>Zero Minor Profiling or Data Collection:</strong> In compliance with COPPA, GDPR, and India's Digital Personal Data Protection (DPDP) Act, Rhythm collects zero personal data on external servers, performs no behavioral tracking or profiling, and serves no advertisements to any user regardless of age.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>9. Disclaimer of Warranties &amp; Limitation of Liability</h2>
+            <p>Rhythm is provided <strong>"AS IS"</strong> and <strong>"AS AVAILABLE"</strong> without warranties of any kind, whether express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or accuracy of informational estimates.</p>
+            <p>To the maximum extent permitted by applicable law, the developer shall not be liable for any direct, indirect, incidental, special, or consequential damages, data loss, or health outcomes resulting from your use of, inability to use, or reliance on the application.</p>
+        </section>
+
+        <section class="card">
+            <h2>10. Changes to This Policy &amp; Contact Us</h2>
+            <p>If we update this Privacy Policy to reflect new on-device features, we will revise the "Last Updated" date at the top of this page and within the application.</p>
+            <p>For questions, feedback, or compliance inquiries regarding this Privacy Policy, contact the developer at: <a href="mailto:admin.rhythm@gmail.com">YOUR_SUPPORT_EMAIL@gmail.com</a></p>
+        </section>
+
+        <footer>
+            &copy; 2026 Rhythm Wellness. Built for 100% On-Device Privacy.
+        </footer>
+    </div>
+</body>
+</html>
