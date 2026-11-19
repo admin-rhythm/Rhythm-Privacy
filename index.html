@@ -79,8 +79,8 @@
             font-size: 15.5px;
             overflow-x: clip;
             background-image:
-                radial-gradient(circle at 25% 0%, rgba(255, 138, 101, 0.08) 0%, transparent 45%),
-                radial-gradient(circle at 75% 4%, rgba(179, 136, 255, 0.09) 0%, transparent 48%);
+                radial-gradient(circle at 22% 0%, rgba(255, 138, 101, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 78% 4%, rgba(179, 136, 255, 0.09) 0%, transparent 48%);
             background-repeat: no-repeat;
         }
 
@@ -97,7 +97,7 @@
             pointer-events: none;
         }
 
-        /* Animations */
+        /* Startup Motion Curves & Keyframes */
         @keyframes heroFloatIn {
             from {
                 opacity: 0;
@@ -120,8 +120,8 @@
 
         @keyframes screenSwapIn {
             from {
-                opacity: 0.35;
-                transform: translateY(6px);
+                opacity: 0.3;
+                transform: translateY(7px);
             }
             to {
                 opacity: 1;
@@ -135,8 +135,8 @@
 
         .reveal {
             opacity: 0;
-            transform: translateY(18px);
-            transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(16px);
+            transition: opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1), transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .reveal.is-visible {
@@ -145,7 +145,7 @@
         }
 
         .screen-animate {
-            animation: screenSwapIn 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+            animation: screenSwapIn 0.24s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -232,7 +232,7 @@
             padding: 7px 11px;
             border-radius: 9px;
             white-space: nowrap;
-            transition: color 0.15s ease, background 0.15s ease;
+            transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .nav-links a:hover,
@@ -247,7 +247,7 @@
             padding: 0 20px calc(88px + env(safe-area-inset-bottom, 0px));
         }
 
-        /* Keynote Hero */
+        /* Keynote Hero & Architecture Proof */
         .hero {
             padding: 56px 0 44px;
             text-align: center;
@@ -319,7 +319,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 12px;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
         .btn-primary,
@@ -333,7 +333,7 @@
             font-size: 0.88rem;
             font-weight: 600;
             text-decoration: none;
-            transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), background 0.16s ease, opacity 0.16s ease;
+            transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), background 0.16s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.16s ease;
         }
 
         .btn-primary {
@@ -364,6 +364,44 @@
 
         .btn-secondary:active {
             transform: scale(0.97);
+        }
+
+        .arch-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        @media (max-width: 680px) {
+            .arch-strip {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .arch-pill {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .arch-pill .label {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-bottom: 3px;
+        }
+
+        .arch-pill .value {
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--text-primary);
         }
 
         .meta-bar {
@@ -441,7 +479,6 @@
             }
         }
 
-        /* Galaxy Z Flip 6 Metallic Armor Frame */
         .zflip-chassis {
             width: 244px;
             margin: 0 auto;
@@ -453,7 +490,7 @@
                 inset 0 0 0 1.5px rgba(255, 255, 255, 0.18),
                 0 0 0 1px rgba(0, 0, 0, 0.45);
             position: relative;
-            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: transform 0.24s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @media (hover: hover) {
@@ -462,7 +499,6 @@
             }
         }
 
-        /* Side Power/Fingerprint Button */
         .zflip-chassis::after {
             content: "";
             position: absolute;
@@ -474,7 +510,6 @@
             border-radius: 0 3px 3px 0;
         }
 
-        /* 9:22 Exact Z Flip 6 Display Aspect Ratio (1080 x 2640) */
         .zflip-screen {
             width: 100%;
             aspect-ratio: 9 / 22;
@@ -487,7 +522,6 @@
             justify-content: space-between;
         }
 
-        /* Centered Samsung Infinity-O Punch-Hole Camera */
         .zflip-camera {
             position: absolute;
             top: 9px;
@@ -502,7 +536,6 @@
             pointer-events: none;
         }
 
-        /* Full-Bleed Uncropped Screenshot Image */
         .zflip-screen img.real-screenshot {
             width: 100%;
             height: 100%;
@@ -516,7 +549,6 @@
             display: none;
         }
 
-        /* Fallback UI Preview when image file isn't present yet */
         .zflip-fallback {
             width: 100%;
             height: 100%;
@@ -596,7 +628,7 @@
             border-radius: 15px;
             padding: 14px 16px;
             cursor: pointer;
-            transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.16s ease, background 0.16s ease;
+            transition: transform 0.16s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.16s cubic-bezier(0.4, 0, 0.2, 1), background 0.16s cubic-bezier(0.4, 0, 0.2, 1);
             color: var(--text-primary);
             font-family: inherit;
         }
@@ -659,7 +691,7 @@
             border-radius: 18px;
             padding: 20px;
             box-shadow: var(--shadow-sm);
-            transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease, box-shadow 0.22s ease;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         @media (hover: hover) {
@@ -945,6 +977,25 @@
                 <a href="#privacy-policy" class="btn-secondary">Read Privacy Policy</a>
             </div>
 
+            <div class="arch-strip">
+                <div class="arch-pill">
+                    <span class="label">Database</span>
+                    <span class="value">SQLCipher AES-256</span>
+                </div>
+                <div class="arch-pill">
+                    <span class="label">Architecture</span>
+                    <span class="value">Zero Backend Servers</span>
+                </div>
+                <div class="arch-pill">
+                    <span class="label">Network</span>
+                    <span class="value">No Internet Permission</span>
+                </div>
+                <div class="arch-pill">
+                    <span class="label">Telemetry</span>
+                    <span class="value">Zero Ads or Trackers</span>
+                </div>
+            </div>
+
             <div class="meta-bar">
                 <div class="meta-item"><strong>Effective &amp; Last Updated:</strong> November 19, 2026</div>
                 <div class="meta-item"><strong>Developer:</strong> [Your Full Name / Developer Name] (India)</div>
@@ -1001,7 +1052,7 @@
                     <button type="button" class="screen-tab-btn" onclick="selectPreview('partner', this)">
                         <span class="tab-kicker">03 &bull; Partner Companion Mode</span>
                         <span class="tab-heading">Offline QR, JSON &amp; Summary Sync</span>
-                        <span class="tab-desc">Share cycle cadence and care cues without cloud accounts—intimate symptom logs stay on your phone[cite: 2, 6].</span>
+                        <span class="tab-desc">Share cycle cadence and care cues without cloud accounts—intimate symptom logs stay on your phone.</span>
                     </button>
 
                     <button type="button" class="screen-tab-btn" onclick="selectPreview('security', this)">
@@ -1224,9 +1275,9 @@
 
         <section class="policy-card reveal">
             <h2><span class="sec-num">11</span> Age Requirement (13+) &amp; Minor Privacy</h2>
-            <p>Rhythm is intended for users aged <strong>13 and older</strong>. We do not direct the application toward children under 13.</p>
+            <p>Rhythm is intended for users aged <strong>13 and older</strong>. We do not direct the application toward children under 13[cite: 2].</p>
             <ul>
-                <li><strong>Minors (Ages 13 to 17):</strong> If you are under the age of 18 (or the age of legal majority in your jurisdiction), please review this Privacy Policy, the Terms of Use, and the Medical Disclaimer with a parent or legal guardian before using the app (including before enabling Partner Companion Mode or sharing cycle cadence with another person). Optional tips via Google Play Billing require the permission of a parent or the legal account holder.</li>
+                <li><strong>Minors (Ages 13 to 17):</strong> If you are under the age of 18 (or the age of legal majority in your jurisdiction), please review this Privacy Policy, the Terms of Use, and the Medical Disclaimer with a parent or legal guardian before using the app (including before enabling Partner Companion Mode or sharing cycle cadence with another person)[cite: 2]. Optional tips via Google Play Billing require the permission of a parent or the legal account holder[cite: 2].</li>
                 <li><strong>No Server Collection or Profiling of Minors:</strong> Because Rhythm stores all logs locally on the user's device and includes no analytics, advertising, or network transmission capabilities, we do not collect, store on external servers, or behaviorally profile personal data from users of any age[cite: 2, 6].</li>
             </ul>
         </section>
@@ -1263,7 +1314,7 @@
 
         <section class="policy-card reveal">
             <h2><span class="sec-num">16</span> Open-Source Software Licenses</h2>
-            <p>Rhythm Cycle Tracker incorporates open-source software libraries (including Android Jetpack, Kotlin Coroutines, Dagger Hilt, Coil, Material Components 3, SQLCipher for Android, Google Play Services Code Scanner, and the Google Play Billing Library). Full third-party acknowledgments and license notices are available inside the application under <strong>Settings &rarr; Open Source Licenses</strong>.</p>
+            <p>Rhythm Cycle Tracker incorporates open-source software libraries (including Android Jetpack, Kotlin Coroutines, Dagger Hilt, Coil, Material Components 3, SQLCipher for Android, Google Play Services Code Scanner, and the Google Play Billing Library). Full third-party acknowledgments and license notices are available inside the application under <strong>Settings &rarr; Open Source Licenses</strong>[cite: 2].</p>
         </section>
 
         <section class="policy-card reveal">
@@ -1385,7 +1436,7 @@
         window.addEventListener('scroll', updateScrollProgress, { passive: true });
         updateScrollProgress();
 
-        // Scroll Reveal Observer
+        // Staggered Scroll Reveal Observer
         const revealElements = document.querySelectorAll('.reveal');
         if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             const observer = new IntersectionObserver((entries) => {
