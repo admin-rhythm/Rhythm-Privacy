@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy &amp; Terms of Use — Rhythm Cycle Tracker</title>
-    
+
     <!-- Browser Tab Icon (Favicon) -->
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
@@ -127,6 +127,7 @@
         .nav-links {
             display: flex;
             gap: 6px;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -539,7 +540,7 @@
                 <h2>Important Medical, Contraception &amp; Emergency Notice</h2>
             </div>
             <p><strong>Not a Medical Device or Contraceptive Method:</strong> Rhythm Cycle Tracker ("Rhythm") is designed solely for personal wellness awareness and informational cycle logging. It is <strong>not</strong> a certified medical device, clinical diagnostic tool, or healthcare service.</p>
-            <p><strong>Strictly Not for Birth Control:</strong> Do not rely on Rhythm's cycle estimates, ovulation projections, or fertile window calculations to prevent or achieve pregnancy. Biological cycles fluctuate naturally due to stress, illness, hormonal shifts, and conditions such as PCOS. Always consult a qualified healthcare professional for medical advice, diagnosis, contraception, or treatment.</p>
+            <p><strong>Strictly Not for Birth Control or Family Planning:</strong> Do not rely on Rhythm's cycle estimates, ovulation projections, fertile window calculations, or Partner Companion Mode alerts/notifications to prevent or achieve pregnancy, or for natural family planning. Biological cycles fluctuate naturally due to stress, travel, illness, hormonal shifts, and conditions such as PCOS. Always consult a qualified healthcare professional for medical advice, diagnosis, contraception, or treatment.</p>
             <p><strong>Medical Emergencies:</strong> If you experience severe pelvic or abdominal pain, abnormal heavy bleeding, dizziness, fainting, or any acute medical symptoms, call your local emergency services (such as 112 or 911) or seek immediate emergency medical care.</p>
         </section>
 
@@ -576,7 +577,7 @@
 
         <section class="policy-card">
             <h2><span class="sec-num">04</span> Permissions &amp; Device Capabilities Used</h2>
-            <p>Rhythm requests or merges only the system permissions required for local app functionality, scheduled reminders, biometric lock, and optional Google Play Billing:</p>
+            <p>Rhythm requests or merges only the system permissions and device capabilities required for local app functionality, scheduled reminders, biometric lock, peer-to-peer partner sync, and optional Google Play Billing:</p>
             <div class="table-wrap">
                 <table>
                     <thead>
@@ -588,11 +589,11 @@
                     <tbody>
                         <tr>
                             <td><code>POST_NOTIFICATIONS</code></td>
-                            <td>Displays optional local cycle reminders and daily wellness check-in nudges that you enable in Settings.</td>
+                            <td>Displays optional local cycle reminders, daily wellness check-in nudges, and Partner Companion Mode alerts (such as Day 1 Care Alerts, High-Energy &amp; Ovulation Alerts, and Morning Wingman Briefings via the <code>wellness_partner</code> / Partner Care &amp; Wingman Alerts channel) that you enable in Settings.</td>
                         </tr>
                         <tr>
-                            <td><code>SCHEDULE_EXACT_ALARM</code></td>
-                            <td>Used solely to trigger user-configured daily wellness and cycle check-in reminders at the exact local time selected by the user, executed entirely on-device via Android's <code>AlarmManager</code>.</td>
+                            <td><code>SCHEDULE_EXACT_ALARM</code> / <code>USE_EXACT_ALARM</code></td>
+                            <td>Used to trigger user-configured daily wellness check-ins, cycle reminders, and scheduled Partner Companion Mode morning wingman briefings or cycle heads-up alerts at the exact local time selected by the user, executed entirely on-device via Android's <code>AlarmManager</code>.</td>
                         </tr>
                         <tr>
                             <td><code>VIBRATE</code></td>
@@ -619,23 +620,28 @@
                             <td>Merged automatically by Android WorkManager and Google Play Billing libraries to check device connectivity state. Because <code>android.permission.INTERNET</code> is explicitly removed from Rhythm's manifest, Rhythm itself cannot open network connections or transmit data.</td>
                         </tr>
                         <tr>
-                            <td>Android System Photo Picker (<code>PickVisualMedia</code>)</td>
-                            <td>Used if you choose to set a custom profile avatar. This system component grants Rhythm read access only to the single image you explicitly pick without requiring broad media or storage permissions.</td>
+                            <td>Google Play Services Code Scanner (<code>com.google.android.gms:play-services-code-scanner</code>)</td>
+                            <td>Used when scanning a partner's sync QR code. This API runs inside a system-level modal provided by Google Play Services, allowing camera-based QR code scanning without granting Rhythm Android camera permissions (<code>android.permission.CAMERA</code>).</td>
+                        </tr>
+                        <tr>
+                            <td>Android System Photo Picker (<code>PickVisualMedia</code>) &amp; On-Device QR Decoding</td>
+                            <td>Used when picking a custom profile avatar or importing a QR code from a photo or screenshot. Android's Photo Picker grants access only to the single image you explicitly select, and any QR code image is decoded completely on-device (via ML Kit / ZXing) without requiring broad media or storage permissions (<code>READ_MEDIA_IMAGES</code> / <code>READ_EXTERNAL_STORAGE</code>).</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p>Rhythm does <strong>not</strong> request location, camera, microphone, contacts, or broad external storage/media permissions.</p>
+            <p>Rhythm does <strong>not</strong> request location, camera (<code>android.permission.CAMERA</code>), microphone, contacts, or broad external storage/media permissions.</p>
         </section>
 
         <section class="policy-card">
-            <h2><span class="sec-num">05</span> Shared Devices, Home-Screen Widgets &amp; Screen Protection</h2>
-            <p>If other people have physical access to your phone, your cycle information could be viewed unless you configure Rhythm's privacy controls appropriately:</p>
+            <h2><span class="sec-num">05</span> Shared Devices, Home-Screen Widgets, Notifications &amp; Screen Protection</h2>
+            <p>If other people have physical access to your or your partner's phone, cycle information could be viewed unless appropriate privacy and OS settings are configured:</p>
             <ul>
                 <li><strong>App Lock (PIN &amp; Biometrics):</strong> Enable App Lock in Settings to require authentication whenever Rhythm is opened or resumed from the background.</li>
                 <li><strong>Discreet Mode:</strong> Replaces explicit menstrual and fertility terminology on in-app dashboard cards and notifications with neutral wellness phrasing.</li>
                 <li><strong>Screen Capture Block:</strong> When App Lock or Discreet Mode is active, Rhythm enables Android's <code>FLAG_SECURE</code> window flag inside the app to block screenshots, screen recording, and previews in the recent-apps switcher.</li>
-                <li><strong>Home-Screen Widgets Notice:</strong> Rhythm includes optional Android home-screen widgets (<em>Rhythm</em>, <em>Harmony</em>, and <em>Companion</em> widgets) designed for quick at-a-glance access to your current cycle day, phase, days until next period, and daily companion tips. <strong>Home-screen widgets sit outside the application's PIN/Biometric App Lock, Discreet Mode masking, and <code>FLAG_SECURE</code> screen protection</strong>, meaning anyone who can view your unlocked home screen can read the information displayed on a widget. If you share your phone or want to keep your cycle status hidden from your home screen, do not place Rhythm widgets on your home screen (or remove them at any time by long-pressing the widget).</li>
+                <li><strong>Home-Screen Widgets &amp; Partner Compass Visibility:</strong> Rhythm includes optional Android home-screen widgets (<em>Rhythm</em>, <em>Harmony</em>, and <em>Companion</em> widgets) as well as Partner Companion views/compasses for quick at-a-glance access to cycle day, phase, days until next period, daily companion tips, and care guidance. <strong>Home-screen widgets sit outside the application's PIN/Biometric App Lock, Discreet Mode masking, and <code>FLAG_SECURE</code> screen protection</strong>, meaning anyone who can view an unlocked home screen can see them. Furthermore, if a partner places home-screen widgets or views Partner Companion status on their device, the estimated cycle phase and care tips will be visible to anyone with physical access to their unlocked phone. If you or a partner share a device or want maximum visual discretion, do not place Rhythm widgets on the home screen (or remove them at any time by long-pressing the widget).</li>
+                <li><strong>Partner Notification Channels &amp; Lock-Screen Visibility:</strong> Partner Companion Mode uses dedicated notification alerts—such as Day 1 Care Alerts, High-Energy &amp; Ovulation Alerts, and Morning Wingman Briefings—to surface care reminders and cycle updates. While Discreet Mode phrases notifications neutrally when enabled, notification banners can still appear on an unlocked screen or lock screen unless you or your partner configure your Android lock-screen privacy settings to hide sensitive notification content.</li>
             </ul>
         </section>
 
@@ -646,7 +652,23 @@
         </section>
 
         <section class="policy-card">
-            <h2><span class="sec-num">07</span> No Advertising, Analytics, or Third-Party Data Sharing</h2>
+            <h2><span class="sec-num">07</span> Partner Companion Mode &amp; Peer-to-Peer Sync</h2>
+            <p>Rhythm offers an optional <strong>Partner Companion Mode</strong> so a primary user can share high-level cycle cadence and care guidance with a chosen partner without using cloud servers:</p>
+            <ul>
+                <li><strong>Air-Gapped, Zero-Cloud Transmission:</strong> Partner Mode does <strong>not</strong> use backend servers, user accounts, or cloud databases. Data synchronization occurs strictly peer-to-peer and offline via user-generated QR codes, direct file transfers (such as JSON sync packages), or plain-text summaries initiated manually by the primary user.</li>
+                <li><strong>Strict Data Minimization ("Privacy Shield"):</strong> Rhythm enforces a strict boundary between high-level cycle cadence and intimate daily health logs:
+                    <ul>
+                        <li><em>What IS Transferred:</em> Cycle cadence metrics (average cycle length, period duration), start and end dates of recent periods, current cycle day, estimated phase/season, calculated prediction anchors (estimated next period, estimated fertile/ovulation window, cadence variance), general aggregate energy scores, cycle tracking mode, and optional user-entered care or comfort notes.</li>
+                        <li><em>What Is NEVER Transferred:</em> Daily symptom logs (such as cramps, headache, or nausea), flow intensity, flow texture, cervical mucus observations, pain scale ratings, sexual activity logs, medication logs, personal diary notes, and hydration counters. Intimate wellness details remain exclusively on the primary user's phone.</li>
+                    </ul>
+                </li>
+                <li><strong>Transit Security Warning for Shared Channels:</strong> When a user chooses to share a QR code image, sync file, or plain-text summary through a third-party messaging app, SMS, email, or cloud service (such as WhatsApp, Telegram, or email), that shared artifact leaves Rhythm's local sandbox and becomes subject to the security, encryption, retention, and privacy practices of the third-party communication service and any recipient who receives it.</li>
+                <li><strong>Partner Device Storage &amp; Isolation:</strong> When a partner imports a sync package, the transferred cadence metrics, prediction anchors, and care notes are stored locally on the partner's device in their private DataStore and encrypted database. Because there is no live cloud connection between devices, each phone's storage remains independent, and the partner can erase all synced partner data at any time via <strong>Clear Partner Sync</strong> or <strong>Wipe All Data</strong>.</li>
+            </ul>
+        </section>
+
+        <section class="policy-card">
+            <h2><span class="sec-num">08</span> No Advertising, Analytics, or Third-Party Data Sharing</h2>
             <ul>
                 <li>Rhythm does <strong>not</strong> include third-party advertising SDKs or behavioral profiling tools.</li>
                 <li>Rhythm does <strong>not</strong> bundle third-party crash-reporting or analytics telemetry SDKs.</li>
@@ -657,8 +679,92 @@
         </section>
 
         <section class="policy-card">
-            <h2><span class="sec-num">08</span> Data Retention, Security Summary &amp; Deletion</h2>
-            <p><strong>Security Summary:</strong> Your health logs are protected on-device via a 256-bit AES SQLCipher encrypted database, an Android Hardware Keystore-managed encryption key, optional PIN/biometric App Lock, and zero network/internet permissions.</p>
+            <h2><span class="sec-num">09</span> Data Retention, Security Summary &amp; Deletion</h2>
+            <p><strong>Security Summary:</strong> Your health logs are protected on-device via a 256-bit AES SQLCipher encrypted database, an Android Hardware Keystore-managed encryption key, optional PIN/biometric App Lock, peer-to-peer data minimization in Partner Mode, and zero internet permission requested by the app.</p>
             <ul>
                 <li><strong>Local Retention Only:</strong> Your data stays exclusively on your device until you choose to delete it. Because Rhythm has no backend servers or user accounts, we hold zero copies of your records.</li>
-                <li><strong>Permanent Deletion:</strong>
+                <li><strong>Permanent Deletion on Primary Device:</strong> Tapping <strong>Settings &rarr; Wipe All Data</strong> inside the app, clearing the app's storage in Android system settings, or uninstalling Rhythm permanently and irreversibly deletes all stored logs, history, and preferences from your device.</li>
+                <li><strong>Partner Device Deletion ("Clear Partner Sync"):</strong> On a partner device, selecting <strong>Clear Partner Sync</strong> immediately and irreversibly deletes synced partner periods, predictions, cadence metrics, and care notes from that device's local database and DataStore. Selecting <strong>Wipe All Data</strong>, clearing app storage, or uninstalling Rhythm on the partner device likewise removes local partner records.</li>
+                <li><strong>Independent Life Cycles:</strong> Because Rhythm has no cloud server or live two-way sync link, deleting or resetting data on one phone does not automatically delete data already imported onto another phone.</li>
+                <li><strong>Exported &amp; Shared Files:</strong> Any PDF, CSV, JSON sync files, QR images, or text messages exported or shared outside Rhythm's sandbox must be managed or deleted manually by you (and by any recipient where applicable).</li>
+            </ul>
+        </section>
+
+        <section class="policy-card">
+            <h2><span class="sec-num">10</span> Your Rights &amp; Data Control</h2>
+            <p>Because all data resides locally on your device, you can exercise your data rights (including access, correction, portability, revocation/withdrawal of sharing, and erasure) directly inside the application at any time without needing to submit a request to us:</p>
+            <ul>
+                <li><strong>Access &amp; Correction:</strong> View or edit any logged period date, symptom, note, or profile field directly within the Calendar and Settings screens.</li>
+                <li><strong>Portability:</strong> Export your complete data in JSON, CSV, or PDF format via Settings.</li>
+                <li><strong>Revoking Partner Sharing:</strong> Because Partner Companion Mode shares offline point-in-time snapshots rather than a live cloud stream, the primary user cannot remotely recall or erase data that has already been imported onto a partner's device. To stop sharing future updates, the primary user simply stops generating or sending new sync codes, exports, or summaries; to remove previously synced data from a partner's phone, the partner must tap <strong>Clear Partner Sync</strong> (or <strong>Wipe All Data</strong> / uninstall the app) on their own device.</li>
+                <li><strong>Questions or Grievances:</strong> If you have questions or complaints regarding your privacy rights, contact the developer at <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a>.</li>
+            </ul>
+        </section>
+
+        <section class="policy-card">
+            <h2><span class="sec-num">11</span> Age Requirement (13+) &amp; Minor Privacy</h2>
+            <p>Rhythm is intended for users aged <strong>13 and older</strong>. We do not direct the application toward children under 13.</p>
+            <ul>
+                <li><strong>Minors (Ages 13 to 17):</strong> If you are under the age of 18 (or the age of legal majority in your jurisdiction), please review this Privacy Policy, the Terms of Use, and the Medical Disclaimer with a parent or legal guardian before using the app (including before enabling Partner Companion Mode or sharing cycle cadence with another person). Optional tips via Google Play Billing require the permission of a parent or the legal account holder.</li>
+                <li><strong>No Server Collection or Profiling of Minors:</strong> Because Rhythm stores all logs locally on the user's device and includes no analytics, advertising, or network transmission capabilities, we do not collect, store on external servers, or behaviorally profile personal data from users of any age.</li>
+            </ul>
+        </section>
+
+        <section class="policy-card">
+            <h2><span class="sec-num">12</span> Changes to This Privacy Policy</h2>
+            <p>If we update this Privacy Policy to reflect new on-device features or regulatory requirements, we will post the updated policy on this page and revise the "Effective &amp; Last Updated" date at the top of this document and inside the application.</p>
+        </section>
+
+        <div id="terms-of-use" class="part-header">
+            <span class="part-badge">Part II</span>
+            <span class="part-title">Terms of Use &amp; Legal Disclaimers</span>
+        </div>
+
+        <section class="policy-card">
+            <h2><span class="sec-num">13</span> Informational Wellness Purpose Only</h2>
+            <p>By downloading or using Rhythm Cycle Tracker, you acknowledge and agree that all cycle predictions, phase indicators ("Inner Seasons"), ovulation estimates, fertile window projections, wellness companion tips, Partner Companion Mode alerts, Partner Support Guide cues, and generated PDF reports are mathematical approximations based solely on self-reported user entries. They are provided strictly for personal educational and wellness tracking purposes and do not constitute clinical advice, medical diagnosis, natural family planning, or contraception.</p>
+            <p>In particular, fertile window projections, ovulation estimates, and care reminders surfaced in Partner Companion Mode are estimates derived from historical cycle cadence and must never be relied upon by either the primary user or a partner to prevent or achieve pregnancy.</p>
+        </section>
+
+        <section class="policy-card">
+            <h2><span class="sec-num">14</span> Partner Mode: Mutual Consent &amp; Responsible Sharing</h2>
+            <ul>
+                <li><strong>Mutual Consent Mandate:</strong> You agree to use Partner Companion Mode and share rhythm data, QR codes, sync packages, or text summaries only with partners who have explicitly consented to receiving that information. You must never export, scan, import, or share another person's cycle or health data without their clear, informed consent.</li>
+                <li><strong>Intended Use for Care &amp; Emotional Support:</strong> Partner Companion Mode is provided solely to support mutual empathy, thoughtful daily care gestures, and communication between consenting partners. The developer is not responsible for interpersonal misunderstandings, relationship disputes, emotional reactions, or decisions made based on algorithmic estimates or care suggestions in the Partner Guide.</li>
+                <li><strong>Offline Snapshot &amp; No Real-Time Guarantee:</strong> Rhythm does not provide live real-time tracking, continuous background syncing, or location/status monitoring. Any data displayed on a partner's device represents an offline snapshot from the last time a manual sync occurred and may be out of date or inaccurate if cycles shift, are delayed, or are affected by stress, illness, travel, or hormonal changes.</li>
+            </ul>
+        </section>
+
+        <section class="policy-card">
+            <h2><span class="sec-num">15</span> Voluntary Tips &amp; In-App Support</h2>
+            <p>Rhythm Cycle Tracker is completely free to use with no locked features, subscriptions, or paywalls. Any in-app contributions made through the "Support Rhythm" tip jar are strictly voluntary, do not unlock additional functionality or content, and are processed exclusively by Google Play. All refund requests for tips are governed by Google Play's standard refund policies.</p>
+        </section>
+
+        <section class="policy-card">
+            <h2><span class="sec-num">16</span> Open-Source Software Licenses</h2>
+            <p>Rhythm Cycle Tracker incorporates open-source software libraries (including Android Jetpack, Kotlin Coroutines, Dagger Hilt, Coil, Material Components 3, SQLCipher for Android, Google Play Services Code Scanner, and the Google Play Billing Library). Full third-party acknowledgments and license notices are available inside the application under <strong>Settings &rarr; Open Source Licenses</strong>.</p>
+        </section>
+
+        <section class="policy-card">
+            <h2><span class="sec-num">17</span> Disclaimer of Warranties &amp; Limitation of Liability</h2>
+            <p>Rhythm Cycle Tracker is provided on an <strong>"AS IS"</strong> and <strong>"AS AVAILABLE"</strong> basis without warranties of any kind, whether express or implied, including implied warranties of merchantability, fitness for a particular purpose, or accuracy of algorithmic estimates.</p>
+            <p>To the maximum extent permitted by applicable law, the developer shall not be liable for any direct, indirect, incidental, special, or consequential damages, or for any loss of local data (including from forgotten PINs, device damage, or unencrypted exports), arising out of your use of the application. Without limiting the generality of the foregoing, the developer disclaims liability for: (a) any unauthorized access, disclosure, or interception occurring when QR codes, sync files, or summaries are transmitted or stored via third-party messaging apps, email, or external file storage; and (b) any relationship disputes, unintended pregnancies, or health decisions resulting from reliance on Partner Companion predictions, care tips, or notifications. Nothing in these terms excludes or limits liability where such exclusion or limitation is prohibited by applicable consumer protection laws in your jurisdiction.</p>
+        </section>
+
+        <section id="contact" class="policy-card">
+            <h2><span class="sec-num">18</span> Governing Law, Jurisdiction &amp; Contact Information</h2>
+            <p>These Terms of Use and Privacy Policy are governed by the laws of <strong>India</strong>, and any disputes arising out of or relating to the application shall be subject to the exclusive jurisdiction of the <strong>courts at Nagpur, Maharashtra, India</strong>, without prejudice to mandatory consumer protection or data privacy provisions applicable in your country of residence.</p>
+            <p><strong>Developer &amp; Grievance Contact:</strong><br>
+            Developer: [Your Full Name / Developer Name]<br>
+            Location: Nagpur, Maharashtra, India<br>
+            Email: <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a></p>
+        </section>
+
+        <footer>
+            <span>&copy; 2026 Rhythm Cycle Tracker. All rights reserved.</span>
+            <span>Built for 100% On-Device Privacy.</span>
+        </footer>
+    </main>
+
+</body>
+</html>
