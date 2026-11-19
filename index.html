@@ -236,7 +236,7 @@
             padding: 0 20px calc(88px + env(safe-area-inset-bottom, 0px));
         }
 
-        /* Compact Keynote Header */
+        /* Product Tab Keynote Hero */
         .hero {
             padding: 40px 0 32px;
             text-align: center;
@@ -300,6 +300,30 @@
             line-height: 1.55;
         }
 
+        /* Compact Dedicated Legal Tab Header */
+        .doc-header {
+            padding: 32px 0 22px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 22px;
+            text-align: left;
+        }
+
+        .doc-header h1 {
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.18;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .doc-header p {
+            font-size: 0.94rem;
+            color: var(--text-secondary);
+            max-width: 680px;
+            margin-bottom: 16px;
+        }
+
         .arch-strip {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -340,7 +364,7 @@
 
         .meta-bar {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             flex-wrap: wrap;
             gap: 10px 22px;
             padding: 12px 16px;
@@ -351,6 +375,10 @@
             color: var(--text-secondary);
             box-shadow: var(--shadow-sm);
             text-align: left;
+        }
+
+        .hero .meta-bar {
+            justify-content: center;
         }
 
         @media (max-width: 600px) {
@@ -365,13 +393,18 @@
             font-weight: 600;
         }
 
-        /* Pinned Medical Disclaimer (Always Visible) */
+        /* Medical Disclaimer Card */
         .disclaimer-card {
             background: var(--warn-bg);
             border: 1px solid var(--warn-border);
             border-radius: 16px;
             padding: 20px 22px;
-            margin-bottom: 28px;
+            margin-bottom: 22px;
+        }
+
+        .disclaimer-card.bottom-placement {
+            margin-top: 24px;
+            margin-bottom: 0;
         }
 
         .disclaimer-card h2 {
@@ -878,9 +911,8 @@
         }
 
         .clause-body {
-            padding: 0 22px 22px;
+            padding: 16px 22px 22px;
             border-top: 1px solid var(--border);
-            padding-top: 16px;
         }
 
         @media (max-width: 600px) {
@@ -1001,7 +1033,7 @@
 
     <nav class="navbar" aria-label="Primary Mode Switcher">
         <div class="nav-inner">
-            <a href="#product" class="nav-brand" onclick="switchMode('product')">
+            <a href="#product" class="nav-brand" onclick="switchMode('product', true)">
                 <span class="nav-logo-dot">
                     <img src="logo.png" alt="" onerror="if(!this.dataset.triedJpg){this.dataset.triedJpg=1;this.src='logo.jpg';}else{this.style.display='none';}">
                 </span>
@@ -1016,55 +1048,48 @@
     </nav>
 
     <main class="container">
-        <header class="hero">
-            <div class="logo-frame">
-                <div class="logo-inner">
-                    <img src="logo.png" alt="Rhythm Cycle Tracker App Logo" onerror="if(!this.dataset.triedJpg){this.dataset.triedJpg=1;this.src='logo.jpg';}else{this.style.display='none';}">
-                </div>
-            </div>
-
-            <span class="eyebrow">Rhythm Cycle Tracker &bull; Product &amp; Legal</span>
-            <h1>Cycle clarity, engineered for total privacy.</h1>
-            <p class="hero-lead">
-                Offline-first menstrual cycle &amp; personal wellness tracker with SQLCipher encryption, Inner Seasons, vibe-matched companions, and peer-to-peer Partner Companion Mode.
-            </p>
-
-            <div class="arch-strip">
-                <div class="arch-pill">
-                    <span class="label">Database</span>
-                    <span class="value">SQLCipher AES-256</span>
-                </div>
-                <div class="arch-pill">
-                    <span class="label">Architecture</span>
-                    <span class="value">Zero Backend Servers</span>
-                </div>
-                <div class="arch-pill">
-                    <span class="label">Network</span>
-                    <span class="value">No Internet Permission</span>
-                </div>
-                <div class="arch-pill">
-                    <span class="label">Telemetry</span>
-                    <span class="value">Zero Ads or Trackers</span>
-                </div>
-            </div>
-
-            <div class="meta-bar">
-                <div class="meta-item"><strong>Effective &amp; Last Updated:</strong> November 19, 2026</div>
-                <div class="meta-item"><strong>Developer:</strong> [Your Full Name / Developer Name] (India)</div>
-                <div class="meta-item"><strong>Contact:</strong> <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a></div>
-            </div>
-        </header>
-
-        <!-- Pinned Medical Notice: Always Visible Across All Views -->
-        <section id="medical-notice" class="disclaimer-card">
-            <h2>Important Medical, Contraception &amp; Emergency Notice</h2>
-            <p><strong>Not a Medical Device or Contraceptive Method:</strong> Rhythm Cycle Tracker ("Rhythm") is designed solely for personal wellness awareness and informational cycle logging. It is <strong>not</strong> a certified medical device, clinical diagnostic tool, or healthcare service.</p>
-            <p><strong>Strictly Not for Birth Control or Family Planning:</strong> Do not rely on Rhythm's cycle estimates, ovulation projections, fertile window calculations, or Partner Companion Mode alerts/notifications to prevent or achieve pregnancy, or for natural family planning. Biological cycles fluctuate naturally due to stress, travel, illness, hormonal shifts, and conditions such as PCOS. Always consult a qualified healthcare professional for medical advice, diagnosis, contraception, or treatment.</p>
-            <p><strong>Medical Emergencies:</strong> If you experience severe pelvic or abdominal pain, abnormal heavy bleeding, dizziness, fainting, or any acute medical symptoms, call your local emergency services (such as 112 or 911) or seek immediate emergency medical care.</p>
-        </section>
 
         <!-- ==================== MODE 1: PRODUCT ==================== -->
         <section id="panel-product" class="mode-panel active panel-animate" role="tabpanel" aria-labelledby="tab-product">
+            <header class="hero">
+                <div class="logo-frame">
+                    <div class="logo-inner">
+                        <img src="logo.png" alt="Rhythm Cycle Tracker App Logo" onerror="if(!this.dataset.triedJpg){this.dataset.triedJpg=1;this.src='logo.jpg';}else{this.style.display='none';}">
+                    </div>
+                </div>
+
+                <span class="eyebrow">Rhythm Cycle Tracker &bull; Offline-First</span>
+                <h1>Cycle clarity, engineered for total privacy.</h1>
+                <p class="hero-lead">
+                    Offline-first menstrual cycle &amp; personal wellness tracker with SQLCipher encryption, Inner Seasons, vibe-matched companions, and peer-to-peer Partner Companion Mode.
+                </p>
+
+                <div class="arch-strip">
+                    <div class="arch-pill">
+                        <span class="label">Database</span>
+                        <span class="value">SQLCipher AES-256</span>
+                    </div>
+                    <div class="arch-pill">
+                        <span class="label">Architecture</span>
+                        <span class="value">Zero Backend Servers</span>
+                    </div>
+                    <div class="arch-pill">
+                        <span class="label">Network</span>
+                        <span class="value">No Internet Permission</span>
+                    </div>
+                    <div class="arch-pill">
+                        <span class="label">Telemetry</span>
+                        <span class="value">Zero Ads or Trackers</span>
+                    </div>
+                </div>
+
+                <div class="meta-bar">
+                    <div class="meta-item"><strong>Effective &amp; Last Updated:</strong> November 19, 2026</div>
+                    <div class="meta-item"><strong>Developer:</strong> [Your Full Name / Developer Name] (India)</div>
+                    <div class="meta-item"><strong>Contact:</strong> <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a></div>
+                </div>
+            </header>
+
             <div class="device-stage">
                 <div class="zflip-chassis">
                     <div id="interactive-screen" class="zflip-screen">
@@ -1159,10 +1184,29 @@
                     <p>Export PDF summaries, CSV tables, or JSON backups via Android's file picker, or erase everything instantly with <strong>Wipe All Data</strong>.</p>
                 </div>
             </div>
+
+            <!-- Medical Notice Placed at Bottom of Product Tab -->
+            <div class="disclaimer-card bottom-placement">
+                <h2>Important Medical, Contraception &amp; Emergency Notice</h2>
+                <p><strong>Not a Medical Device or Contraceptive Method:</strong> Rhythm Cycle Tracker ("Rhythm") is designed solely for personal wellness awareness and informational cycle logging. It is <strong>not</strong> a certified medical device, clinical diagnostic tool, or healthcare service.</p>
+                <p><strong>Strictly Not for Birth Control or Family Planning:</strong> Do not rely on Rhythm's cycle estimates, ovulation projections, fertile window calculations, or Partner Companion Mode alerts/notifications to prevent or achieve pregnancy, or for natural family planning. Biological cycles fluctuate naturally due to stress, travel, illness, hormonal shifts, and conditions such as PCOS. Always consult a qualified healthcare professional for medical advice, diagnosis, contraception, or treatment.</p>
+                <p><strong>Medical Emergencies:</strong> If you experience severe pelvic or abdominal pain, abnormal heavy bleeding, dizziness, fainting, or any acute medical symptoms, call your local emergency services (such as 112 or 911) or seek immediate emergency medical care.</p>
+            </div>
         </section>
 
         <!-- ==================== MODE 2: PRIVACY POLICY ==================== -->
         <section id="panel-privacy" class="mode-panel panel-animate" role="tabpanel" aria-labelledby="tab-privacy">
+            <header class="doc-header">
+                <span class="eyebrow">Part I &bull; Official Privacy Policy</span>
+                <h1>Privacy Policy</h1>
+                <p>How Rhythm Cycle Tracker stores your data locally, protects your privacy on-device, and handles peer-to-peer Partner Companion sync.</p>
+                <div class="meta-bar">
+                    <div class="meta-item"><strong>Effective &amp; Last Updated:</strong> November 19, 2026</div>
+                    <div class="meta-item"><strong>Package ID:</strong> <code>com.aistudio.periodtracker.kpzwqn</code></div>
+                    <div class="meta-item"><strong>Contact:</strong> <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a></div>
+                </div>
+            </header>
+
             <div class="legal-toolbar">
                 <input type="search" id="privacy-search" class="search-input" placeholder="Filter Privacy Policy (e.g. QR, widget, PDF, PIN, 13+, alarm)..." oninput="filterClauses('panel-privacy', this.value)">
                 <button type="button" id="privacy-expand-btn" class="toolbar-btn" onclick="toggleAllClauses('panel-privacy', this)">Expand All</button>
@@ -1435,6 +1479,24 @@
 
         <!-- ==================== MODE 3: TERMS OF USE ==================== -->
         <section id="panel-terms" class="mode-panel panel-animate" role="tabpanel" aria-labelledby="tab-terms">
+            <header class="doc-header">
+                <span class="eyebrow">Part II &bull; Legal Disclaimers &amp; Terms</span>
+                <h1>Terms of Use &amp; Legal Disclaimers</h1>
+                <p>Informational wellness scope, Partner Companion Mode consent rules, open-source licenses, and governing jurisdiction.</p>
+                <div class="meta-bar">
+                    <div class="meta-item"><strong>Effective &amp; Last Updated:</strong> November 19, 2026</div>
+                    <div class="meta-item"><strong>Jurisdiction:</strong> Nagpur, Maharashtra, India</div>
+                    <div class="meta-item"><strong>Contact:</strong> <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a></div>
+                </div>
+            </header>
+
+            <section id="medical-notice" class="disclaimer-card">
+                <h2>Important Medical, Contraception &amp; Emergency Notice</h2>
+                <p><strong>Not a Medical Device or Contraceptive Method:</strong> Rhythm Cycle Tracker ("Rhythm") is designed solely for personal wellness awareness and informational cycle logging. It is <strong>not</strong> a certified medical device, clinical diagnostic tool, or healthcare service.</p>
+                <p><strong>Strictly Not for Birth Control or Family Planning:</strong> Do not rely on Rhythm's cycle estimates, ovulation projections, fertile window calculations, or Partner Companion Mode alerts/notifications to prevent or achieve pregnancy, or for natural family planning. Biological cycles fluctuate naturally due to stress, travel, illness, hormonal shifts, and conditions such as PCOS. Always consult a qualified healthcare professional for medical advice, diagnosis, contraception, or treatment.</p>
+                <p><strong>Medical Emergencies:</strong> If you experience severe pelvic or abdominal pain, abnormal heavy bleeding, dizziness, fainting, or any acute medical symptoms, call your local emergency services (such as 112 or 911) or seek immediate emergency medical care.</p>
+            </section>
+
             <div class="legal-toolbar">
                 <input type="search" id="terms-search" class="search-input" placeholder="Filter Terms of Use (e.g. consent, tips, license, liability, Nagpur)..." oninput="filterClauses('panel-terms', this.value)">
                 <button type="button" id="terms-expand-btn" class="toolbar-btn" onclick="toggleAllClauses('panel-terms', this)">Expand All</button>
@@ -1560,6 +1622,7 @@
                 history.replaceState(null, '', modeMap[mode].hash);
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            updateScrollProgress();
         }
 
         function syncModeFromHash() {
