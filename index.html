@@ -1420,7 +1420,7 @@
                     <div>
                         <span class="tile-tag">Widgets &amp; Nudges</span>
                         <h3>Right on your home screen</h3>
-                        <p>Glanceable widgets &amp; exact local reminders.</p>
+                        <p>Glanceable widgets &amp; local on-device reminders.</p>
                     </div>
                     <div class="mini-pills">
                         <span class="mini-pill">Rhythm</span>
@@ -1477,14 +1477,14 @@
                 <h1>Privacy Policy</h1>
                 <p>How Rhythm Cycle Tracker stores your data locally, protects your privacy on-device, and handles peer-to-peer Partner Companion sync.</p>
                 <div class="meta-bar">
-                    <div class="meta-item"><strong>Effective &amp; Last Updated:</strong> November 19, 2026</div>
+                    <div class="meta-item"><strong>Effective &amp; Last Updated:</strong> November 20, 2026</div>
                     <div class="meta-item"><strong>Package ID:</strong> <code>in.tracker.cycle.rhythm</code></div>
                     <div class="meta-item"><strong>Contact:</strong> <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a></div>
                 </div>
             </header>
 
             <div class="legal-toolbar">
-                <input type="search" id="privacy-search" class="search-input" placeholder="Filter Privacy Policy (e.g. QR, widget, PDF, PIN, 13+, alarm)..." oninput="filterClauses('panel-privacy', this.value)">
+                <input type="search" id="privacy-search" class="search-input" placeholder="Filter Privacy Policy (e.g. QR, widget, PDF, PIN, 13+, foreground)..." oninput="filterClauses('panel-privacy', this.value)">
                 <button type="button" id="privacy-expand-btn" class="toolbar-btn" onclick="toggleAllClauses('panel-privacy', this)">Expand All</button>
             </div>
 
@@ -1494,7 +1494,7 @@
                 <summary>
                     <div class="clause-summary-left">
                         <div class="clause-title-row"><span class="sec-num">01</span> Developer Identity &amp; Overview</div>
-                        <div class="clause-takeaway">Built by an independent developer in India with zero backend servers and no internet permission.</div>
+                        <div class="clause-takeaway">Built by Pharos, an independent developer in India, with zero backend servers and no internet permission.</div>
                     </div>
                     <span class="clause-chevron">&#9662;</span>
                 </summary>
@@ -1508,15 +1508,15 @@
                 <summary>
                     <div class="clause-summary-left">
                         <div class="clause-title-row"><span class="sec-num">02</span> Information Stored Locally on Your Device</div>
-                        <div class="clause-takeaway">Cycle logs live in an AES-256 SQLCipher database; settings &amp; widget summaries live in sandboxed DataStore; OS cloud backups are disabled.</div>
+                        <div class="clause-takeaway">Cycle logs live in an AES-256 SQLCipher database; settings, widget values &amp; partner-sync cache live in sandboxed DataStore; OS cloud backups are disabled.</div>
                     </div>
                     <span class="clause-chevron">&#9662;</span>
                 </summary>
                 <div class="clause-body">
                     <p>All cycle and wellness information you enter into Rhythm is stored exclusively on your physical device:</p>
                     <ul>
-                        <li><strong>Cycle &amp; Wellness Logs (Encrypted Database):</strong> Period start and end dates, flow intensity, flow texture (such as fluid, spotting, or clots), menstrual product used, pain levels, physical symptoms, mood, energy levels, sleep quality, digestion, skin observations, physical activity levels, medication notes, hydration counts, cervical mucus observations, and personal daily notes are stored in a local Room SQLite database encrypted at rest using <strong>SQLCipher (256-bit AES)</strong> with keys managed by the Android Hardware Keystore.</li>
-                        <li><strong>Profile, Settings, Custom Avatar &amp; Widget Summary Storage (Private Sandbox):</strong> Optional profile details (such as display name, age, gender/sex, height, weight, wellness goals, and cycle tracking mode), app settings (such as PIN configuration and reminder preferences), and the current cycle status values displayed on home-screen widgets (current cycle day, phase name, days until next period, and companion icon) are kept in the application's private, OS-sandboxed Android Jetpack DataStore storage, which is separate from the SQLCipher-encrypted database. If you select a custom profile picture, the selected image is copied into the app's private internal file directory (<code>filesDir</code>).</li>
+                        <li><strong>Cycle &amp; Wellness Logs (Encrypted Database):</strong> Period start and end dates, period irregularity flags, flow intensity, flow texture (such as fluid, spotting, or clots), menstrual product used, pain levels, physical symptoms, mood, energy levels, sleep quality, digestion, skin observations, physical activity levels, medication notes, medication-effectiveness checkboxes, hydration counts, cervical mucus observations, and personal daily notes are stored in a local Room SQLite database encrypted at rest using <strong>SQLCipher (256-bit AES)</strong> with keys managed by the Android Hardware Keystore.</li>
+                        <li><strong>Profile, Settings, Partner-Sync Cache, Custom Avatar &amp; Widget Summary Storage (Private Sandbox):</strong> Optional profile details (such as display name, age, gender/sex, height, weight, wellness goals, and cycle tracking mode), app settings (such as PIN configuration and reminder preferences), current cycle status values displayed on home-screen widgets (current cycle day, phase name, days until next period, and companion icon), and imported Partner Companion Mode predictions, cadence metrics, and care notes are kept in the application's private, OS-sandboxed Android Jetpack DataStore storage, which is separate from the SQLCipher-encrypted database. If you select a custom profile picture, the selected image is copied into the app's private internal file directory (<code>filesDir</code>).</li>
                         <li><strong>OS Cloud Backups Disabled:</strong> Automatic operating-system cloud backups (Google Drive device backup) and ADB device-to-device transfers are explicitly disabled (<code>allowBackup="false"</code>) for Rhythm's database and preference directories so your logs are not uploaded to cloud storage without your knowledge.</li>
                     </ul>
                 </div>
@@ -1544,12 +1544,12 @@
                 <summary>
                     <div class="clause-summary-left">
                         <div class="clause-title-row"><span class="sec-num">04</span> Permissions &amp; Device Capabilities Used</div>
-                        <div class="clause-takeaway">Minimal permissions for local reminders, biometrics, QR scanning via Play Services, Photo Picker, and optional Play Billing.</div>
+                        <div class="clause-takeaway">10 merged release permissions for local reminders, biometrics, WorkManager, QR scanning via Google Play services, Photo Picker, and optional Play Billing.</div>
                     </div>
                     <span class="clause-chevron">&#9662;</span>
                 </summary>
                 <div class="clause-body">
-                    <p>Rhythm requests or merges only the system permissions and device capabilities required for local app functionality, scheduled reminders, biometric lock, peer-to-peer partner sync, and optional Google Play Billing:</p>
+                    <p>Rhythm requests or merges only the 10 system permissions and device capabilities required for local app functionality, scheduled reminders, biometric lock, peer-to-peer partner sync, and optional Google Play Billing:</p>
                     <div class="table-wrap">
                         <table>
                             <thead>
@@ -1562,10 +1562,6 @@
                                 <tr>
                                     <td><code>POST_NOTIFICATIONS</code></td>
                                     <td>Displays optional local cycle reminders, daily wellness check-in nudges, and Partner Companion Mode alerts (Day 1 Care Alerts, High-Energy &amp; Ovulation Alerts, and Morning Wingman Briefings via the <code>wellness_partner</code> channel) enabled in Settings.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>SCHEDULE_EXACT_ALARM</code> / <code>USE_EXACT_ALARM</code></td>
-                                    <td>Used to trigger user-configured daily wellness check-ins, cycle reminders, and scheduled Partner Companion Mode morning wingman briefings or cycle heads-up alerts at the exact local time selected by the user via Android's <code>AlarmManager</code>.</td>
                                 </tr>
                                 <tr>
                                     <td><code>VIBRATE</code></td>
@@ -1581,7 +1577,11 @@
                                 </tr>
                                 <tr>
                                     <td><code>WAKE_LOCK</code></td>
-                                    <td>Added by Android WorkManager to reliably run brief local background tasks (evaluating local notifications and refreshing home-screen widgets).</td>
+                                    <td>Merged by Android WorkManager to reliably run brief local background tasks (evaluating local notifications and refreshing home-screen widgets).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>FOREGROUND_SERVICE</code></td>
+                                    <td>Merged automatically by Android WorkManager to support expedited local background tasks when required by the OS. Rhythm does not run persistent user-facing foreground services.</td>
                                 </tr>
                                 <tr>
                                     <td><code>com.android.vending.BILLING</code></td>
@@ -1592,12 +1592,16 @@
                                     <td>Merged automatically by WorkManager and Play Billing libraries to check connectivity state. Because <code>android.permission.INTERNET</code> is removed from Rhythm's manifest, Rhythm cannot open network connections or transmit data.</td>
                                 </tr>
                                 <tr>
-                                    <td>Google Play Services Code Scanner (<code>com.google.android.gms:play-services-code-scanner</code>)</td>
-                                    <td>Used when scanning a partner's sync QR code inside a system-level modal provided by Google Play Services, without granting Rhythm <code>android.permission.CAMERA</code>.</td>
+                                    <td><code>in.tracker.cycle.rhythm.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</code></td>
+                                    <td>Standard AndroidX internal signature permission merged automatically to protect non-exported dynamic broadcast receivers within the app.</td>
                                 </tr>
                                 <tr>
-                                    <td>Android System Photo Picker (<code>PickVisualMedia</code>) &amp; On-Device QR Decoding</td>
-                                    <td>Used for picking a custom profile avatar or importing a QR screenshot. Grants access only to the single selected image and decodes QR codes on-device (ML Kit / ZXing) without broad media/storage permissions.</td>
+                                    <td>Google Play Services Code Scanner &amp; ML Kit Barcode Scanning (<code>play-services-code-scanner</code> / <code>play-services-mlkit-barcode-scanning</code>)</td>
+                                    <td>Used when scanning a partner's sync QR code via the system camera modal (without granting Rhythm <code>android.permission.CAMERA</code>) or decoding a QR screenshot picked via Android's Photo Picker (with ZXing as an on-device fallback). QR scanning uses Google Play services components that may be downloaded or updated by Google outside Rhythm and are subject to Google's own privacy policy.</td>
+                                </tr>
+                                <tr>
+                                    <td>Android System Photo Picker (<code>PickVisualMedia</code>)</td>
+                                    <td>Used for picking a custom profile avatar or importing a QR screenshot. Grants access only to the single selected image without requiring broad media or storage permissions (<code>READ_MEDIA_IMAGES</code> / <code>READ_EXTERNAL_STORAGE</code>).</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1644,7 +1648,7 @@
                 <summary>
                     <div class="clause-summary-left">
                         <div class="clause-title-row"><span class="sec-num">07</span> Partner Companion Mode &amp; Peer-to-Peer Sync</div>
-                        <div class="clause-takeaway">Offline QR/JSON/text sync transfers only high-level cycle cadence and care cues—never intimate daily symptom logs.</div>
+                        <div class="clause-takeaway">Offline QR/JSON/text sync transfers high-level cadence, bleeding status &amp; display name in plain readable text—never intimate daily symptom logs.</div>
                     </div>
                     <span class="clause-chevron">&#9662;</span>
                 </summary>
@@ -1654,12 +1658,12 @@
                         <li><strong>Air-Gapped, Zero-Cloud Transmission:</strong> Partner Mode does <strong>not</strong> use backend servers, user accounts, or cloud databases. Data synchronization occurs strictly peer-to-peer and offline via user-generated QR codes, direct file transfers (such as JSON sync packages), or plain-text summaries initiated manually by the primary user.</li>
                         <li><strong>Strict Data Minimization ("Privacy Shield"):</strong>
                             <ul>
-                                <li><em>What IS Transferred:</em> Cycle cadence metrics (average cycle length, period duration), start and end dates of recent periods, current cycle day, estimated phase/season, calculated prediction anchors (estimated next period, estimated fertile/ovulation window, cadence variance), general aggregate energy scores, cycle tracking mode, and optional user-entered care or comfort notes.</li>
-                                <li><em>What Is NEVER Transferred:</em> Daily symptom logs (such as cramps, headache, or nausea), flow intensity, flow texture, cervical mucus observations, pain scale ratings, sexual activity logs, medication logs, personal diary notes, and hydration counters. Intimate wellness details remain exclusively on the primary user's phone.</li>
+                                <li><em>What IS Transferred:</em> Display name, current bleeding status (<code>isBleeding</code>), export date, days-until-next-period countdown, cycle cadence metrics (average cycle length, period duration), start and end dates of recent periods, current cycle day, estimated phase/season, calculated prediction anchors (estimated next period, estimated fertile/ovulation window, cadence variance), general aggregate energy scores, cycle tracking mode, and optional user-entered care or comfort notes. The optional plain-text summary also includes energy and "social battery" descriptions along with phase advice.</li>
+                                <li><em>What Is NEVER Transferred:</em> Daily symptom logs (such as cramps, headache, or nausea), flow intensity, flow texture, cervical mucus observations, pain scale ratings, medication logs, personal diary notes, and hydration counters. Intimate wellness details remain exclusively on the primary user's phone.</li>
                             </ul>
                         </li>
-                        <li><strong>Transit Security Warning for Shared Channels:</strong> When a user chooses to share a QR code image, sync file, or plain-text summary through a third-party messaging app, SMS, email, or cloud service (such as WhatsApp, Telegram, or email), that shared artifact leaves Rhythm's local sandbox and becomes subject to the security, encryption, retention, and privacy practices of the chosen communication service.</li>
-                        <li><strong>Partner Device Storage &amp; Isolation:</strong> Imported cadence metrics, prediction anchors, and care notes are stored locally on the partner's device in their private DataStore and encrypted database. The partner can erase all synced partner data at any time via <strong>Clear Partner Sync</strong> or <strong>Wipe All Data</strong>.</li>
+                        <li><strong>Unencrypted Sync Format &amp; Transit Security Warning:</strong> Sync codes, JSON sync packages, QR code images, and text summaries are <strong>plain, readable text and are not encrypted</strong>—meaning anyone who obtains a QR image, file, or text summary can read all of the transferred information. When a user chooses to share a QR image, sync file, or plain-text summary through a third-party messaging app, SMS, email, or cloud service (such as WhatsApp, Telegram, or email), that shared artifact leaves Rhythm's local sandbox and becomes subject to the security, encryption, retention, and privacy practices of the chosen communication service.</li>
+                        <li><strong>Partner Device Storage &amp; Isolation:</strong> When a partner imports a sync package, the transferred cadence metrics, predictions, and care notes are stored locally on the partner's device in the app's private, OS-sandboxed Android Jetpack DataStore (separate from the SQLCipher-encrypted database). The partner can erase all synced partner data at any time via <strong>Settings &rarr; Partner Mode &rarr; Disconnect / Clear Synced Rhythm</strong> or <strong>Wipe All Data</strong>.</li>
                     </ul>
                 </div>
             </details>
@@ -1668,7 +1672,7 @@
                 <summary>
                     <div class="clause-summary-left">
                         <div class="clause-title-row"><span class="sec-num">08</span> No Advertising, Analytics, or Third-Party Data Sharing</div>
-                        <div class="clause-takeaway">Zero ads, zero trackers, no data selling; Google Play independently handles optional tip payments and installs.</div>
+                        <div class="clause-takeaway">Zero ads, zero trackers, no data selling; Google Play independently handles optional tip payments, installs, and QR scanner modules.</div>
                     </div>
                     <span class="clause-chevron">&#9662;</span>
                 </summary>
@@ -1677,7 +1681,7 @@
                         <li>Rhythm does <strong>not</strong> include third-party advertising SDKs or behavioral profiling tools.</li>
                         <li>Rhythm does <strong>not</strong> bundle third-party crash-reporting or analytics telemetry SDKs.</li>
                         <li>We never sell, rent, trade, or share your personal or reproductive health data.</li>
-                        <li><strong>Google Play Billing &amp; Bundled Transport Libraries:</strong> Rhythm includes the official Google Play Billing Library solely for optional user tips. This library pulls in standard Google transport components (<code>datatransport</code>) as transitive dependencies, but because Rhythm strips <code>android.permission.INTERNET</code> from the final app manifest, these components cannot open network connections or transmit data from within Rhythm. When you install Rhythm, update the app, or make an optional contribution through the tip jar, the <strong>Google Play Store app</strong> independently processes installation diagnostics and purchase transactions under <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. Rhythm never receives your credit card, UPI, or banking details, and your health logs are never linked to Google Play Billing transactions.</li>
+                        <li><strong>Google Play Billing, Play Services &amp; Bundled Transport Libraries:</strong> Rhythm includes the official Google Play Billing Library solely for optional user tips. This library pulls in standard Google transport components (<code>datatransport</code>) as transitive dependencies, but because Rhythm strips <code>android.permission.INTERNET</code> from the final app manifest, these components cannot open network connections or transmit data from within Rhythm. When you install Rhythm, update the app, or make an optional contribution through the tip jar, the <strong>Google Play Store app</strong> independently processes installation diagnostics and purchase transactions under <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. Rhythm never receives your credit card, UPI, or banking details, and your health logs are never linked to Google Play Billing transactions. Additionally, QR scanning uses Google Play services components that may be downloaded or updated by Google outside Rhythm and are subject to Google's own privacy policy.</li>
                         <li><strong>Send Feedback Feature:</strong> Tapping "Send Feedback" in Settings opens your device's default email application with a draft addressed to our support email, pre-filled with your device model, Android version, and Rhythm app version. No information is sent unless you review and press send in your email app.</li>
                     </ul>
                 </div>
@@ -1687,7 +1691,7 @@
                 <summary>
                     <div class="clause-summary-left">
                         <div class="clause-title-row"><span class="sec-num">09</span> Data Retention, Security Summary &amp; Deletion</div>
-                        <div class="clause-takeaway">Data stays on-device until you tap Wipe All Data, Clear Partner Sync, clear storage, or uninstall.</div>
+                        <div class="clause-takeaway">Data stays on-device until you tap Wipe All Data, Disconnect / Clear Synced Rhythm, clear storage, or uninstall.</div>
                     </div>
                     <span class="clause-chevron">&#9662;</span>
                 </summary>
@@ -1696,7 +1700,7 @@
                     <ul>
                         <li><strong>Local Retention Only:</strong> Your data stays exclusively on your device until you choose to delete it. Because Rhythm has no backend servers or user accounts, we hold zero copies of your records.</li>
                         <li><strong>Permanent Deletion on Primary Device:</strong> Tapping <strong>Settings &rarr; Wipe All Data</strong> inside the app, clearing the app's storage in Android system settings, or uninstalling Rhythm permanently and irreversibly deletes all stored logs, history, and preferences from your device.</li>
-                        <li><strong>Partner Device Deletion ("Clear Partner Sync"):</strong> On a partner device, selecting <strong>Clear Partner Sync</strong> immediately and irreversibly deletes synced partner periods, predictions, cadence metrics, and care notes from that device's local database and DataStore.</li>
+                        <li><strong>Partner Device Deletion ("Disconnect / Clear Synced Rhythm"):</strong> On a partner device, selecting <strong>Settings &rarr; Partner Mode &rarr; Disconnect / Clear Synced Rhythm</strong> immediately and irreversibly deletes synced partner periods, predictions, cadence metrics, and care notes from that device's local DataStore.</li>
                         <li><strong>Independent Life Cycles:</strong> Because Rhythm has no cloud server or live two-way sync link, deleting or resetting data on one phone does not automatically delete data already imported onto another phone.</li>
                         <li><strong>Exported &amp; Shared Files:</strong> Any PDF, CSV, JSON sync files, QR images, or text messages exported or shared outside Rhythm's sandbox must be managed or deleted manually by you.</li>
                     </ul>
@@ -1716,7 +1720,7 @@
                     <ul>
                         <li><strong>Access &amp; Correction:</strong> View or edit any logged period date, symptom, note, or profile field directly within the Calendar and Settings screens.</li>
                         <li><strong>Portability:</strong> Export your complete data in JSON, CSV, or PDF format via Settings.</li>
-                        <li><strong>Revoking Partner Sharing:</strong> Because Partner Companion Mode shares offline point-in-time snapshots rather than a live cloud stream, the primary user cannot remotely recall or erase data already imported onto a partner's device. To stop sharing future updates, stop generating or sending new sync codes/exports; to remove previously synced data, the partner must tap <strong>Clear Partner Sync</strong> (or <strong>Wipe All Data</strong> / uninstall) on their own device.</li>
+                        <li><strong>Revoking Partner Sharing:</strong> Because Partner Companion Mode shares offline point-in-time snapshots rather than a live cloud stream, the primary user cannot remotely recall or erase data already imported onto a partner's device. To stop sharing future updates, stop generating or sending new sync codes/exports; to remove previously synced data, the partner must tap <strong>Settings &rarr; Partner Mode &rarr; Disconnect / Clear Synced Rhythm</strong> (or <strong>Wipe All Data</strong> / uninstall) on their own device.</li>
                         <li><strong>Questions or Grievances:</strong> Contact the developer at <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a>.</li>
                     </ul>
                 </div>
@@ -1760,7 +1764,7 @@
                 <h1>Terms of Use &amp; Legal Disclaimers</h1>
                 <p>Informational wellness scope, Partner Companion Mode consent rules, open-source licenses, and governing jurisdiction.</p>
                 <div class="meta-bar">
-                    <div class="meta-item"><strong>Effective &amp; Last Updated:</strong> November 19, 2026</div>
+                    <div class="meta-item"><strong>Effective &amp; Last Updated:</strong> November 20, 2026</div>
                     <div class="meta-item"><strong>Jurisdiction:</strong> Nagpur, Maharashtra, India</div>
                     <div class="meta-item"><strong>Contact:</strong> <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a></div>
                 </div>
@@ -1833,7 +1837,7 @@
                     <span class="clause-chevron">&#9662;</span>
                 </summary>
                 <div class="clause-body">
-                    <p>Rhythm Cycle Tracker incorporates open-source software libraries (including Android Jetpack, Kotlin Coroutines, Dagger Hilt, Coil, Material Components 3, SQLCipher for Android, Google Play Services Code Scanner, and the Google Play Billing Library). Full third-party acknowledgments and license notices are available inside the application under <strong>Settings &rarr; Open Source Licenses</strong>.</p>
+                    <p>Rhythm Cycle Tracker incorporates open-source software libraries (including Android Jetpack, Kotlin Coroutines, Dagger Hilt, Coil, Material Components 3, SQLCipher for Android, Google Play Services Code Scanner, ML Kit Barcode Scanning, ZXing, and the Google Play Billing Library). Full third-party acknowledgments and license notices are available inside the application under <strong>Settings &rarr; Open Source Licenses</strong>.</p>
                 </div>
             </details>
 
@@ -1871,7 +1875,7 @@
         </section>
 
         <footer>
-            <span>&copy; 2026 Rhythm Cycle Tracker.</span>
+            <span>&copy; 2026 Pharos &bull; Rhythm Cycle Tracker.</span>
             <span>
                 <a href="https://www.instagram.com/rhythm_cycletracker?bqrl=MWkycDMzNnY1MTE1eA==" target="_blank" rel="noopener">Instagram</a> &bull;
                 <a href="mailto:admin.rhythm@gmail.com">Contact</a>
@@ -1971,7 +1975,7 @@
                 title: "Offline Cadence Sync",
                 sub: "Share cycle phase via QR—never daily symptoms.",
                 c1Title: "Shared",
-                c1Body: "Phase, cycle day & care notes.",
+                c1Body: "Display name, phase, bleeding status & care notes.",
                 c2Title: "Private",
                 c2Body: "Symptoms, pain & diary stay on your phone.",
                 footer: "Peer-to-Peer Snapshot",
@@ -1985,8 +1989,8 @@
                 sub: "PIN/Biometrics, Discreet Mode & 1-tap wipe.",
                 c1Title: "Hardware Keystore",
                 c1Body: "AES-256 encrypted • Cloud backup off.",
-                c2Title: "Instant Export",
-                c2Body: "PDF, CSV, or JSON anytime.",
+                c2Title: "Instant Erasure",
+                c2Body: "Wipe All Data or Disconnect / Clear Synced Rhythm.",
                 footer: "Built for On-Device Privacy",
                 capTitle: "Vault & Portability",
                 capDesc: "Biometric lock, Discreet Mode & doctor-ready PDFs."
@@ -2103,15 +2107,16 @@
         const shieldData = {
             shared: {
                 items: [
+                    "&#10003; Display Name",
+                    "&#10003; Bleeding Status",
                     "&#10003; Cycle Cadence",
                     "&#10003; Recent Period Dates",
                     "&#10003; Current Cycle Day",
                     "&#10003; Inner Season",
-                    "&#10003; Next Period Est.",
-                    "&#10003; Energy Score",
-                    "&#10003; Optional Care Notes"
+                    "&#10003; Next Period Countdown",
+                    "&#10003; Energy &amp; Care Notes"
                 ],
-                note: "Offline snapshot via QR or JSON. No cloud server involved."
+                note: "Plain-text offline snapshot via QR or JSON. No cloud server involved."
             },
             private: {
                 items: [
@@ -2120,7 +2125,7 @@
                     "&#128274; Flow &amp; Texture",
                     "&#128274; Cervical Mucus",
                     "&#128274; Medications",
-                    "&#128274; Intimacy Logs",
+                    "&#128274; Hydration Counters",
                     "&#128274; Personal Diary Notes"
                 ],
                 note: "Locked inside your phone's AES-256 vault. Never exported in Partner Sync."
