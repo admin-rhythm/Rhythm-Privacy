@@ -24,12 +24,15 @@
             --accent: #6D28D9;
             --accent-soft: rgba(109, 40, 217, 0.08);
             --accent-border: rgba(109, 40, 217, 0.22);
+            --green: #059669;
+            --green-soft: rgba(5, 150, 105, 0.09);
+            --green-border: rgba(5, 150, 105, 0.24);
             --border: rgba(17, 17, 21, 0.08);
             --warn-bg: #FFF9F8;
             --warn-border: rgba(220, 38, 38, 0.22);
             --warn-title: #991B1B;
             --warn-text: #7F1D1D;
-            --nav-bg: rgba(250, 250, 252, 0.86);
+            --nav-bg: rgba(250, 250, 252, 0.88);
             --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
             --shadow-md: 0 14px 36px -10px rgba(17, 17, 21, 0.08);
             --shadow-lg: 0 24px 60px -15px rgba(17, 17, 21, 0.16);
@@ -46,12 +49,15 @@
                 --accent: #C4B5FD;
                 --accent-soft: rgba(196, 181, 253, 0.11);
                 --accent-border: rgba(196, 181, 253, 0.24);
+                --green: #34D399;
+                --green-soft: rgba(52, 211, 153, 0.11);
+                --green-border: rgba(52, 211, 153, 0.26);
                 --border: rgba(255, 255, 255, 0.08);
                 --warn-bg: rgba(127, 29, 29, 0.15);
                 --warn-border: rgba(248, 113, 113, 0.28);
                 --warn-title: #FCA5A5;
                 --warn-text: #FECACA;
-                --nav-bg: rgba(10, 10, 13, 0.86);
+                --nav-bg: rgba(10, 10, 13, 0.88);
                 --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
                 --shadow-md: 0 14px 36px -10px rgba(0, 0, 0, 0.6);
                 --shadow-lg: 0 24px 60px -15px rgba(0, 0, 0, 0.8);
@@ -68,14 +74,14 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 72px;
+            scroll-padding-top: 76px;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg);
             color: var(--text-primary);
-            line-height: 1.7;
+            line-height: 1.68;
             font-size: 15.5px;
             overflow-x: clip;
             background-image:
@@ -97,51 +103,18 @@
             pointer-events: none;
         }
 
-        /* Startup Motion Curves & Keyframes */
-        @keyframes heroFloatIn {
-            from {
-                opacity: 0;
-                transform: translateY(16px) scale(0.985);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        @keyframes subtlePulseGlow {
-            0%, 100% {
-                box-shadow: var(--shadow-lg), 0 0 0 0 rgba(179, 136, 255, 0);
-            }
-            50% {
-                box-shadow: var(--shadow-lg), 0 0 28px 2px rgba(179, 136, 255, 0.18);
-            }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes screenSwapIn {
-            from {
-                opacity: 0.3;
-                transform: translateY(7px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0.3; transform: translateY(7px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .hero-animate {
-            animation: heroFloatIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(16px);
-            transition: opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1), transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .reveal.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+        .panel-animate {
+            animation: fadeSlideIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
 
         .screen-animate {
@@ -150,16 +123,10 @@
 
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
-            .hero-animate, .screen-animate { animation: none; }
-            .reveal {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-            .logo-frame { animation: none; }
+            .panel-animate, .screen-animate { animation: none; }
         }
 
-        /* Frosted Sticky Navigation */
+        /* Frosted Sticky Header + Mode Switcher */
         .navbar {
             position: sticky;
             top: 0;
@@ -173,11 +140,12 @@
         .nav-inner {
             max-width: 940px;
             margin: 0 auto;
-            padding: 12px 20px;
+            padding: 10px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 12px;
+            flex-wrap: wrap;
         }
 
         .nav-brand {
@@ -190,7 +158,6 @@
             text-decoration: none;
             letter-spacing: -0.02em;
             white-space: nowrap;
-            flex-shrink: 0;
         }
 
         .nav-logo-dot {
@@ -211,34 +178,56 @@
             object-fit: cover;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 4px;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            padding-bottom: 2px;
-        }
-
-        .nav-links::-webkit-scrollbar {
-            display: none;
-        }
-
-        .nav-links a {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 7px 11px;
-            border-radius: 9px;
-            white-space: nowrap;
-            transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-links a:hover,
-        .nav-links a:focus-visible {
-            color: var(--text-primary);
+        /* Segmented Mode Switcher */
+        .mode-switcher {
+            display: inline-flex;
             background: var(--surface-subtle);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 3px;
+            gap: 3px;
+        }
+
+        .mode-btn {
+            min-height: 36px;
+            padding: 6px 14px;
+            border: none;
+            border-radius: 9px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.16s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mode-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .mode-btn.active {
+            background: var(--surface);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        @media (max-width: 620px) {
+            .nav-inner {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            .mode-switcher {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .mode-btn {
+                padding: 8px 6px;
+                font-size: 0.78rem;
+                text-align: center;
+            }
         }
 
         .container {
@@ -247,29 +236,26 @@
             padding: 0 20px calc(88px + env(safe-area-inset-bottom, 0px));
         }
 
-        /* Keynote Hero & Architecture Proof */
+        /* Compact Keynote Header */
         .hero {
-            padding: 56px 0 44px;
+            padding: 40px 0 32px;
             text-align: center;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 44px;
         }
 
         .logo-frame {
-            width: 84px;
-            height: 84px;
-            border-radius: 22px;
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
             background: linear-gradient(135deg, #FF8A65 0%, #BA68C8 55%, #9575CD 100%);
             padding: 2.5px;
-            box-shadow: var(--shadow-lg);
-            margin: 0 auto 22px;
-            animation: subtlePulseGlow 4s ease-in-out infinite;
+            box-shadow: var(--shadow-md);
+            margin: 0 auto 16px;
         }
 
         .logo-inner {
             width: 100%;
             height: 100%;
-            border-radius: 19.5px;
+            border-radius: 17.5px;
             background: linear-gradient(135deg, #FF8A65 0%, #9575CD 100%);
             display: flex;
             align-items: center;
@@ -285,92 +271,40 @@
 
         .eyebrow {
             display: inline-block;
-            font-size: 0.72rem;
+            font-size: 0.71rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.09em;
             color: var(--accent);
             background: var(--accent-soft);
             border: 1px solid var(--accent-border);
-            padding: 5px 12px;
+            padding: 4px 11px;
             border-radius: 999px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .hero h1 {
-            font-size: clamp(1.95rem, 5.6vw, 3.15rem);
+            font-size: clamp(1.8rem, 4.8vw, 2.75rem);
             font-weight: 800;
             letter-spacing: -0.035em;
-            line-height: 1.12;
+            line-height: 1.14;
             color: var(--text-primary);
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .hero-lead {
-            font-size: clamp(0.98rem, 2.2vw, 1.18rem);
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
             color: var(--text-secondary);
-            max-width: 620px;
-            margin: 0 auto 24px;
-            line-height: 1.58;
-        }
-
-        .hero-cta-row {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .btn-primary,
-        .btn-secondary {
-            min-height: 44px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 22px;
-            border-radius: 999px;
-            font-size: 0.88rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), background 0.16s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.16s ease;
-        }
-
-        .btn-primary {
-            background: var(--text-primary);
-            color: var(--bg);
-        }
-
-        .btn-primary:hover {
-            opacity: 0.92;
-            transform: translateY(-1px);
-        }
-
-        .btn-primary:active {
-            transform: scale(0.97);
-        }
-
-        .btn-secondary {
-            background: var(--surface);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .btn-secondary:hover {
-            background: var(--surface-subtle);
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary:active {
-            transform: scale(0.97);
+            max-width: 610px;
+            margin: 0 auto 22px;
+            line-height: 1.55;
         }
 
         .arch-strip {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             text-align: left;
         }
 
@@ -384,22 +318,22 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 12px 14px;
+            padding: 11px 14px;
             box-shadow: var(--shadow-sm);
         }
 
         .arch-pill .label {
             display: block;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
+            font-size: 0.67rem;
             text-transform: uppercase;
             letter-spacing: 0.06em;
             color: var(--text-muted);
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         .arch-pill .value {
-            font-size: 0.86rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-primary);
         }
@@ -408,12 +342,12 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 12px 24px;
-            padding: 14px 18px;
+            gap: 10px 22px;
+            padding: 12px 16px;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            font-size: 0.82rem;
+            border-radius: 12px;
+            font-size: 0.81rem;
             color: var(--text-secondary);
             box-shadow: var(--shadow-sm);
             text-align: left;
@@ -422,7 +356,7 @@
         @media (max-width: 600px) {
             .meta-bar {
                 flex-direction: column;
-                gap: 8px;
+                gap: 6px;
             }
         }
 
@@ -431,56 +365,66 @@
             font-weight: 600;
         }
 
-        /* Dedicated Product Showcase Section */
-        .product-showcase {
-            margin-bottom: 56px;
+        /* Pinned Medical Disclaimer (Always Visible) */
+        .disclaimer-card {
+            background: var(--warn-bg);
+            border: 1px solid var(--warn-border);
+            border-radius: 16px;
+            padding: 20px 22px;
+            margin-bottom: 28px;
         }
 
-        .showcase-header {
-            text-align: center;
-            max-width: 660px;
-            margin: 0 auto 32px;
-        }
-
-        .showcase-header h2 {
-            font-size: clamp(1.55rem, 3.8vw, 2.2rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1.18;
-            color: var(--text-primary);
-            margin-bottom: 10px;
-        }
-
-        .showcase-header p {
-            color: var(--text-secondary);
+        .disclaimer-card h2 {
             font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--warn-title);
+            margin-bottom: 8px;
         }
 
-        /* Samsung Galaxy Z Flip 6 Device Stage (22:9 Tall Aspect Ratio) */
+        .disclaimer-card p {
+            color: var(--warn-text);
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+            line-height: 1.55;
+        }
+
+        .disclaimer-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Mode Panels (DOM-preserved for crawlers) */
+        .mode-panel {
+            display: none;
+        }
+
+        .mode-panel.active {
+            display: block;
+        }
+
+        /* Galaxy Z Flip 6 Device Stage */
         .device-stage {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 26px;
-            padding: 32px 28px;
+            border-radius: 24px;
+            padding: 30px 26px;
             box-shadow: var(--shadow-md);
             margin-bottom: 20px;
             display: grid;
-            grid-template-columns: 268px 1fr;
-            gap: 36px;
+            grid-template-columns: 260px 1fr;
+            gap: 32px;
             align-items: center;
         }
 
         @media (max-width: 820px) {
             .device-stage {
                 grid-template-columns: 1fr;
-                padding: 24px 16px;
-                gap: 24px;
-                border-radius: 22px;
+                padding: 22px 16px;
+                gap: 22px;
             }
         }
 
         .zflip-chassis {
-            width: 244px;
+            width: 240px;
             margin: 0 auto;
             background: linear-gradient(145deg, #2E2E38 0%, #141419 52%, #262630 100%);
             border-radius: 34px;
@@ -490,22 +434,15 @@
                 inset 0 0 0 1.5px rgba(255, 255, 255, 0.18),
                 0 0 0 1px rgba(0, 0, 0, 0.45);
             position: relative;
-            transition: transform 0.24s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @media (hover: hover) {
-            .zflip-chassis:hover {
-                transform: translateY(-3px);
-            }
         }
 
         .zflip-chassis::after {
             content: "";
             position: absolute;
             right: -3px;
-            top: 104px;
+            top: 102px;
             width: 3px;
-            height: 42px;
+            height: 40px;
             background: #3D3D48;
             border-radius: 0 3px 3px 0;
         }
@@ -575,7 +512,7 @@
         }
 
         .screen-title {
-            font-size: 1.18rem;
+            font-size: 1.16rem;
             font-weight: 800;
             letter-spacing: -0.02em;
             line-height: 1.22;
@@ -613,7 +550,6 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Screen Switcher Tabs */
         .screen-tabs {
             display: flex;
             flex-direction: column;
@@ -625,49 +561,135 @@
             min-height: 44px;
             background: var(--bg);
             border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 14px 16px;
+            border-radius: 14px;
+            padding: 13px 15px;
             cursor: pointer;
-            transition: transform 0.16s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.16s cubic-bezier(0.4, 0, 0.2, 1), background 0.16s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.16s cubic-bezier(0.4, 0, 0.2, 1);
             color: var(--text-primary);
             font-family: inherit;
         }
 
         .screen-tab-btn:hover {
             border-color: var(--accent-border);
-            transform: translateX(2px);
-        }
-
-        .screen-tab-btn:active {
-            transform: scale(0.99);
         }
 
         .screen-tab-btn.active {
             background: var(--accent-soft);
             border-color: var(--accent);
-            box-shadow: 0 4px 16px -6px var(--accent-border);
         }
 
         .screen-tab-btn .tab-kicker {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.71rem;
+            font-size: 0.7rem;
             color: var(--accent);
             display: block;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         .screen-tab-btn .tab-heading {
-            font-size: 0.95rem;
+            font-size: 0.94rem;
             font-weight: 700;
             display: block;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         .screen-tab-btn .tab-desc {
-            font-size: 0.83rem;
+            font-size: 0.82rem;
             color: var(--text-secondary);
             display: block;
-            line-height: 1.45;
+            line-height: 1.42;
+        }
+
+        /* Interactive Privacy Shield Inspector */
+        .shield-inspector {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .shield-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .shield-header h3 {
+            font-size: 1.08rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .shield-tabs {
+            display: inline-flex;
+            background: var(--surface-subtle);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 3px;
+            gap: 3px;
+        }
+
+        .shield-tab-btn {
+            min-height: 36px;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .shield-tab-btn.active {
+            background: var(--surface);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .shield-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        @media (max-width: 620px) {
+            .shield-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .shield-item {
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: 0.86rem;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text-secondary);
+        }
+
+        .shield-item.shared {
+            background: var(--green-soft);
+            border-color: var(--green-border);
+        }
+
+        .shield-item.private {
+            background: var(--accent-soft);
+            border-color: var(--accent-border);
+        }
+
+        .shield-item strong {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+            font-size: 0.88rem;
         }
 
         /* Feature Bento Grid */
@@ -675,7 +697,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 14px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         @media (max-width: 780px) {
@@ -691,15 +713,6 @@
             border-radius: 18px;
             padding: 20px;
             box-shadow: var(--shadow-sm);
-            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        @media (hover: hover) {
-            .feature-tile:hover {
-                transform: translateY(-2px);
-                border-color: var(--accent-border);
-                box-shadow: var(--shadow-md);
-            }
         }
 
         .feature-tile.span-2 {
@@ -719,112 +732,118 @@
             letter-spacing: 0.06em;
             color: var(--accent);
             display: block;
-            margin-bottom: 7px;
+            margin-bottom: 6px;
         }
 
         .feature-tile h3 {
-            font-size: 1.03rem;
+            font-size: 1.02rem;
             font-weight: 700;
-            letter-spacing: -0.015em;
             color: var(--text-primary);
-            margin-bottom: 7px;
+            margin-bottom: 6px;
         }
 
         .feature-tile p {
             font-size: 0.88rem;
             color: var(--text-secondary);
-            line-height: 1.58;
+            line-height: 1.56;
         }
 
-        /* Medical Disclaimer Callout */
-        .disclaimer-card {
-            background: var(--warn-bg);
-            border: 1px solid var(--warn-border);
-            border-radius: 18px;
-            padding: 24px 24px;
-            margin-bottom: 40px;
-        }
-
-        .disclaimer-card h2 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--warn-title);
-            letter-spacing: -0.01em;
-            margin-bottom: 12px;
-        }
-
-        .disclaimer-card p {
-            color: var(--warn-text);
-            font-size: 0.91rem;
-            margin-bottom: 10px;
-        }
-
-        .disclaimer-card p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Part Headers */
-        .part-header {
+        /* Legal Toolbar (Search + Expand All) */
+        .legal-toolbar {
             display: flex;
-            align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
-            margin: 48px 0 20px;
-        }
-
-        .part-badge {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.73rem;
-            font-weight: 500;
-            color: var(--accent);
-            background: var(--accent-soft);
-            border: 1px solid var(--accent-border);
-            padding: 4px 10px;
-            border-radius: 6px;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
-        .part-title {
-            font-size: clamp(1.25rem, 3.2vw, 1.42rem);
-            font-weight: 800;
-            letter-spacing: -0.025em;
-            color: var(--text-primary);
-        }
-
-        /* Editorial Cards */
-        .policy-card {
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            padding: 12px 14px;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 26px 28px;
-            margin-bottom: 14px;
+            border-radius: 14px;
             box-shadow: var(--shadow-sm);
-            transition: border-color 0.2s ease;
         }
 
-        @media (hover: hover) {
-            .policy-card:hover {
-                border-color: var(--accent-border);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .policy-card {
-                padding: 20px 18px;
-                border-radius: 16px;
-            }
-        }
-
-        .policy-card h2 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            letter-spacing: -0.015em;
+        .search-input {
+            flex: 1 1 220px;
+            min-height: 40px;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg);
             color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.88rem;
+            outline: none;
+            transition: border-color 0.15s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+        }
+
+        .toolbar-btn {
+            min-height: 40px;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface-subtle);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .toolbar-btn:hover {
+            background: var(--accent-soft);
+            border-color: var(--accent-border);
+        }
+
+        /* Summary Accordion Cards */
+        details.clause-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             margin-bottom: 12px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: border-color 0.18s ease;
+        }
+
+        details.clause-card[open] {
+            border-color: var(--accent-border);
+        }
+
+        details.clause-card summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 18px 22px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+            user-select: none;
+        }
+
+        details.clause-card summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .clause-summary-left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .clause-title-row {
             display: flex;
             align-items: baseline;
             gap: 10px;
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.015em;
         }
 
         .sec-num {
@@ -833,6 +852,40 @@
             font-weight: 500;
             color: var(--accent);
             flex-shrink: 0;
+        }
+
+        .clause-takeaway {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .clause-chevron {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            padding: 2px 6px;
+            border-radius: 6px;
+            background: var(--surface-subtle);
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+
+        details.clause-card[open] .clause-chevron {
+            transform: rotate(180deg);
+            color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        .clause-body {
+            padding: 0 22px 22px;
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+        }
+
+        @media (max-width: 600px) {
+            details.clause-card summary { padding: 16px 16px; }
+            .clause-body { padding: 14px 16px 18px; }
         }
 
         p {
@@ -855,7 +908,7 @@
         }
 
         li {
-            margin-bottom: 10px;
+            margin-bottom: 9px;
             padding-left: 4px;
         }
 
@@ -877,7 +930,7 @@
         .table-wrap {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            margin: 16px 0;
+            margin: 14px 0;
             border: 1px solid var(--border);
             border-radius: 12px;
         }
@@ -886,12 +939,12 @@
             width: 100%;
             min-width: 520px;
             border-collapse: collapse;
-            font-size: 0.86rem;
+            font-size: 0.85rem;
         }
 
         th, td {
             text-align: left;
-            padding: 12px 14px;
+            padding: 11px 14px;
             border-bottom: 1px solid var(--border);
             vertical-align: top;
             color: var(--text-secondary);
@@ -905,7 +958,7 @@
             background: var(--surface-subtle);
             font-weight: 600;
             color: var(--text-primary);
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
@@ -914,17 +967,23 @@
             color: var(--accent);
             text-decoration: none;
             font-weight: 500;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.15s ease;
         }
 
         a:hover {
-            border-bottom-color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .empty-search {
+            display: none;
+            text-align: center;
+            padding: 28px 16px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
         footer {
-            margin-top: 56px;
-            padding-top: 24px;
+            margin-top: 48px;
+            padding-top: 22px;
             border-top: 1px solid var(--border);
             display: flex;
             flex-wrap: wrap;
@@ -940,26 +999,24 @@
 
     <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
 
-    <nav class="navbar" aria-label="Primary Navigation">
+    <nav class="navbar" aria-label="Primary Mode Switcher">
         <div class="nav-inner">
-            <a href="#" class="nav-brand">
+            <a href="#product" class="nav-brand" onclick="switchMode('product')">
                 <span class="nav-logo-dot">
                     <img src="logo.png" alt="" onerror="if(!this.dataset.triedJpg){this.dataset.triedJpg=1;this.src='logo.jpg';}else{this.style.display='none';}">
                 </span>
                 Rhythm Cycle Tracker
             </a>
-            <div class="nav-links">
-                <a href="#product">Product</a>
-                <a href="#medical-notice">Medical Notice</a>
-                <a href="#privacy-policy">Privacy Policy</a>
-                <a href="#terms-of-use">Terms of Use</a>
-                <a href="#contact">Contact</a>
+            <div class="mode-switcher" role="tablist" aria-label="Page View">
+                <button type="button" id="tab-product" class="mode-btn active" role="tab" aria-selected="true" onclick="switchMode('product', true)">Product</button>
+                <button type="button" id="tab-privacy" class="mode-btn" role="tab" aria-selected="false" onclick="switchMode('privacy', true)">Privacy Policy</button>
+                <button type="button" id="tab-terms" class="mode-btn" role="tab" aria-selected="false" onclick="switchMode('terms', true)">Terms of Use</button>
             </div>
         </div>
     </nav>
 
     <main class="container">
-        <header class="hero hero-animate">
+        <header class="hero">
             <div class="logo-frame">
                 <div class="logo-inner">
                     <img src="logo.png" alt="Rhythm Cycle Tracker App Logo" onerror="if(!this.dataset.triedJpg){this.dataset.triedJpg=1;this.src='logo.jpg';}else{this.style.display='none';}">
@@ -969,13 +1026,8 @@
             <span class="eyebrow">Rhythm Cycle Tracker &bull; Product &amp; Legal</span>
             <h1>Cycle clarity, engineered for total privacy.</h1>
             <p class="hero-lead">
-                Track inner seasons, pair with vibe-matched companions, share cadence offline via Partner Companion Mode, and keep your health logs encrypted on your device[cite: 2, 5, 6].
+                Offline-first menstrual cycle &amp; personal wellness tracker with SQLCipher encryption, Inner Seasons, vibe-matched companions, and peer-to-peer Partner Companion Mode.
             </p>
-
-            <div class="hero-cta-row">
-                <a href="#product" class="btn-primary">Explore Features</a>
-                <a href="#privacy-policy" class="btn-secondary">Read Privacy Policy</a>
-            </div>
 
             <div class="arch-strip">
                 <div class="arch-pill">
@@ -1003,16 +1055,17 @@
             </div>
         </header>
 
-        <!-- Dedicated Product Information & Galaxy Z Flip 6 Screenshot Section -->
-        <section id="product" class="product-showcase reveal">
-            <div class="showcase-header">
-                <span class="eyebrow">Product Architecture</span>
-                <h2>Thoughtful wellness tools. Zero cloud servers.</h2>
-                <p>Tap a screen below to preview how Rhythm organizes cycle rhythm, companions, partner sync, and on-device security[cite: 2, 5, 6].</p>
-            </div>
+        <!-- Pinned Medical Notice: Always Visible Across All Views -->
+        <section id="medical-notice" class="disclaimer-card">
+            <h2>Important Medical, Contraception &amp; Emergency Notice</h2>
+            <p><strong>Not a Medical Device or Contraceptive Method:</strong> Rhythm Cycle Tracker ("Rhythm") is designed solely for personal wellness awareness and informational cycle logging. It is <strong>not</strong> a certified medical device, clinical diagnostic tool, or healthcare service.</p>
+            <p><strong>Strictly Not for Birth Control or Family Planning:</strong> Do not rely on Rhythm's cycle estimates, ovulation projections, fertile window calculations, or Partner Companion Mode alerts/notifications to prevent or achieve pregnancy, or for natural family planning. Biological cycles fluctuate naturally due to stress, travel, illness, hormonal shifts, and conditions such as PCOS. Always consult a qualified healthcare professional for medical advice, diagnosis, contraception, or treatment.</p>
+            <p><strong>Medical Emergencies:</strong> If you experience severe pelvic or abdominal pain, abnormal heavy bleeding, dizziness, fainting, or any acute medical symptoms, call your local emergency services (such as 112 or 911) or seek immediate emergency medical care.</p>
+        </section>
 
+        <!-- ==================== MODE 1: PRODUCT ==================== -->
+        <section id="panel-product" class="mode-panel active panel-animate" role="tabpanel" aria-labelledby="tab-product">
             <div class="device-stage">
-                <!-- Samsung Galaxy Z Flip 6 Frame (22:9 Tall Aspect Ratio) -->
                 <div class="zflip-chassis">
                     <div id="interactive-screen" class="zflip-screen">
                         <div class="zflip-camera"></div>
@@ -1040,13 +1093,13 @@
                     <button type="button" class="screen-tab-btn active" onclick="selectPreview('seasons', this)">
                         <span class="tab-kicker">01 &bull; Dashboard &amp; Inner Seasons</span>
                         <span class="tab-heading">Winter, Spring, Summer &amp; Autumn</span>
-                        <span class="tab-desc">See where you are in your cycle with intuitive phase cues instead of cluttered clinical grids[cite: 2, 5].</span>
+                        <span class="tab-desc">See where you are in your cycle with intuitive phase cues instead of cluttered clinical grids.</span>
                     </button>
 
                     <button type="button" class="screen-tab-btn" onclick="selectPreview('companions', this)">
                         <span class="tab-kicker">02 &bull; Wellness Companions</span>
                         <span class="tab-heading">Luna, Spark &amp; Willow</span>
-                        <span class="tab-desc">Pick a companion that matches your tone—dreamy Luna, high-energy Spark, or grounded Willow[cite: 2, 5].</span>
+                        <span class="tab-desc">Pick a companion that matches your tone—dreamy Luna, high-energy Spark, or grounded Willow.</span>
                     </button>
 
                     <button type="button" class="screen-tab-btn" onclick="selectPreview('partner', this)">
@@ -1058,287 +1111,471 @@
                     <button type="button" class="screen-tab-btn" onclick="selectPreview('security', this)">
                         <span class="tab-kicker">04 &bull; Shield &amp; Portability</span>
                         <span class="tab-heading">Biometrics, Discreet Mode &amp; PDF/CSV/JSON</span>
-                        <span class="tab-desc">Lock with PIN/biometrics, mask terms in Discreet Mode, export reports, or wipe everything in one tap[cite: 2, 6].</span>
+                        <span class="tab-desc">Lock with PIN/biometrics, mask terms in Discreet Mode, export reports, or wipe everything in one tap.</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Comprehensive Product Features Grid -->
+            <!-- Interactive Privacy Shield Inspector -->
+            <div class="shield-inspector">
+                <div class="shield-header">
+                    <div>
+                        <span class="tile-tag" style="margin-bottom:2px;">Partner Companion Mode</span>
+                        <h3>Interactive "Privacy Shield" Inspector</h3>
+                    </div>
+                    <div class="shield-tabs" role="tablist" aria-label="Partner Sync Data Boundary">
+                        <button type="button" id="shield-btn-shared" class="shield-tab-btn active" onclick="switchShield('shared')">Shared in Sync</button>
+                        <button type="button" id="shield-btn-private" class="shield-tab-btn" onclick="switchShield('private')">Strictly Private</button>
+                    </div>
+                </div>
+                <div id="shield-content" class="shield-grid"></div>
+            </div>
+
+            <!-- Feature Bento Grid -->
             <div class="feature-bento">
-                <div class="feature-tile span-2 reveal">
+                <div class="feature-tile span-2">
                     <span class="tile-tag">Cycle &amp; Wellness Logging</span>
                     <h3>Comprehensive Daily Tracking Without the Clutter</h3>
-                    <p>Log period start/end dates, flow intensity, flow texture, menstrual products, pain levels, symptoms, mood, energy, sleep, digestion, skin, physical activity, hydration, cervical mucus, and personal notes[cite: 2, 6]. Everything is stored in a local Room database encrypted at rest with SQLCipher (256-bit AES) and Android Hardware Keystore keys[cite: 2, 6].</p>
+                    <p>Log period start/end dates, flow intensity, flow texture, menstrual products, pain levels, symptoms, mood, energy, sleep, digestion, skin, physical activity, hydration, cervical mucus, and personal notes. Stored locally in Room encrypted with SQLCipher (256-bit AES) and Android Hardware Keystore keys.</p>
                 </div>
-
-                <div class="feature-tile reveal">
+                <div class="feature-tile">
                     <span class="tile-tag">Inner Seasons</span>
                     <h3>Four Phases, One Clear View</h3>
-                    <p>Translates menstrual, follicular, ovulatory, and luteal phases into Inner Winter, Spring, Summer, and Autumn so daily planning feels natural[cite: 2, 5].</p>
+                    <p>Translates menstrual, follicular, ovulatory, and luteal phases into Inner Winter, Spring, Summer, and Autumn.</p>
                 </div>
-
-                <div class="feature-tile reveal">
+                <div class="feature-tile">
                     <span class="tile-tag">Vibe-Matched Guides</span>
                     <h3>Luna, Spark &amp; Willow</h3>
-                    <p>Tailored daily wellness insights and gentle check-in nudges delivered in a voice that fits how you want to be supported[cite: 2, 5].</p>
+                    <p>Tailored daily wellness insights and gentle check-in nudges delivered in a voice that fits your preference.</p>
                 </div>
-
-                <div class="feature-tile reveal">
-                    <span class="tile-tag">Partner Companion Mode</span>
-                    <h3>Care Cues via Peer-to-Peer Sync</h3>
-                    <p>Share high-level cycle cadence, prediction anchors, and care notes via QR code, JSON package, or text summary—with zero cloud servers[cite: 2, 6].</p>
-                </div>
-
-                <div class="feature-tile reveal">
+                <div class="feature-tile">
                     <span class="tile-tag">Widgets &amp; Reminders</span>
                     <h3>Home Widgets &amp; Local Nudges</h3>
-                    <p>Add Rhythm, Harmony, or Companion widgets to your home screen and schedule exact local reminders via <code>AlarmManager</code> and <code>WorkManager</code>[cite: 2, 6].</p>
+                    <p>Optional Rhythm, Harmony, and Companion widgets plus exact local reminders via <code>AlarmManager</code> and <code>WorkManager</code>.</p>
                 </div>
-
-                <div class="feature-tile span-2 reveal">
-                    <span class="tile-tag">Portability, Privacy Controls &amp; Instant Wipe</span>
+                <div class="feature-tile">
+                    <span class="tile-tag">Portability &amp; Wipe</span>
                     <h3>Full Ownership of Every Record</h3>
-                    <p>Generate formatted PDF summaries for doctor visits, export CSV tables or JSON backups via Android's file picker, toggle Discreet Mode and <code>FLAG_SECURE</code> screen protection, or erase all data immediately with <strong>Wipe All Data</strong>[cite: 2, 6].</p>
-                </div>
-
-                <div class="feature-tile reveal">
-                    <span class="tile-tag">Ad-Free &amp; Voluntary Support</span>
-                    <h3>Zero Ads, Zero Trackers</h3>
-                    <p>No behavioral ads or analytics SDKs[cite: 2, 6]. Optional tips are processed cleanly through Google Play Billing without unlocking paywalls[cite: 2, 6].</p>
+                    <p>Export PDF summaries, CSV tables, or JSON backups via Android's file picker, or erase everything instantly with <strong>Wipe All Data</strong>.</p>
                 </div>
             </div>
         </section>
 
-        <section id="medical-notice" class="disclaimer-card reveal">
-            <h2>Important Medical, Contraception &amp; Emergency Notice</h2>
-            <p><strong>Not a Medical Device or Contraceptive Method:</strong> Rhythm Cycle Tracker ("Rhythm") is designed solely for personal wellness awareness and informational cycle logging. It is <strong>not</strong> a certified medical device, clinical diagnostic tool, or healthcare service[cite: 2, 6].</p>
-            <p><strong>Strictly Not for Birth Control or Family Planning:</strong> Do not rely on Rhythm's cycle estimates, ovulation projections, fertile window calculations, or Partner Companion Mode alerts/notifications to prevent or achieve pregnancy, or for natural family planning[cite: 2, 6]. Biological cycles fluctuate naturally due to stress, travel, illness, hormonal shifts, and conditions such as PCOS[cite: 2, 6]. Always consult a qualified healthcare professional for medical advice, diagnosis, contraception, or treatment[cite: 2, 6].</p>
-            <p><strong>Medical Emergencies:</strong> If you experience severe pelvic or abdominal pain, abnormal heavy bleeding, dizziness, fainting, or any acute medical symptoms, call your local emergency services (such as 112 or 911) or seek immediate emergency medical care[cite: 2].</p>
-        </section>
-
-        <div id="privacy-policy" class="part-header reveal">
-            <span class="part-badge">Part I</span>
-            <span class="part-title">Privacy Policy</span>
-        </div>
-
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">01</span> Developer Identity &amp; Overview</h2>
-            <p>Rhythm Cycle Tracker (Android package ID: <code>com.aistudio.periodtracker.kpzwqn</code>) is developed and published by <strong>[Your Full Name / Developer Name]</strong>, an independent developer based in India ("we", "us", or "our"). For any privacy questions, feedback, or data inquiries, you can reach us directly at <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a>.</p>
-            <p>Rhythm is built with an offline-first architecture[cite: 2, 6]. We do not operate backend servers, user accounts, or remote databases[cite: 2, 6]. The application explicitly removes the Android <code>android.permission.INTERNET</code> permission from its manifest, meaning the app itself does not transmit your logged health records to us or any external server[cite: 2, 6].</p>
-        </section>
-
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">02</span> Information Stored Locally on Your Device</h2>
-            <p>All cycle and wellness information you enter into Rhythm is stored exclusively on your physical device[cite: 2, 6]:</p>
-            <ul>
-                <li><strong>Cycle &amp; Wellness Logs (Encrypted Database):</strong> Period start and end dates, flow intensity, flow texture (such as fluid, spotting, or clots), menstrual product used, pain levels, physical symptoms, mood, energy levels, sleep quality, digestion, skin observations, physical activity levels, medication notes, hydration counts, cervical mucus observations, and personal daily notes are stored in a local Room SQLite database encrypted at rest using <strong>SQLCipher (256-bit AES)</strong> with keys managed by the Android Hardware Keystore[cite: 2, 6].</li>
-                <li><strong>Profile, Settings, Custom Avatar &amp; Widget Summary Storage (Private Sandbox):</strong> Optional profile details (such as display name, age, gender/sex, height, weight, wellness goals, and cycle tracking mode), app settings (such as PIN configuration and reminder preferences), and the current cycle status values displayed on home-screen widgets (current cycle day, phase name, days until next period, and companion icon) are kept in the application's private, OS-sandboxed Android Jetpack DataStore storage, which is separate from the SQLCipher-encrypted database[cite: 2, 6]. If you select a custom profile picture, the selected image is copied into the app's private internal file directory (<code>filesDir</code>).</li>
-                <li><strong>OS Cloud Backups Disabled:</strong> Automatic operating-system cloud backups (Google Drive device backup) and ADB device-to-device transfers are explicitly disabled (<code>allowBackup="false"</code>) for Rhythm's database and preference directories so your logs are not uploaded to cloud storage without your knowledge[cite: 2, 6].</li>
-            </ul>
-        </section>
-
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">03</span> Important Warning Regarding Data Loss &amp; Device Changes</h2>
-            <p>Because your database encryption key is hardware-bound to your specific device and cloud backups are disabled, <strong>we have no way to access, view, or recover your data</strong>[cite: 2, 6]:</p>
-            <ul>
-                <li><strong>Device Loss, Reset, or Uninstall:</strong> If you lose or damage your phone, switch to a new phone, clear the app's storage, or uninstall Rhythm, all locally stored cycle history and logs will be permanently lost unless you have previously exported a manual backup[cite: 2, 6].</li>
-                <li><strong>Forgotten PIN:</strong> Because there are no user accounts or servers, there is no remote "Forgot PIN" recovery option. If you forget your 4-digit PIN and do not have Biometric Lock enabled, you will need to clear the application's storage in Android settings to use the app again, which permanently erases all stored data.</li>
-                <li><strong>How to Move Your Data:</strong> To preserve your records when upgrading phones, use the in-app manual <strong>JSON Backup Export</strong> feature prior to switching devices[cite: 2, 6].</li>
-            </ul>
-        </section>
-
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">04</span> Permissions &amp; Device Capabilities Used</h2>
-            <p>Rhythm requests or merges only the system permissions and device capabilities required for local app functionality, scheduled reminders, biometric lock, peer-to-peer partner sync, and optional Google Play Billing[cite: 2, 6]:</p>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Permission / Component</th>
-                            <th>Why It Is Included</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>POST_NOTIFICATIONS</code></td>
-                            <td>Displays optional local cycle reminders, daily wellness check-in nudges, and Partner Companion Mode alerts (such as Day 1 Care Alerts, High-Energy &amp; Ovulation Alerts, and Morning Wingman Briefings via the <code>wellness_partner</code> / Partner Care &amp; Wingman Alerts channel) that you enable in Settings.</td>
-                        </tr>
-                        <tr>
-                            <td><code>SCHEDULE_EXACT_ALARM</code> / <code>USE_EXACT_ALARM</code></td>
-                            <td>Used to trigger user-configured daily wellness check-ins, cycle reminders, and scheduled Partner Companion Mode morning wingman briefings or cycle heads-up alerts at the exact local time selected by the user, executed entirely on-device via Android's <code>AlarmManager</code>.</td>
-                        </tr>
-                        <tr>
-                            <td><code>VIBRATE</code></td>
-                            <td>Provides optional tactile haptic feedback on button taps.</td>
-                        </tr>
-                        <tr>
-                            <td><code>USE_BIOMETRIC</code> / <code>USE_FINGERPRINT</code></td>
-                            <td>Added by the AndroidX Biometric library so you can unlock the app using your device's fingerprint or face authentication via Android's system <code>BiometricPrompt</code>[cite: 2, 6]. Rhythm only receives a pass/fail result and never accesses or stores raw biometric data[cite: 2, 6].</td>
-                        </tr>
-                        <tr>
-                            <td><code>RECEIVE_BOOT_COMPLETED</code></td>
-                            <td>Allows the app and Android WorkManager to reschedule your enabled local reminders and widget updates after you restart your phone[cite: 2].</td>
-                        </tr>
-                        <tr>
-                            <td><code>WAKE_LOCK</code></td>
-                            <td>Added by Android WorkManager to reliably run brief local background tasks (such as evaluating local notifications and refreshing home-screen widgets)[cite: 2].</td>
-                        </tr>
-                        <tr>
-                            <td><code>com.android.vending.BILLING</code></td>
-                            <td>Added by the Google Play Billing Library to process optional, voluntary developer support tips through the Google Play Store[cite: 2, 6].</td>
-                        </tr>
-                        <tr>
-                            <td><code>ACCESS_NETWORK_STATE</code></td>
-                            <td>Merged automatically by Android WorkManager and Google Play Billing libraries to check device connectivity state. Because <code>android.permission.INTERNET</code> is explicitly removed from Rhythm's manifest, Rhythm itself cannot open network connections or transmit data[cite: 2, 6].</td>
-                        </tr>
-                        <tr>
-                            <td>Google Play Services Code Scanner (<code>com.google.android.gms:play-services-code-scanner</code>)</td>
-                            <td>Used when scanning a partner's sync QR code. This API runs inside a system-level modal provided by Google Play Services, allowing camera-based QR code scanning without granting Rhythm Android camera permissions (<code>android.permission.CAMERA</code>).</td>
-                        </tr>
-                        <tr>
-                            <td>Android System Photo Picker (<code>PickVisualMedia</code>) &amp; On-Device QR Decoding</td>
-                            <td>Used when picking a custom profile avatar or importing a QR code from a photo or screenshot. Android's Photo Picker grants access only to the single image you explicitly select, and any QR code image is decoded completely on-device (via ML Kit / ZXing) without requiring broad media or storage permissions (<code>READ_MEDIA_IMAGES</code> / <code>READ_EXTERNAL_STORAGE</code>).</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- ==================== MODE 2: PRIVACY POLICY ==================== -->
+        <section id="panel-privacy" class="mode-panel panel-animate" role="tabpanel" aria-labelledby="tab-privacy">
+            <div class="legal-toolbar">
+                <input type="search" id="privacy-search" class="search-input" placeholder="Filter Privacy Policy (e.g. QR, widget, PDF, PIN, 13+, alarm)..." oninput="filterClauses('panel-privacy', this.value)">
+                <button type="button" id="privacy-expand-btn" class="toolbar-btn" onclick="toggleAllClauses('panel-privacy', this)">Expand All</button>
             </div>
-            <p>Rhythm does <strong>not</strong> request location, camera (<code>android.permission.CAMERA</code>), microphone, contacts, or broad external storage/media permissions[cite: 2, 6].</p>
-        </section>
 
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">05</span> Shared Devices, Home-Screen Widgets, Notifications &amp; Screen Protection</h2>
-            <p>If other people have physical access to your or your partner's phone, cycle information could be viewed unless appropriate privacy and OS settings are configured[cite: 2]:</p>
-            <ul>
-                <li><strong>App Lock (PIN &amp; Biometrics):</strong> Enable App Lock in Settings to require authentication whenever Rhythm is opened or resumed from the background[cite: 2, 6].</li>
-                <li><strong>Discreet Mode:</strong> Replaces explicit menstrual and fertility terminology on in-app dashboard cards and notifications with neutral wellness phrasing[cite: 2, 6].</li>
-                <li><strong>Screen Capture Block:</strong> When App Lock or Discreet Mode is active, Rhythm enables Android's <code>FLAG_SECURE</code> window flag inside the app to block screenshots, screen recording, and previews in the recent-apps switcher[cite: 2, 6].</li>
-                <li><strong>Home-Screen Widgets &amp; Partner Compass Visibility:</strong> Rhythm includes optional Android home-screen widgets (<em>Rhythm</em>, <em>Harmony</em>, and <em>Companion</em> widgets) as well as Partner Companion views/compasses for quick at-a-glance access to cycle day, phase, days until next period, daily companion tips, and care guidance. <strong>Home-screen widgets sit outside the application's PIN/Biometric App Lock, Discreet Mode masking, and <code>FLAG_SECURE</code> screen protection</strong>, meaning anyone who can view an unlocked home screen can see them. Furthermore, if a partner places home-screen widgets or views Partner Companion status on their device, the estimated cycle phase and care tips will be visible to anyone with physical access to their unlocked phone. If you or a partner share a device or want maximum visual discretion, do not place Rhythm widgets on the home screen (or remove them at any time by long-pressing the widget).</li>
-                <li><strong>Partner Notification Channels &amp; Lock-Screen Visibility:</strong> Partner Companion Mode uses dedicated notification alerts—such as Day 1 Care Alerts, High-Energy &amp; Ovulation Alerts, and Morning Wingman Briefings—to surface care reminders and cycle updates. While Discreet Mode phrases notifications neutrally when enabled, notification banners can still appear on an unlocked screen or lock screen unless you or your partner configure your Android lock-screen privacy settings to hide sensitive notification content.</li>
-            </ul>
-        </section>
+            <div id="privacy-empty" class="empty-search">No privacy clauses match your search.</div>
 
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">06</span> User-Initiated Exports (Unencrypted File Warning)</h2>
-            <p>Rhythm allows you to export your records as <strong>PDF summaries, CSV tables, or JSON backup files</strong> using Android's system file picker (Storage Access Framework) or system share sheet[cite: 2, 6].</p>
-            <p><strong>Security Warning for Exported Files:</strong> Once you export a PDF, CSV, or JSON file outside Rhythm, <strong>that exported file is stored in plain, unencrypted format</strong> so that it can be read by PDF viewers, spreadsheet apps, or restored on a new phone[cite: 2, 6]. Anyone with access to your device's file folders, email, or cloud drive where you choose to save or share that file will be able to read its contents[cite: 2, 6]. You are solely responsible for safeguarding or deleting exported files after use[cite: 2, 6].</p>
-        </section>
+            <details class="clause-card" open>
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">01</span> Developer Identity &amp; Overview</div>
+                        <div class="clause-takeaway">Built by an independent developer in India with zero backend servers and no internet permission.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>Rhythm Cycle Tracker (Android package ID: <code>com.aistudio.periodtracker.kpzwqn</code>) is developed and published by <strong>[Your Full Name / Developer Name]</strong>, an independent developer based in India ("we", "us", or "our"). For any privacy questions, feedback, or data inquiries, you can reach us directly at <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a>.</p>
+                    <p>Rhythm is built with an offline-first architecture. We do not operate backend servers, user accounts, or remote databases. The application explicitly removes the Android <code>android.permission.INTERNET</code> permission from its manifest, meaning the app itself does not transmit your logged health records to us or any external server.</p>
+                </div>
+            </details>
 
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">07</span> Partner Companion Mode &amp; Peer-to-Peer Sync</h2>
-            <p>Rhythm offers an optional <strong>Partner Companion Mode</strong> so a primary user can share high-level cycle cadence and care guidance with a chosen partner without using cloud servers[cite: 2, 6]:</p>
-            <ul>
-                <li><strong>Air-Gapped, Zero-Cloud Transmission:</strong> Partner Mode does <strong>not</strong> use backend servers, user accounts, or cloud databases[cite: 2, 6]. Data synchronization occurs strictly peer-to-peer and offline via user-generated QR codes, direct file transfers (such as JSON sync packages), or plain-text summaries initiated manually by the primary user.</li>
-                <li><strong>Strict Data Minimization ("Privacy Shield"):</strong> Rhythm enforces a strict boundary between high-level cycle cadence and intimate daily health logs:
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">02</span> Information Stored Locally on Your Device</div>
+                        <div class="clause-takeaway">Cycle logs live in an AES-256 SQLCipher database; settings &amp; widget summaries live in sandboxed DataStore; OS cloud backups are disabled.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>All cycle and wellness information you enter into Rhythm is stored exclusively on your physical device:</p>
                     <ul>
-                        <li><em>What IS Transferred:</em> Cycle cadence metrics (average cycle length, period duration), start and end dates of recent periods, current cycle day, estimated phase/season, calculated prediction anchors (estimated next period, estimated fertile/ovulation window, cadence variance), general aggregate energy scores, cycle tracking mode, and optional user-entered care or comfort notes.</li>
-                        <li><em>What Is NEVER Transferred:</em> Daily symptom logs (such as cramps, headache, or nausea), flow intensity, flow texture, cervical mucus observations, pain scale ratings, sexual activity logs, medication logs, personal diary notes, and hydration counters. Intimate wellness details remain exclusively on the primary user's phone[cite: 2, 6].</li>
+                        <li><strong>Cycle &amp; Wellness Logs (Encrypted Database):</strong> Period start and end dates, flow intensity, flow texture (such as fluid, spotting, or clots), menstrual product used, pain levels, physical symptoms, mood, energy levels, sleep quality, digestion, skin observations, physical activity levels, medication notes, hydration counts, cervical mucus observations, and personal daily notes are stored in a local Room SQLite database encrypted at rest using <strong>SQLCipher (256-bit AES)</strong> with keys managed by the Android Hardware Keystore.</li>
+                        <li><strong>Profile, Settings, Custom Avatar &amp; Widget Summary Storage (Private Sandbox):</strong> Optional profile details (such as display name, age, gender/sex, height, weight, wellness goals, and cycle tracking mode), app settings (such as PIN configuration and reminder preferences), and the current cycle status values displayed on home-screen widgets (current cycle day, phase name, days until next period, and companion icon) are kept in the application's private, OS-sandboxed Android Jetpack DataStore storage, which is separate from the SQLCipher-encrypted database. If you select a custom profile picture, the selected image is copied into the app's private internal file directory (<code>filesDir</code>).</li>
+                        <li><strong>OS Cloud Backups Disabled:</strong> Automatic operating-system cloud backups (Google Drive device backup) and ADB device-to-device transfers are explicitly disabled (<code>allowBackup="false"</code>) for Rhythm's database and preference directories so your logs are not uploaded to cloud storage without your knowledge.</li>
                     </ul>
-                </li>
-                <li><strong>Transit Security Warning for Shared Channels:</strong> When a user chooses to share a QR code image, sync file, or plain-text summary through a third-party messaging app, SMS, email, or cloud service (such as WhatsApp, Telegram, or email), that shared artifact leaves Rhythm's local sandbox and becomes subject to the security, encryption, retention, and privacy practices of the third-party communication service and any recipient who receives it.</li>
-                <li><strong>Partner Device Storage &amp; Isolation:</strong> When a partner imports a sync package, the transferred cadence metrics, prediction anchors, and care notes are stored locally on the partner's device in their private DataStore and encrypted database. Because there is no live cloud connection between devices, each phone's storage remains independent, and the partner can erase all synced partner data at any time via <strong>Clear Partner Sync</strong> or <strong>Wipe All Data</strong>.</li>
-            </ul>
+                </div>
+            </details>
+
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">03</span> Important Warning Regarding Data Loss &amp; Device Changes</div>
+                        <div class="clause-takeaway">We cannot recover lost phones, forgotten PINs, or uninstalled data—use manual JSON export before switching devices.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>Because your database encryption key is hardware-bound to your specific device and cloud backups are disabled, <strong>we have no way to access, view, or recover your data</strong>:</p>
+                    <ul>
+                        <li><strong>Device Loss, Reset, or Uninstall:</strong> If you lose or damage your phone, switch to a new phone, clear the app's storage, or uninstall Rhythm, all locally stored cycle history and logs will be permanently lost unless you have previously exported a manual backup.</li>
+                        <li><strong>Forgotten PIN:</strong> Because there are no user accounts or servers, there is no remote "Forgot PIN" recovery option. If you forget your 4-digit PIN and do not have Biometric Lock enabled, you will need to clear the application's storage in Android settings to use the app again, which permanently erases all stored data.</li>
+                        <li><strong>How to Move Your Data:</strong> To preserve your records when upgrading phones, use the in-app manual <strong>JSON Backup Export</strong> feature prior to switching devices.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">04</span> Permissions &amp; Device Capabilities Used</div>
+                        <div class="clause-takeaway">Minimal permissions for local reminders, biometrics, QR scanning via Play Services, Photo Picker, and optional Play Billing.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>Rhythm requests or merges only the system permissions and device capabilities required for local app functionality, scheduled reminders, biometric lock, peer-to-peer partner sync, and optional Google Play Billing:</p>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Permission / Component</th>
+                                    <th>Why It Is Included</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>POST_NOTIFICATIONS</code></td>
+                                    <td>Displays optional local cycle reminders, daily wellness check-in nudges, and Partner Companion Mode alerts (Day 1 Care Alerts, High-Energy &amp; Ovulation Alerts, and Morning Wingman Briefings via the <code>wellness_partner</code> channel) enabled in Settings.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SCHEDULE_EXACT_ALARM</code> / <code>USE_EXACT_ALARM</code></td>
+                                    <td>Used to trigger user-configured daily wellness check-ins, cycle reminders, and scheduled Partner Companion Mode morning wingman briefings or cycle heads-up alerts at the exact local time selected by the user via Android's <code>AlarmManager</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>VIBRATE</code></td>
+                                    <td>Provides optional tactile haptic feedback on button taps.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>USE_BIOMETRIC</code> / <code>USE_FINGERPRINT</code></td>
+                                    <td>Added by AndroidX Biometric so you can unlock the app via Android's system <code>BiometricPrompt</code>. Rhythm only receives a pass/fail result and never accesses or stores raw biometric data.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>RECEIVE_BOOT_COMPLETED</code></td>
+                                    <td>Allows the app and Android WorkManager to reschedule enabled local reminders and widget updates after a phone restart.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>WAKE_LOCK</code></td>
+                                    <td>Added by Android WorkManager to reliably run brief local background tasks (evaluating local notifications and refreshing home-screen widgets).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>com.android.vending.BILLING</code></td>
+                                    <td>Added by Google Play Billing Library to process optional, voluntary developer support tips through Google Play.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>ACCESS_NETWORK_STATE</code></td>
+                                    <td>Merged automatically by WorkManager and Play Billing libraries to check connectivity state. Because <code>android.permission.INTERNET</code> is removed from Rhythm's manifest, Rhythm cannot open network connections or transmit data.</td>
+                                </tr>
+                                <tr>
+                                    <td>Google Play Services Code Scanner (<code>com.google.android.gms:play-services-code-scanner</code>)</td>
+                                    <td>Used when scanning a partner's sync QR code inside a system-level modal provided by Google Play Services, without granting Rhythm <code>android.permission.CAMERA</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Android System Photo Picker (<code>PickVisualMedia</code>) &amp; On-Device QR Decoding</td>
+                                    <td>Used for picking a custom profile avatar or importing a QR screenshot. Grants access only to the single selected image and decodes QR codes on-device (ML Kit / ZXing) without broad media/storage permissions.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Rhythm does <strong>not</strong> request location, camera (<code>android.permission.CAMERA</code>), microphone, contacts, or broad external storage/media permissions.</p>
+                </div>
+            </details>
+
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">05</span> Shared Devices, Home-Screen Widgets, Notifications &amp; Screen Protection</div>
+                        <div class="clause-takeaway">App Lock and FLAG_SECURE protect the app, but home-screen widgets and lock-screen notifications sit outside App Lock.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>If other people have physical access to your or your partner's phone, cycle information could be viewed unless appropriate privacy and OS settings are configured:</p>
+                    <ul>
+                        <li><strong>App Lock (PIN &amp; Biometrics):</strong> Enable App Lock in Settings to require authentication whenever Rhythm is opened or resumed from the background.</li>
+                        <li><strong>Discreet Mode:</strong> Replaces explicit menstrual and fertility terminology on in-app dashboard cards and notifications with neutral wellness phrasing.</li>
+                        <li><strong>Screen Capture Block:</strong> When App Lock or Discreet Mode is active, Rhythm enables Android's <code>FLAG_SECURE</code> window flag inside the app to block screenshots, screen recording, and previews in the recent-apps switcher.</li>
+                        <li><strong>Home-Screen Widgets &amp; Partner Compass Visibility:</strong> Rhythm includes optional Android home-screen widgets (<em>Rhythm</em>, <em>Harmony</em>, and <em>Companion</em> widgets) as well as Partner Companion views/compasses for quick at-a-glance access to cycle day, phase, days until next period, daily companion tips, and care guidance. <strong>Home-screen widgets sit outside the application's PIN/Biometric App Lock, Discreet Mode masking, and <code>FLAG_SECURE</code> screen protection</strong>, meaning anyone who can view an unlocked home screen can see them. If you or a partner share a device or want maximum visual discretion, do not place Rhythm widgets on the home screen (or remove them at any time by long-pressing the widget).</li>
+                        <li><strong>Partner Notification Channels &amp; Lock-Screen Visibility:</strong> Partner Companion Mode uses dedicated notification alerts—such as Day 1 Care Alerts, High-Energy &amp; Ovulation Alerts, and Morning Wingman Briefings. While Discreet Mode phrases notifications neutrally when enabled, notification banners can still appear on an unlocked screen or lock screen unless Android lock-screen privacy settings are configured to hide sensitive notification content.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">06</span> User-Initiated Exports (Unencrypted File Warning)</div>
+                        <div class="clause-takeaway">Exported PDF, CSV, and JSON files are unencrypted once saved outside Rhythm; safeguard or delete them after use.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>Rhythm allows you to export your records as <strong>PDF summaries, CSV tables, or JSON backup files</strong> using Android's system file picker (Storage Access Framework) or system share sheet.</p>
+                    <p><strong>Security Warning for Exported Files:</strong> Once you export a PDF, CSV, or JSON file outside Rhythm, <strong>that exported file is stored in plain, unencrypted format</strong> so that it can be read by PDF viewers, spreadsheet apps, or restored on a new phone. Anyone with access to your device's file folders, email, or cloud drive where you choose to save or share that file will be able to read its contents. You are solely responsible for safeguarding or deleting exported files after use.</p>
+                </div>
+            </details>
+
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">07</span> Partner Companion Mode &amp; Peer-to-Peer Sync</div>
+                        <div class="clause-takeaway">Offline QR/JSON/text sync transfers only high-level cycle cadence and care cues—never intimate daily symptom logs.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>Rhythm offers an optional <strong>Partner Companion Mode</strong> so a primary user can share high-level cycle cadence and care guidance with a chosen partner without using cloud servers:</p>
+                    <ul>
+                        <li><strong>Air-Gapped, Zero-Cloud Transmission:</strong> Partner Mode does <strong>not</strong> use backend servers, user accounts, or cloud databases. Data synchronization occurs strictly peer-to-peer and offline via user-generated QR codes, direct file transfers (such as JSON sync packages), or plain-text summaries initiated manually by the primary user.</li>
+                        <li><strong>Strict Data Minimization ("Privacy Shield"):</strong>
+                            <ul>
+                                <li><em>What IS Transferred:</em> Cycle cadence metrics (average cycle length, period duration), start and end dates of recent periods, current cycle day, estimated phase/season, calculated prediction anchors (estimated next period, estimated fertile/ovulation window, cadence variance), general aggregate energy scores, cycle tracking mode, and optional user-entered care or comfort notes.</li>
+                                <li><em>What Is NEVER Transferred:</em> Daily symptom logs (such as cramps, headache, or nausea), flow intensity, flow texture, cervical mucus observations, pain scale ratings, sexual activity logs, medication logs, personal diary notes, and hydration counters. Intimate wellness details remain exclusively on the primary user's phone.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Transit Security Warning for Shared Channels:</strong> When a user chooses to share a QR code image, sync file, or plain-text summary through a third-party messaging app, SMS, email, or cloud service (such as WhatsApp, Telegram, or email), that shared artifact leaves Rhythm's local sandbox and becomes subject to the security, encryption, retention, and privacy practices of the chosen communication service.</li>
+                        <li><strong>Partner Device Storage &amp; Isolation:</strong> Imported cadence metrics, prediction anchors, and care notes are stored locally on the partner's device in their private DataStore and encrypted database. The partner can erase all synced partner data at any time via <strong>Clear Partner Sync</strong> or <strong>Wipe All Data</strong>.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">08</span> No Advertising, Analytics, or Third-Party Data Sharing</div>
+                        <div class="clause-takeaway">Zero ads, zero trackers, no data selling; Google Play independently handles optional tip payments and installs.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <ul>
+                        <li>Rhythm does <strong>not</strong> include third-party advertising SDKs or behavioral profiling tools.</li>
+                        <li>Rhythm does <strong>not</strong> bundle third-party crash-reporting or analytics telemetry SDKs.</li>
+                        <li>We never sell, rent, trade, or share your personal or reproductive health data.</li>
+                        <li><strong>Google Play Billing &amp; Bundled Transport Libraries:</strong> Rhythm includes the official Google Play Billing Library solely for optional user tips. This library pulls in standard Google transport components (<code>datatransport</code>) as transitive dependencies, but because Rhythm strips <code>android.permission.INTERNET</code> from the final app manifest, these components cannot open network connections or transmit data from within Rhythm. When you install Rhythm, update the app, or make an optional contribution through the tip jar, the <strong>Google Play Store app</strong> independently processes installation diagnostics and purchase transactions under <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. Rhythm never receives your credit card, UPI, or banking details, and your health logs are never linked to Google Play Billing transactions.</li>
+                        <li><strong>Send Feedback Feature:</strong> Tapping "Send Feedback" in Settings opens your device's default email application with a draft addressed to our support email, pre-filled with your device model, Android version, and Rhythm app version. No information is sent unless you review and press send in your email app.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">09</span> Data Retention, Security Summary &amp; Deletion</div>
+                        <div class="clause-takeaway">Data stays on-device until you tap Wipe All Data, Clear Partner Sync, clear storage, or uninstall.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p><strong>Security Summary:</strong> Your health logs are protected on-device via a 256-bit AES SQLCipher encrypted database, an Android Hardware Keystore-managed encryption key, optional PIN/biometric App Lock, peer-to-peer data minimization in Partner Mode, and zero internet permission requested by the app.</p>
+                    <ul>
+                        <li><strong>Local Retention Only:</strong> Your data stays exclusively on your device until you choose to delete it. Because Rhythm has no backend servers or user accounts, we hold zero copies of your records.</li>
+                        <li><strong>Permanent Deletion on Primary Device:</strong> Tapping <strong>Settings &rarr; Wipe All Data</strong> inside the app, clearing the app's storage in Android system settings, or uninstalling Rhythm permanently and irreversibly deletes all stored logs, history, and preferences from your device.</li>
+                        <li><strong>Partner Device Deletion ("Clear Partner Sync"):</strong> On a partner device, selecting <strong>Clear Partner Sync</strong> immediately and irreversibly deletes synced partner periods, predictions, cadence metrics, and care notes from that device's local database and DataStore.</li>
+                        <li><strong>Independent Life Cycles:</strong> Because Rhythm has no cloud server or live two-way sync link, deleting or resetting data on one phone does not automatically delete data already imported onto another phone.</li>
+                        <li><strong>Exported &amp; Shared Files:</strong> Any PDF, CSV, JSON sync files, QR images, or text messages exported or shared outside Rhythm's sandbox must be managed or deleted manually by you.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">10</span> Your Rights &amp; Data Control</div>
+                        <div class="clause-takeaway">Access, edit, export, or erase everything in-app; stop future partner sharing by not sending new sync snapshots.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>Because all data resides locally on your device, you can exercise your data rights (including access, correction, portability, revocation/withdrawal of sharing, and erasure) directly inside the application at any time without needing to submit a request to us:</p>
+                    <ul>
+                        <li><strong>Access &amp; Correction:</strong> View or edit any logged period date, symptom, note, or profile field directly within the Calendar and Settings screens.</li>
+                        <li><strong>Portability:</strong> Export your complete data in JSON, CSV, or PDF format via Settings.</li>
+                        <li><strong>Revoking Partner Sharing:</strong> Because Partner Companion Mode shares offline point-in-time snapshots rather than a live cloud stream, the primary user cannot remotely recall or erase data already imported onto a partner's device. To stop sharing future updates, stop generating or sending new sync codes/exports; to remove previously synced data, the partner must tap <strong>Clear Partner Sync</strong> (or <strong>Wipe All Data</strong> / uninstall) on their own device.</li>
+                        <li><strong>Questions or Grievances:</strong> Contact the developer at <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a>.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">11</span> Age Requirement (13+) &amp; Minor Privacy</div>
+                        <div class="clause-takeaway">Intended for users aged 13+; minors 13–17 should review with a parent/guardian; zero server profiling for any age.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>Rhythm is intended for users aged <strong>13 and older</strong>. We do not direct the application toward children under 13.</p>
+                    <ul>
+                        <li><strong>Minors (Ages 13 to 17):</strong> If you are under the age of 18 (or the age of legal majority in your jurisdiction), please review this Privacy Policy, the Terms of Use, and the Medical Disclaimer with a parent or legal guardian before using the app (including before enabling Partner Companion Mode or sharing cycle cadence with another person). Optional tips via Google Play Billing require the permission of a parent or the legal account holder.</li>
+                        <li><strong>No Server Collection or Profiling of Minors:</strong> Because Rhythm stores all logs locally on the user's device and includes no analytics, advertising, or network transmission capabilities, we do not collect, store on external servers, or behaviorally profile personal data from users of any age.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">12</span> Changes to This Privacy Policy</div>
+                        <div class="clause-takeaway">Updates are posted on this page with a revised Effective &amp; Last Updated date.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>If we update this Privacy Policy to reflect new on-device features or regulatory requirements, we will post the updated policy on this page and revise the "Effective &amp; Last Updated" date at the top of this document and inside the application.</p>
+                </div>
+            </details>
         </section>
 
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">08</span> No Advertising, Analytics, or Third-Party Data Sharing</h2>
-            <ul>
-                <li>Rhythm does <strong>not</strong> include third-party advertising SDKs or behavioral profiling tools[cite: 2, 6].</li>
-                <li>Rhythm does <strong>not</strong> bundle third-party crash-reporting or analytics telemetry SDKs[cite: 2, 6].</li>
-                <li>We never sell, rent, trade, or share your personal or reproductive health data[cite: 2, 6].</li>
-                <li><strong>Google Play Billing &amp; Bundled Transport Libraries:</strong> Rhythm includes the official Google Play Billing Library solely for optional user tips[cite: 2, 6]. This library pulls in standard Google transport components (<code>datatransport</code>) as transitive dependencies, but because Rhythm strips <code>android.permission.INTERNET</code> from the final app manifest, these components cannot open network connections or transmit data from within Rhythm[cite: 2, 6]. When you install Rhythm, update the app, or make an optional contribution through the tip jar, the <strong>Google Play Store app</strong> independently processes installation diagnostics and purchase transactions under <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>[cite: 2, 6]. Rhythm never receives your credit card, UPI, or banking details, and your health logs are never linked to Google Play Billing transactions[cite: 2, 6].</li>
-                <li><strong>Send Feedback Feature:</strong> Tapping "Send Feedback" in Settings opens your device's default email application with a draft addressed to our support email, pre-filled with your device model, Android version, and Rhythm app version to help us troubleshoot bugs. No information is sent unless you review and press send in your email app.</li>
-            </ul>
-        </section>
+        <!-- ==================== MODE 3: TERMS OF USE ==================== -->
+        <section id="panel-terms" class="mode-panel panel-animate" role="tabpanel" aria-labelledby="tab-terms">
+            <div class="legal-toolbar">
+                <input type="search" id="terms-search" class="search-input" placeholder="Filter Terms of Use (e.g. consent, tips, license, liability, Nagpur)..." oninput="filterClauses('panel-terms', this.value)">
+                <button type="button" id="terms-expand-btn" class="toolbar-btn" onclick="toggleAllClauses('panel-terms', this)">Expand All</button>
+            </div>
 
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">09</span> Data Retention, Security Summary &amp; Deletion</h2>
-            <p><strong>Security Summary:</strong> Your health logs are protected on-device via a 256-bit AES SQLCipher encrypted database, an Android Hardware Keystore-managed encryption key, optional PIN/biometric App Lock, peer-to-peer data minimization in Partner Mode, and zero internet permission requested by the app[cite: 2, 6].</p>
-            <ul>
-                <li><strong>Local Retention Only:</strong> Your data stays exclusively on your device until you choose to delete it[cite: 2, 6]. Because Rhythm has no backend servers or user accounts, we hold zero copies of your records[cite: 2, 6].</li>
-                <li><strong>Permanent Deletion on Primary Device:</strong> Tapping <strong>Settings &rarr; Wipe All Data</strong> inside the app, clearing the app's storage in Android system settings, or uninstalling Rhythm permanently and irreversibly deletes all stored logs, history, and preferences from your device[cite: 2, 6].</li>
-                <li><strong>Partner Device Deletion ("Clear Partner Sync"):</strong> On a partner device, selecting <strong>Clear Partner Sync</strong> immediately and irreversibly deletes synced partner periods, predictions, cadence metrics, and care notes from that device's local database and DataStore. Selecting <strong>Wipe All Data</strong>, clearing app storage, or uninstalling Rhythm on the partner device likewise removes local partner records.</li>
-                <li><strong>Independent Life Cycles:</strong> Because Rhythm has no cloud server or live two-way sync link, deleting or resetting data on one phone does not automatically delete data already imported onto another phone.</li>
-                <li><strong>Exported &amp; Shared Files:</strong> Any PDF, CSV, JSON sync files, QR images, or text messages exported or shared outside Rhythm's sandbox must be managed or deleted manually by you (and by any recipient where applicable)[cite: 2, 6].</li>
-            </ul>
-        </section>
+            <div id="terms-empty" class="empty-search">No terms clauses match your search.</div>
 
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">10</span> Your Rights &amp; Data Control</h2>
-            <p>Because all data resides locally on your device, you can exercise your data rights (including access, correction, portability, revocation/withdrawal of sharing, and erasure) directly inside the application at any time without needing to submit a request to us[cite: 2, 6]:</p>
-            <ul>
-                <li><strong>Access &amp; Correction:</strong> View or edit any logged period date, symptom, note, or profile field directly within the Calendar and Settings screens.</li>
-                <li><strong>Portability:</strong> Export your complete data in JSON, CSV, or PDF format via Settings[cite: 2, 6].</li>
-                <li><strong>Revoking Partner Sharing:</strong> Because Partner Companion Mode shares offline point-in-time snapshots rather than a live cloud stream, the primary user cannot remotely recall or erase data that has already been imported onto a partner's device. To stop sharing future updates, the primary user simply stops generating or sending new sync codes, exports, or summaries; to remove previously synced data from a partner's phone, the partner must tap <strong>Clear Partner Sync</strong> (or <strong>Wipe All Data</strong> / uninstall the app) on their own device.</li>
-                <li><strong>Questions or Grievances:</strong> If you have questions or complaints regarding your privacy rights, contact the developer at <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a>.</li>
-            </ul>
-        </section>
+            <details class="clause-card" open>
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">13</span> Informational Wellness Purpose Only</div>
+                        <div class="clause-takeaway">All predictions, Inner Seasons, partner alerts, and PDF reports are mathematical estimates—never contraception or medical advice.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>By downloading or using Rhythm Cycle Tracker, you acknowledge and agree that all cycle predictions, phase indicators ("Inner Seasons"), ovulation estimates, fertile window projections, wellness companion tips, Partner Companion Mode alerts, Partner Support Guide cues, and generated PDF reports are mathematical approximations based solely on self-reported user entries. They are provided strictly for personal educational and wellness tracking purposes and do not constitute clinical advice, medical diagnosis, natural family planning, or contraception.</p>
+                    <p>In particular, fertile window projections, ovulation estimates, and care reminders surfaced in Partner Companion Mode are estimates derived from historical cycle cadence and must never be relied upon by either the primary user or a partner to prevent or achieve pregnancy.</p>
+                </div>
+            </details>
 
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">11</span> Age Requirement (13+) &amp; Minor Privacy</h2>
-            <p>Rhythm is intended for users aged <strong>13 and older</strong>. We do not direct the application toward children under 13[cite: 2].</p>
-            <ul>
-                <li><strong>Minors (Ages 13 to 17):</strong> If you are under the age of 18 (or the age of legal majority in your jurisdiction), please review this Privacy Policy, the Terms of Use, and the Medical Disclaimer with a parent or legal guardian before using the app (including before enabling Partner Companion Mode or sharing cycle cadence with another person)[cite: 2]. Optional tips via Google Play Billing require the permission of a parent or the legal account holder[cite: 2].</li>
-                <li><strong>No Server Collection or Profiling of Minors:</strong> Because Rhythm stores all logs locally on the user's device and includes no analytics, advertising, or network transmission capabilities, we do not collect, store on external servers, or behaviorally profile personal data from users of any age[cite: 2, 6].</li>
-            </ul>
-        </section>
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">14</span> Partner Mode: Mutual Consent &amp; Responsible Sharing</div>
+                        <div class="clause-takeaway">Share only with explicit mutual consent; Partner Mode is an offline snapshot for empathetic care, not live monitoring.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <ul>
+                        <li><strong>Mutual Consent Mandate:</strong> You agree to use Partner Companion Mode and share rhythm data, QR codes, sync packages, or text summaries only with partners who have explicitly consented to receiving that information. You must never export, scan, import, or share another person's cycle or health data without their clear, informed consent.</li>
+                        <li><strong>Intended Use for Care &amp; Emotional Support:</strong> Partner Companion Mode is provided solely to support mutual empathy, thoughtful daily care gestures, and communication between consenting partners. The developer is not responsible for interpersonal misunderstandings, relationship disputes, emotional reactions, or decisions made based on algorithmic estimates or care suggestions in the Partner Guide.</li>
+                        <li><strong>Offline Snapshot &amp; No Real-Time Guarantee:</strong> Rhythm does not provide live real-time tracking, continuous background syncing, or location/status monitoring. Any data displayed on a partner's device represents an offline snapshot from the last time a manual sync occurred and may be out of date or inaccurate if cycles shift, are delayed, or are affected by stress, illness, travel, or hormonal changes.</li>
+                    </ul>
+                </div>
+            </details>
 
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">12</span> Changes to This Privacy Policy</h2>
-            <p>If we update this Privacy Policy to reflect new on-device features or regulatory requirements, we will post the updated policy on this page and revise the "Effective &amp; Last Updated" date at the top of this document and inside the application[cite: 2].</p>
-        </section>
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">15</span> Voluntary Tips &amp; In-App Support</div>
+                        <div class="clause-takeaway">100% free with no paywalls; tips are voluntary and follow Google Play's refund policy.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>Rhythm Cycle Tracker is completely free to use with no locked features, subscriptions, or paywalls. Any in-app contributions made through the "Support Rhythm" tip jar are strictly voluntary, do not unlock additional functionality or content, and are processed exclusively by Google Play. All refund requests for tips are governed by Google Play's standard refund policies.</p>
+                </div>
+            </details>
 
-        <div id="terms-of-use" class="part-header reveal">
-            <span class="part-badge">Part II</span>
-            <span class="part-title">Terms of Use &amp; Legal Disclaimers</span>
-        </div>
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">16</span> Open-Source Software Licenses</div>
+                        <div class="clause-takeaway">Third-party library notices (including SQLCipher, Jetpack, and Play Services) are listed in Settings &rarr; Open Source Licenses.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>Rhythm Cycle Tracker incorporates open-source software libraries (including Android Jetpack, Kotlin Coroutines, Dagger Hilt, Coil, Material Components 3, SQLCipher for Android, Google Play Services Code Scanner, and the Google Play Billing Library). Full third-party acknowledgments and license notices are available inside the application under <strong>Settings &rarr; Open Source Licenses</strong>.</p>
+                </div>
+            </details>
 
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">13</span> Informational Wellness Purpose Only</h2>
-            <p>By downloading or using Rhythm Cycle Tracker, you acknowledge and agree that all cycle predictions, phase indicators ("Inner Seasons"), ovulation estimates, fertile window projections, wellness companion tips, Partner Companion Mode alerts, Partner Support Guide cues, and generated PDF reports are mathematical approximations based solely on self-reported user entries[cite: 2, 5, 6]. They are provided strictly for personal educational and wellness tracking purposes and do not constitute clinical advice, medical diagnosis, natural family planning, or contraception[cite: 2, 6].</p>
-            <p>In particular, fertile window projections, ovulation estimates, and care reminders surfaced in Partner Companion Mode are estimates derived from historical cycle cadence and must never be relied upon by either the primary user or a partner to prevent or achieve pregnancy[cite: 2, 6].</p>
-        </section>
+            <details class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">17</span> Disclaimer of Warranties &amp; Limitation of Liability</div>
+                        <div class="clause-takeaway">Provided "AS IS"; disclaims liability for data loss, third-party messaging leaks, or reliance on cycle estimates, subject to consumer laws.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>Rhythm Cycle Tracker is provided on an <strong>"AS IS"</strong> and <strong>"AS AVAILABLE"</strong> basis without warranties of any kind, whether express or implied, including implied warranties of merchantability, fitness for a particular purpose, or accuracy of algorithmic estimates.</p>
+                    <p>To the maximum extent permitted by applicable law, the developer shall not be liable for any direct, indirect, incidental, special, or consequential damages, or for any loss of local data (including from forgotten PINs, device damage, or unencrypted exports), arising out of your use of the application. Without limiting the generality of the foregoing, the developer disclaims liability for: (a) any unauthorized access, disclosure, or interception occurring when QR codes, sync files, or summaries are transmitted or stored via third-party messaging apps, email, or external file storage; and (b) any relationship disputes, unintended pregnancies, or health decisions resulting from reliance on Partner Companion predictions, care tips, or notifications. Nothing in these terms excludes or limits liability where such exclusion or limitation is prohibited by applicable consumer protection laws in your jurisdiction.</p>
+                </div>
+            </details>
 
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">14</span> Partner Mode: Mutual Consent &amp; Responsible Sharing</h2>
-            <ul>
-                <li><strong>Mutual Consent Mandate:</strong> You agree to use Partner Companion Mode and share rhythm data, QR codes, sync packages, or text summaries only with partners who have explicitly consented to receiving that information. You must never export, scan, import, or share another person's cycle or health data without their clear, informed consent.</li>
-                <li><strong>Intended Use for Care &amp; Emotional Support:</strong> Partner Companion Mode is provided solely to support mutual empathy, thoughtful daily care gestures, and communication between consenting partners. The developer is not responsible for interpersonal misunderstandings, relationship disputes, emotional reactions, or decisions made based on algorithmic estimates or care suggestions in the Partner Guide.</li>
-                <li><strong>Offline Snapshot &amp; No Real-Time Guarantee:</strong> Rhythm does not provide live real-time tracking, continuous background syncing, or location/status monitoring. Any data displayed on a partner's device represents an offline snapshot from the last time a manual sync occurred and may be out of date or inaccurate if cycles shift, are delayed, or are affected by stress, illness, travel, or hormonal changes.</li>
-            </ul>
-        </section>
-
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">15</span> Voluntary Tips &amp; In-App Support</h2>
-            <p>Rhythm Cycle Tracker is completely free to use with no locked features, subscriptions, or paywalls. Any in-app contributions made through the "Support Rhythm" tip jar are strictly voluntary, do not unlock additional functionality or content, and are processed exclusively by Google Play[cite: 2, 6]. All refund requests for tips are governed by Google Play's standard refund policies.</p>
-        </section>
-
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">16</span> Open-Source Software Licenses</h2>
-            <p>Rhythm Cycle Tracker incorporates open-source software libraries (including Android Jetpack, Kotlin Coroutines, Dagger Hilt, Coil, Material Components 3, SQLCipher for Android, Google Play Services Code Scanner, and the Google Play Billing Library). Full third-party acknowledgments and license notices are available inside the application under <strong>Settings &rarr; Open Source Licenses</strong>[cite: 2].</p>
-        </section>
-
-        <section class="policy-card reveal">
-            <h2><span class="sec-num">17</span> Disclaimer of Warranties &amp; Limitation of Liability</h2>
-            <p>Rhythm Cycle Tracker is provided on an <strong>"AS IS"</strong> and <strong>"AS AVAILABLE"</strong> basis without warranties of any kind, whether express or implied, including implied warranties of merchantability, fitness for a particular purpose, or accuracy of algorithmic estimates[cite: 2, 6].</p>
-            <p>To the maximum extent permitted by applicable law, the developer shall not be liable for any direct, indirect, incidental, special, or consequential damages, or for any loss of local data (including from forgotten PINs, device damage, or unencrypted exports), arising out of your use of the application[cite: 2, 6]. Without limiting the generality of the foregoing, the developer disclaims liability for: (a) any unauthorized access, disclosure, or interception occurring when QR codes, sync files, or summaries are transmitted or stored via third-party messaging apps, email, or external file storage; and (b) any relationship disputes, unintended pregnancies, or health decisions resulting from reliance on Partner Companion predictions, care tips, or notifications. Nothing in these terms excludes or limits liability where such exclusion or limitation is prohibited by applicable consumer protection laws in your jurisdiction[cite: 2].</p>
-        </section>
-
-        <section id="contact" class="policy-card reveal">
-            <h2><span class="sec-num">18</span> Governing Law, Jurisdiction &amp; Contact Information</h2>
-            <p>These Terms of Use and Privacy Policy are governed by the laws of <strong>India</strong>, and any disputes arising out of or relating to the application shall be subject to the exclusive jurisdiction of the <strong>courts at Nagpur, Maharashtra, India</strong>, without prejudice to mandatory consumer protection or data privacy provisions applicable in your country of residence[cite: 2].</p>
-            <p><strong>Developer &amp; Grievance Contact:</strong><br>
-            Developer: [Your Full Name / Developer Name]<br>
-            Location: Nagpur, Maharashtra, India<br>
-            Email: <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a></p>
+            <details id="contact" class="clause-card">
+                <summary>
+                    <div class="clause-summary-left">
+                        <div class="clause-title-row"><span class="sec-num">18</span> Governing Law, Jurisdiction &amp; Contact Information</div>
+                        <div class="clause-takeaway">Governed by the laws of India (courts at Nagpur, Maharashtra), with mandatory consumer rights preserved.</div>
+                    </div>
+                    <span class="clause-chevron">&#9662;</span>
+                </summary>
+                <div class="clause-body">
+                    <p>These Terms of Use and Privacy Policy are governed by the laws of <strong>India</strong>, and any disputes arising out of or relating to the application shall be subject to the exclusive jurisdiction of the <strong>courts at Nagpur, Maharashtra, India</strong>, without prejudice to mandatory consumer protection or data privacy provisions applicable in your country of residence.</p>
+                    <p><strong>Developer &amp; Grievance Contact:</strong><br>
+                    Developer: [Your Full Name / Developer Name]<br>
+                    Location: Nagpur, Maharashtra, India<br>
+                    Email: <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a></p>
+                </div>
+            </details>
         </section>
 
         <footer>
             <span>&copy; 2026 Rhythm Cycle Tracker. All rights reserved.</span>
-            <span>Built for 100% On-Device Privacy[cite: 2, 6].</span>
+            <span>Built for 100% On-Device Privacy.</span>
         </footer>
     </main>
 
     <script>
+        /* 1. Mode Switcher with URL Hash Deep-Linking */
+        const modeMap = {
+            product: { tab: 'tab-product', panel: 'panel-product', hash: '#product' },
+            privacy: { tab: 'tab-privacy', panel: 'panel-privacy', hash: '#privacy-policy' },
+            terms:   { tab: 'tab-terms',   panel: 'panel-terms',   hash: '#terms-of-use' }
+        };
+
+        function switchMode(mode, updateHash = false) {
+            if (!modeMap[mode]) mode = 'product';
+            Object.keys(modeMap).forEach(key => {
+                const { tab, panel } = modeMap[key];
+                const isActive = key === mode;
+                const tabEl = document.getElementById(tab);
+                const panelEl = document.getElementById(panel);
+                tabEl.classList.toggle('active', isActive);
+                tabEl.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                panelEl.classList.toggle('active', isActive);
+            });
+            if (updateHash && history.replaceState) {
+                history.replaceState(null, '', modeMap[mode].hash);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function syncModeFromHash() {
+            const h = window.location.hash.toLowerCase();
+            if (h.includes('privacy')) {
+                switchMode('privacy', false);
+            } else if (h.includes('terms') || h.includes('contact')) {
+                switchMode('terms', false);
+            } else {
+                switchMode('product', false);
+            }
+        }
+
+        window.addEventListener('hashchange', syncModeFromHash);
+
+        /* 2. Galaxy Z Flip 6 Interactive Screen Preview */
         const previewData = {
             seasons: {
                 baseName: "screenshot-dashboard",
@@ -1426,7 +1663,61 @@
             screenEl.classList.add('screen-animate');
         }
 
-        // Scroll Progress Indicator
+        /* 3. Interactive Privacy Shield Inspector */
+        const shieldData = {
+            shared: [
+                { title: "Cycle Cadence & Recent Dates", desc: "Average cycle length, period duration, and start/end dates of recent periods." },
+                { title: "Current Day & Inner Season", desc: "Current cycle day, estimated phase/season, and general aggregate energy score." },
+                { title: "Prediction Anchors", desc: "Estimated next period, fertile/ovulation window, cadence variance, and tracking mode." },
+                { title: "Optional Care Notes", desc: "User-entered comfort preferences or care cues for empathetic partner support." }
+            ],
+            private: [
+                { title: "Intimate Symptoms & Pain", desc: "Daily symptoms (cramps, headache, nausea) and 0–10 pain scale ratings never leave your phone." },
+                { title: "Flow & Cervical Mucus", desc: "Flow intensity, flow texture (spotting/clots), menstrual products, and mucus observations." },
+                { title: "Medications & Intimacy", desc: "Medication names, effectiveness, sexual activity logs, and hydration counters." },
+                { title: "Personal Diary Notes", desc: "Private daily journal entries remain encrypted exclusively in your local SQLCipher vault." }
+            ]
+        };
+
+        function switchShield(mode) {
+            document.getElementById('shield-btn-shared').classList.toggle('active', mode === 'shared');
+            document.getElementById('shield-btn-private').classList.toggle('active', mode === 'private');
+            const container = document.getElementById('shield-content');
+            container.innerHTML = shieldData[mode].map(item => `
+                <div class="shield-item ${mode}">
+                    <strong>${item.title}</strong>
+                    <span>${item.desc}</span>
+                </div>
+            `).join('');
+        }
+
+        /* 4. Legal Search & Expand/Collapse All */
+        function filterClauses(panelId, query) {
+            const panel = document.getElementById(panelId);
+            const cards = panel.querySelectorAll('details.clause-card');
+            const q = query.trim().toLowerCase();
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const match = !q || card.textContent.toLowerCase().includes(q);
+                card.style.display = match ? '' : 'none';
+                if (match && q) card.open = true;
+                if (match) visibleCount++;
+            });
+
+            const emptyEl = panel.querySelector('.empty-search');
+            if (emptyEl) emptyEl.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function toggleAllClauses(panelId, btnEl) {
+            const panel = document.getElementById(panelId);
+            const cards = Array.from(panel.querySelectorAll('details.clause-card')).filter(c => c.style.display !== 'none');
+            const allOpen = cards.every(c => c.open);
+            cards.forEach(c => { c.open = !allOpen; });
+            btnEl.textContent = allOpen ? 'Expand All' : 'Collapse All';
+        }
+
+        /* 5. Scroll Progress Indicator */
         const progressBar = document.getElementById('scroll-progress');
         function updateScrollProgress() {
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -1434,26 +1725,11 @@
             progressBar.style.width = scrolled + '%';
         }
         window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+        /* Init */
+        switchShield('shared');
+        syncModeFromHash();
         updateScrollProgress();
-
-        // Staggered Scroll Reveal Observer
-        const revealElements = document.querySelectorAll('.reveal');
-        if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, idx) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.classList.add('is-visible');
-                        }, Math.min(idx * 45, 180));
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
-
-            revealElements.forEach(el => observer.observe(el));
-        } else {
-            revealElements.forEach(el => el.classList.add('is-visible'));
-        }
     </script>
 </body>
 </html>
