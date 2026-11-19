@@ -109,7 +109,7 @@
         }
 
         @keyframes screenSwapIn {
-            from { opacity: 0.3; transform: translateY(7px); }
+            from { opacity: 0.35; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -118,7 +118,7 @@
         }
 
         .screen-animate {
-            animation: screenSwapIn 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: screenSwapIn 0.22s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1094,7 +1094,7 @@
                 <div class="zflip-chassis">
                     <div id="interactive-screen" class="zflip-screen">
                         <div class="zflip-camera"></div>
-                        <img id="real-screen-img" class="real-screenshot" src="screenshot-dashboard.jpg" alt="Rhythm App Preview on Galaxy Z Flip 6" onload="this.style.display='block'" onerror="handleScreenshotFallback(this)">
+                        <img id="real-screen-img" class="real-screenshot" alt="Rhythm App Preview on Galaxy Z Flip 6">
                         <div id="fallback-screen-ui" class="zflip-fallback">
                             <div>
                                 <span id="mock-badge" class="screen-badge">Inner Seasons</span>
@@ -1638,7 +1638,7 @@
 
         window.addEventListener('hashchange', syncModeFromHash);
 
-        /* 2. Galaxy Z Flip 6 Interactive Screen Preview */
+        /* 2. Galaxy Z Flip 6 Interactive Screen Preview (Zero-Flash Preloader) */
         const previewData = {
             seasons: {
                 baseName: "screenshot-dashboard",
@@ -1686,40 +1686,70 @@
             }
         };
 
-        let currentBaseName = "screenshot-dashboard";
+        const resolvedScreenshotCache = {};
+        let activePreviewRequest = 0;
 
-        function handleScreenshotFallback(imgEl) {
-            if (!imgEl.dataset.triedPng) {
-                imgEl.dataset.triedPng = "1";
-                imgEl.src = currentBaseName + ".png";
-            } else {
-                imgEl.style.display = "none";
-            }
+        function probeImage(url) {
+            return new Promise((resolve) => {
+                const probe = new Image();
+                probe.onload = () => resolve(url);
+                probe.onerror = () => resolve(null);
+                probe.src = url;
+            });
         }
 
-        function selectPreview(key, btnEl) {
+        async function resolveScreenshot(baseName) {
+            if (baseName in resolvedScreenshotCache) {
+                return resolvedScreenshotCache[baseName];
+            }
+            const jpgUrl = await probeImage(baseName + ".jpg");
+            if (jpgUrl) {
+                resolvedScreenshotCache[baseName] = jpgUrl;
+                return jpgUrl;
+            }
+            const pngUrl = await probeImage(baseName + ".png");
+            resolvedScreenshotCache[baseName] = pngUrl;
+            return pngUrl;
+        }
+
+        function preloadAllScreenshots() {
+            Object.values(previewData).forEach((item) => {
+                resolveScreenshot(item.baseName);
+            });
+        }
+
+        async function selectPreview(key, btnEl) {
             document.querySelectorAll('.screen-tab-btn').forEach(btn => btn.classList.remove('active'));
             if (btnEl) btnEl.classList.add('active');
 
             const data = previewData[key];
             if (!data) return;
 
-            currentBaseName = data.baseName;
+            const requestId = ++activePreviewRequest;
             const screenEl = document.getElementById('interactive-screen');
             const imgEl = document.getElementById('real-screen-img');
+            const fallbackEl = document.getElementById('fallback-screen-ui');
 
-            imgEl.style.display = 'none';
-            delete imgEl.dataset.triedPng;
-            imgEl.src = data.baseName + ".jpg";
+            const resolvedUrl = await resolveScreenshot(data.baseName);
 
-            document.getElementById('mock-badge').textContent = data.badge;
-            document.getElementById('mock-title').textContent = data.title;
-            document.getElementById('mock-sub').textContent = data.sub;
-            document.getElementById('mock-card1-title').textContent = data.c1Title;
-            document.getElementById('mock-card1-body').textContent = data.c1Body;
-            document.getElementById('mock-card2-title').textContent = data.c2Title;
-            document.getElementById('mock-card2-body').textContent = data.c2Body;
-            document.getElementById('mock-footer').textContent = data.footer;
+            if (requestId !== activePreviewRequest) return;
+
+            if (resolvedUrl) {
+                imgEl.src = resolvedUrl;
+                imgEl.style.display = 'block';
+                fallbackEl.style.visibility = 'hidden';
+            } else {
+                imgEl.style.display = 'none';
+                fallbackEl.style.visibility = 'visible';
+                document.getElementById('mock-badge').textContent = data.badge;
+                document.getElementById('mock-title').textContent = data.title;
+                document.getElementById('mock-sub').textContent = data.sub;
+                document.getElementById('mock-card1-title').textContent = data.c1Title;
+                document.getElementById('mock-card1-body').textContent = data.c1Body;
+                document.getElementById('mock-card2-title').textContent = data.c2Title;
+                document.getElementById('mock-card2-body').textContent = data.c2Body;
+                document.getElementById('mock-footer').textContent = data.footer;
+            }
 
             screenEl.classList.remove('screen-animate');
             void screenEl.offsetWidth;
@@ -1790,6 +1820,8 @@
         window.addEventListener('scroll', updateScrollProgress, { passive: true });
 
         /* Init */
+        preloadAllScreenshots();
+        selectPreview('seasons', document.querySelector('.screen-tab-btn'));
         switchShield('shared');
         syncModeFromHash();
         updateScrollProgress();
