@@ -6,9 +6,9 @@
     <title>Rhythm Cycle Tracker — Offline-First Period &amp; Wellness Tracker</title>
 
     <!-- Browser Tab Icon (Favicon - supports both .png and .jpg) -->
-    <link rel="icon" href="logo.png">
-    <link rel="icon" type="image/jpeg" href="logo.jpg">
-    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" href="logo_Edited.png">
+    <link rel="icon" type="image/jpeg" href="logo_Edited.jpg">
+    <link rel="apple-touch-icon" href="logo_Edited.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1484,7 +1484,7 @@
             </header>
 
             <div class="legal-toolbar">
-                <input type="search" id="privacy-search" class="search-input" placeholder="Filter Privacy Policy (e.g. QR, widget, PDF, PIN, 13+, foreground)..." oninput="filterClauses('panel-privacy', this.value)">
+                <input type="search" id="privacy-search" class="search-input" placeholder="Filter Privacy Policy (e.g. QR, widget, PDF, PIN, 18+, foreground)..." oninput="filterClauses('panel-privacy', this.value)">
                 <button type="button" id="privacy-expand-btn" class="toolbar-btn" onclick="toggleAllClauses('panel-privacy', this)">Expand All</button>
             </div>
 
@@ -1494,12 +1494,12 @@
                 <summary>
                     <div class="clause-summary-left">
                         <div class="clause-title-row"><span class="sec-num">01</span> Developer Identity &amp; Overview</div>
-                        <div class="clause-takeaway">Built by Pharos, an independent developer in India, with zero backend servers and no internet permission.</div>
+                        <div class="clause-takeaway">Built by SunGlade, an independent developer in India, with zero backend servers and no internet permission.</div>
                     </div>
                     <span class="clause-chevron">&#9662;</span>
                 </summary>
                 <div class="clause-body">
-                    <p>Rhythm Cycle Tracker (Android package ID: <code>in.tracker.cycle.rhythm</code>) is developed and published by <strong>Pharos</strong>, an independent developer based in India ("we", "us", or "our"). For any privacy questions, feedback, or data inquiries, you can reach us directly at <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a>.</p>
+                    <p>Rhythm Cycle Tracker (Android package ID: <code>in.tracker.cycle.rhythm</code>) is developed and published by <strong>SunGlade</strong>, an independent developer based in India ("we", "us", or "our"). For any privacy questions, feedback, or data inquiries, you can reach us directly at <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a>.</p>
                     <p>Rhythm is built with an offline-first architecture. We do not operate backend servers, user accounts, or remote databases. The application explicitly removes the Android <code>android.permission.INTERNET</code> permission from its manifest, meaning the app itself does not transmit your logged health records to us or any external server.</p>
                 </div>
             </details>
@@ -1581,7 +1581,7 @@
                                 </tr>
                                 <tr>
                                     <td><code>FOREGROUND_SERVICE</code></td>
-                                    <td>Merged automatically by Android WorkManager to support expedited local background tasks when required by the OS. Rhythm does not run persistent user-facing foreground services.</td>
+                                    <td>Merged by Android WorkManager. Rhythm does not use foreground or expedited work.</td>
                                 </tr>
                                 <tr>
                                     <td><code>com.android.vending.BILLING</code></td>
@@ -1663,7 +1663,7 @@
                             </ul>
                         </li>
                         <li><strong>Unencrypted Sync Format &amp; Transit Security Warning:</strong> Sync codes, JSON sync packages, QR code images, and text summaries are <strong>plain, readable text and are not encrypted</strong>—meaning anyone who obtains a QR image, file, or text summary can read all of the transferred information. When a user chooses to share a QR image, sync file, or plain-text summary through a third-party messaging app, SMS, email, or cloud service (such as WhatsApp, Telegram, or email), that shared artifact leaves Rhythm's local sandbox and becomes subject to the security, encryption, retention, and privacy practices of the chosen communication service.</li>
-                        <li><strong>Partner Device Storage &amp; Isolation:</strong> When a partner imports a sync package, the transferred cadence metrics, predictions, and care notes are stored locally on the partner's device in the app's private, OS-sandboxed Android Jetpack DataStore (separate from the SQLCipher-encrypted database). The partner can erase all synced partner data at any time via <strong>Settings &rarr; Partner Mode &rarr; Disconnect / Clear Synced Rhythm</strong> or <strong>Wipe All Data</strong>.</li>
+                        <li><strong>Partner Device Storage &amp; Isolation:</strong> When a partner imports a sync package, the period dates are saved in Rhythm's encrypted database and replace any period history already on that device. The sender's display name replaces the name set on that device. Predictions, cadence metrics, and care notes are kept in the app's private DataStore, which is not covered by the SQLCipher encryption. Rhythm shows a warning when you switch to Partner Mode on a phone that has your own logs. Export a backup first, or use Partner Mode on a phone where you don't track your own cycle.</li>
                     </ul>
                 </div>
             </details>
@@ -1691,7 +1691,7 @@
                 <summary>
                     <div class="clause-summary-left">
                         <div class="clause-title-row"><span class="sec-num">09</span> Data Retention, Security Summary &amp; Deletion</div>
-                        <div class="clause-takeaway">Data stays on-device until you tap Wipe All Data, Disconnect / Clear Synced Rhythm, clear storage, or uninstall.</div>
+                        <div class="clause-takeaway">Data stays on-device until you tap Wipe All App Data &amp; Settings, Disconnect / Clear Synced Rhythm, clear storage, or uninstall.</div>
                     </div>
                     <span class="clause-chevron">&#9662;</span>
                 </summary>
@@ -1699,8 +1699,8 @@
                     <p><strong>Security Summary:</strong> Your health logs are protected on-device via a 256-bit AES SQLCipher encrypted database, an Android Hardware Keystore-managed encryption key, optional PIN/biometric App Lock, peer-to-peer data minimization in Partner Mode, and zero internet permission requested by the app.</p>
                     <ul>
                         <li><strong>Local Retention Only:</strong> Your data stays exclusively on your device until you choose to delete it. Because Rhythm has no backend servers or user accounts, we hold zero copies of your records.</li>
-                        <li><strong>Permanent Deletion on Primary Device:</strong> Tapping <strong>Settings &rarr; Wipe All Data</strong> inside the app, clearing the app's storage in Android system settings, or uninstalling Rhythm permanently and irreversibly deletes all stored logs, history, and preferences from your device.</li>
-                        <li><strong>Partner Device Deletion ("Disconnect / Clear Synced Rhythm"):</strong> On a partner device, selecting <strong>Settings &rarr; Partner Mode &rarr; Disconnect / Clear Synced Rhythm</strong> immediately and irreversibly deletes synced partner periods, predictions, cadence metrics, and care notes from that device's local DataStore.</li>
+                        <li><strong>Permanent Deletion on Primary Device ("Wipe All App Data &amp; Settings"):</strong> Tapping <strong>Settings &rarr; Wipe All App Data &amp; Settings</strong> inside the app, clearing the app's storage in Android system settings, or uninstalling Rhythm permanently and irreversibly deletes all stored logs, history, and preferences from your device. It also removes your custom profile picture, any export files Rhythm saved in its own app folder, and your reminders. It can't delete files you exported or shared elsewhere.</li>
+                        <li><strong>Partner Device Deletion ("Disconnect / Clear Synced Rhythm"):</strong> On a partner device, <strong>Settings &rarr; Partner Mode &rarr; Disconnect / Clear Synced Rhythm</strong> deletes all period history and daily logs stored on that device (including any you entered yourself), the synced predictions, cadence metrics, care notes, and imported display name, cancels partner notifications, and refreshes home-screen widgets. Your theme, PIN, and other app settings are kept.</li>
                         <li><strong>Independent Life Cycles:</strong> Because Rhythm has no cloud server or live two-way sync link, deleting or resetting data on one phone does not automatically delete data already imported onto another phone.</li>
                         <li><strong>Exported &amp; Shared Files:</strong> Any PDF, CSV, JSON sync files, QR images, or text messages exported or shared outside Rhythm's sandbox must be managed or deleted manually by you.</li>
                     </ul>
@@ -1720,7 +1720,7 @@
                     <ul>
                         <li><strong>Access &amp; Correction:</strong> View or edit any logged period date, symptom, note, or profile field directly within the Calendar and Settings screens.</li>
                         <li><strong>Portability:</strong> Export your complete data in JSON, CSV, or PDF format via Settings.</li>
-                        <li><strong>Revoking Partner Sharing:</strong> Because Partner Companion Mode shares offline point-in-time snapshots rather than a live cloud stream, the primary user cannot remotely recall or erase data already imported onto a partner's device. To stop sharing future updates, stop generating or sending new sync codes/exports; to remove previously synced data, the partner must tap <strong>Settings &rarr; Partner Mode &rarr; Disconnect / Clear Synced Rhythm</strong> (or <strong>Wipe All Data</strong> / uninstall) on their own device.</li>
+                        <li><strong>Revoking Partner Sharing:</strong> Because Partner Companion Mode shares offline point-in-time snapshots rather than a live cloud stream, the primary user cannot remotely recall or erase data already imported onto a partner's device. To stop sharing future updates, stop generating or sending new sync codes/exports; to remove previously synced data, the partner must tap <strong>Settings &rarr; Partner Mode &rarr; Disconnect / Clear Synced Rhythm</strong> (or <strong>Wipe All App Data &amp; Settings</strong> / uninstall) on their own device.</li>
                         <li><strong>Questions or Grievances:</strong> Contact the developer at <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a>.</li>
                     </ul>
                 </div>
@@ -1729,15 +1729,15 @@
             <details class="clause-card">
                 <summary>
                     <div class="clause-summary-left">
-                        <div class="clause-title-row"><span class="sec-num">11</span> Age Requirement (13+) &amp; Minor Privacy</div>
-                        <div class="clause-takeaway">Intended for users aged 13+; minors 13–17 should review with a parent/guardian; zero server profiling for any age.</div>
+                        <div class="clause-title-row"><span class="sec-num">11</span> Age Requirement (13+ / 18+ for Partner Mode) &amp; Minor Privacy</div>
+                        <div class="clause-takeaway">Intended for users aged 13+ for personal tracking; Partner Companion Mode is available only to users aged 18 and older.</div>
                     </div>
                     <span class="clause-chevron">&#9662;</span>
                 </summary>
                 <div class="clause-body">
-                    <p>Rhythm is intended for users aged <strong>13 and older</strong>. We do not direct the application toward children under 13.</p>
+                    <p>Rhythm is intended for users aged <strong>13 and older</strong>. We do not direct the application toward children under 13. <strong>Partner Companion Mode is available only to users aged 18 and older.</strong></p>
                     <ul>
-                        <li><strong>Minors (Ages 13 to 17):</strong> If you are under the age of 18 (or the age of legal majority in your jurisdiction), please review this Privacy Policy, the Terms of Use, and the Medical Disclaimer with a parent or legal guardian before using the app (including before enabling Partner Companion Mode or sharing cycle cadence with another person). Optional tips via Google Play Billing require the permission of a parent or the legal account holder.</li>
+                        <li><strong>Minors (Ages 13 to 17):</strong> If you are under the age of 18 (or the age of legal majority in your jurisdiction), please review this Privacy Policy, the Terms of Use, and the Medical Disclaimer with a parent or legal guardian before using the app. Users under 18 may not enable Partner Companion Mode or share cycle data through it. Optional tips via Google Play Billing require the permission of a parent or the legal account holder.</li>
                         <li><strong>No Server Collection or Profiling of Minors:</strong> Because Rhythm stores all logs locally on the user's device and includes no analytics, advertising, or network transmission capabilities, we do not collect, store on external servers, or behaviorally profile personal data from users of any age.</li>
                     </ul>
                 </div>
@@ -1802,7 +1802,7 @@
                 <summary>
                     <div class="clause-summary-left">
                         <div class="clause-title-row"><span class="sec-num">14</span> Partner Mode: Mutual Consent &amp; Responsible Sharing</div>
-                        <div class="clause-takeaway">Share only with explicit mutual consent and zero coercion; Partner Mode is an offline snapshot for empathetic care, not live monitoring.</div>
+                        <div class="clause-takeaway">18+ only; share only with explicit mutual consent and zero coercion; Partner Mode is an offline snapshot for empathetic care, not live monitoring.</div>
                     </div>
                     <span class="clause-chevron">&#9662;</span>
                 </summary>
@@ -1810,7 +1810,7 @@
                     <ul>
                         <li><strong>Mutual Consent Mandate:</strong> You agree to use Partner Companion Mode and share rhythm data, QR codes, sync packages, or text summaries only with partners who have explicitly consented to receiving that information. You must never export, scan, import, or share another person's cycle or health data without their clear, informed consent.</li>
                         <li><strong>No Pressure or Coercion:</strong> Never require, pressure, or coerce anyone into sharing or receiving cycle data. Sharing is a personal choice that can be stopped at any time.</li>
-                        <li><strong>Intended Use for Care &amp; Emotional Support:</strong> Partner Companion Mode is provided solely to support mutual empathy, thoughtful daily care gestures, and communication between consenting partners. The developer is not responsible for interpersonal misunderstandings, relationship disputes, emotional reactions, or decisions made based on algorithmic estimates or care suggestions in the Partner Guide.</li>
+                        <li><strong>Intended Use for Care &amp; Emotional Support:</strong> Partner Companion Mode is provided solely to support mutual empathy, thoughtful daily care gestures, and communication between consenting adult partners (aged 18 and older). The developer is not responsible for interpersonal misunderstandings, relationship disputes, emotional reactions, or decisions made based on algorithmic estimates or care suggestions in the Partner Guide.</li>
                         <li><strong>Offline Snapshot &amp; No Real-Time Guarantee:</strong> Rhythm does not provide live real-time tracking, continuous background syncing, or location/status monitoring. Any data displayed on a partner's device represents an offline snapshot from the last time a manual sync occurred and may be out of date or inaccurate if cycles shift, are delayed, or are affected by stress, illness, travel, or hormonal changes.</li>
                     </ul>
                 </div>
@@ -1867,7 +1867,7 @@
                 <div class="clause-body">
                     <p>These Terms of Use and Privacy Policy are governed by the laws of <strong>India</strong>, and any disputes arising out of or relating to the application shall be subject to the exclusive jurisdiction of the <strong>courts at Nagpur, Maharashtra, India</strong>, without prejudice to mandatory consumer protection or data privacy provisions applicable in your country of residence.</p>
                     <p><strong>Developer &amp; Grievance Contact:</strong><br>
-                    Developer: Pharos<br>
+                    Developer: SunGlade<br>
                     Location: Nagpur, Maharashtra, India<br>
                     Email: <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a><br>
                     Instagram: <a href="https://www.instagram.com/rhythm_cycletracker?bqrl=MWkycDMzNnY1MTE1eA==" target="_blank" rel="noopener">@rhythm_cycletracker</a></p>
@@ -1876,7 +1876,7 @@
         </section>
 
         <footer>
-            <span>&copy; 2026 Pharos &bull; Rhythm Cycle Tracker.</span>
+            <span>&copy; 2026 SunGlade &bull; Rhythm Cycle Tracker.</span>
             <span>
                 <a href="https://www.instagram.com/rhythm_cycletracker?bqrl=MWkycDMzNnY1MTE1eA==" target="_blank" rel="noopener">Instagram</a> &bull;
                 <a href="mailto:admin.rhythm@gmail.com">Contact</a>
@@ -1991,7 +1991,7 @@
                 c1Title: "Hardware Keystore",
                 c1Body: "AES-256 encrypted • Cloud backup off.",
                 c2Title: "Instant Erasure",
-                c2Body: "Wipe All Data or Disconnect / Clear Synced Rhythm.",
+                c2Body: "Wipe All App Data & Settings or Disconnect / Clear Synced Rhythm.",
                 footer: "Built for On-Device Privacy",
                 capTitle: "Vault & Portability",
                 capDesc: "Biometric lock, Discreet Mode & shareable PDF summaries."
