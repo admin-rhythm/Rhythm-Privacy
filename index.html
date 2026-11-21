@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Rhythm Cycle Tracker — Offline-First Period &amp; Wellness Tracker</title>
+    <meta name="description" content="Effortless menstrual cycle tracking, daily wellness companions, and offline partner sync—with AES-256 local encryption, zero cloud servers, and zero ads.">
+
+    <!-- Mobile Browser Address Bar Theme Colors -->
+    <meta name="theme-color" content="#FAFAFC" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0A0A0D" media="(prefers-color-scheme: dark)">
+
+    <!-- Open Graph / WhatsApp / Instagram / Reddit Link Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://admin-rhythm.github.io/Rhythm-Privacy/">
+    <meta property="og:title" content="Rhythm Cycle Tracker — Your cycle. Your phone. Nobody else's.">
+    <meta property="og:description" content="100% offline-first cycle tracker with SQLCipher AES-256 encryption, Inner Seasons, vibe-matched companions, and peer-to-peer Partner Mode.">
+    <meta property="og:image" content="https://admin-rhythm.github.io/Rhythm-Privacy/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rhythm Cycle Tracker — Offline-First Period Tracker">
+    <meta name="twitter:description" content="Zero cloud servers. Zero ads. Encrypted on your device.">
+    <meta name="twitter:image" content="https://admin-rhythm.github.io/Rhythm-Privacy/logo.png">
 
     <!-- Browser Tab Icon (Favicon - supports both .png and .jpg) -->
-    <link rel="icon" href="logo_Edited.png">
-    <link rel="icon" type="image/jpeg" href="logo_Edited.jpg">
-    <link rel="apple-touch-icon" href="logo_Edited.png">
+    <link rel="icon" href="logo.png">
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <link rel="apple-touch-icon" href="logo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +43,8 @@
             --green: #059669;
             --green-soft: rgba(5, 150, 105, 0.09);
             --green-border: rgba(5, 150, 105, 0.24);
+            --red: #DC2626;
+            --red-soft: rgba(220, 38, 38, 0.08);
             --border: rgba(17, 17, 21, 0.08);
             --warn-bg: #FFF9F8;
             --warn-border: rgba(220, 38, 38, 0.22);
@@ -54,6 +72,8 @@
                 --green: #34D399;
                 --green-soft: rgba(52, 211, 153, 0.11);
                 --green-border: rgba(52, 211, 153, 0.26);
+                --red: #F87171;
+                --red-soft: rgba(248, 113, 113, 0.12);
                 --border: rgba(255, 255, 255, 0.08);
                 --warn-bg: rgba(127, 29, 29, 0.15);
                 --warn-border: rgba(248, 113, 113, 0.28);
@@ -302,7 +322,7 @@
             line-height: 1.48;
         }
 
-        /* Google Play Download CTA Button */
+        /* Google Play Download CTA + Secondary Actions */
         .cta-stack {
             display: flex;
             flex-direction: column;
@@ -311,19 +331,28 @@
             margin-bottom: 22px;
         }
 
+        .cta-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 9px;
+            width: 100%;
+        }
+
         .play-cta {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 11px;
-            min-height: 52px;
-            padding: 12px 26px;
+            min-height: 50px;
+            padding: 12px 24px;
             border-radius: 999px;
             background: var(--cta-bg);
             color: var(--cta-text);
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.96rem;
+            font-size: 0.94rem;
             letter-spacing: -0.01em;
             box-shadow: var(--shadow-md);
             transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.16s ease;
@@ -335,14 +364,40 @@
             text-decoration: none;
         }
 
-        .play-cta:active {
-            transform: scale(0.97);
+        .play-cta:active { transform: scale(0.97); }
+
+        .play-cta svg { width: 19px; height: 19px; flex-shrink: 0; }
+
+        .ghost-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            min-height: 50px;
+            padding: 11px 16px;
+            border-radius: 999px;
+            background: var(--surface);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.16s ease;
         }
 
-        .play-cta svg {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
+        .ghost-cta:hover {
+            border-color: var(--accent-border);
+            background: var(--surface-subtle);
+        }
+
+        .ghost-cta:active { transform: scale(0.97); }
+        .ghost-cta svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+        .desktop-only-btn { display: inline-flex; }
+        @media (max-width: 720px) {
+            .desktop-only-btn { display: none; }
         }
 
         .trust-micro {
@@ -374,7 +429,9 @@
             .hero { padding: 20px 0 18px; }
             .logo-frame { width: 56px; height: 56px; border-radius: 15px; margin-bottom: 10px; }
             .logo-inner { border-radius: 12.5px; }
-            .play-cta { width: 100%; max-width: 310px; }
+            .cta-row { flex-wrap: nowrap; max-width: 340px; }
+            .play-cta { flex: 1; padding: 12px 16px; font-size: 0.9rem; }
+            .ghost-cta { padding: 11px 14px; }
             .stat-strip { grid-template-columns: repeat(2, 1fr); gap: 6px; }
         }
 
@@ -400,6 +457,78 @@
             color: var(--text-muted);
             font-family: 'JetBrains Mono', monospace;
         }
+
+        /* Desktop Scan-to-Install QR Modal */
+        .qr-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            background: rgba(10, 10, 15, 0.62);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .qr-modal-backdrop.open { display: flex; }
+
+        .qr-modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 26px 24px 22px;
+            max-width: 320px;
+            width: 100%;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            animation: fadeSlideIn 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .qr-modal h3 {
+            font-size: 1.06rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .qr-modal p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .qr-box {
+            background: #FFFFFF;
+            padding: 12px;
+            border-radius: 16px;
+            display: inline-block;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            margin-bottom: 16px;
+        }
+
+        .qr-box img {
+            width: 176px;
+            height: 176px;
+            display: block;
+            border-radius: 6px;
+        }
+
+        .qr-close-btn {
+            width: 100%;
+            min-height: 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface-subtle);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .qr-close-btn:hover { background: var(--accent-soft); border-color: var(--accent-border); }
 
         /* Compact Dedicated Legal Tab Header */
         .doc-header {
@@ -706,7 +835,7 @@
             .mobile-swipe-meta { display: block; }
         }
 
-        /* 1-Second Visual Privacy Shield (Chip Badges Instead of Paragraphs) */
+        /* 1-Second Visual Privacy Shield */
         .shield-inspector {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -801,7 +930,92 @@
             .shield-chip { font-size: 0.76rem; padding: 6px 10px; }
         }
 
-        /* Ultra-Scannable Visual Feature Deck (Swipeable on Phone) */
+        /* Compact Rhythm vs. Cloud Trackers Comparison */
+        .compare-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .compare-card h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1.35fr 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            overflow: hidden;
+            font-size: 0.82rem;
+        }
+
+        .compare-cell {
+            background: var(--surface);
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .compare-cell.head {
+            background: var(--surface-subtle);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.69rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .compare-cell.head.rhythm-col {
+            color: var(--accent);
+        }
+
+        .compare-cell.metric {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .badge-good {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 700;
+            color: var(--green);
+            background: var(--green-soft);
+            padding: 3px 9px;
+            border-radius: 999px;
+            font-size: 0.76rem;
+        }
+
+        .badge-bad {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+            color: var(--red);
+            background: var(--red-soft);
+            padding: 3px 9px;
+            border-radius: 999px;
+            font-size: 0.76rem;
+        }
+
+        @media (max-width: 620px) {
+            .compare-card { padding: 15px 14px; border-radius: 18px; }
+            .compare-grid { font-size: 0.76rem; }
+            .compare-cell { padding: 9px 8px; }
+            .badge-good, .badge-bad { font-size: 0.7rem; padding: 3px 7px; }
+        }
+
+        /* Ultra-Scannable Visual Feature Deck (Swipeable on Phone + Live Dots) */
         .bento-header-mobile {
             display: none;
             align-items: center;
@@ -876,15 +1090,41 @@
             border: 1px solid var(--border);
         }
 
+        .carousel-dots {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin: -6px 0 16px;
+        }
+
+        .carousel-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--border);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .carousel-dot.active {
+            width: 18px;
+            background: var(--accent);
+        }
+
         @media (max-width: 720px) {
             .bento-header-mobile { display: flex; }
+            .carousel-dots { display: flex; }
             .feature-bento {
                 display: flex;
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
                 gap: 10px;
-                padding-bottom: 4px;
+                padding-bottom: 6px;
+                margin-bottom: 12px;
                 margin-left: -16px;
                 margin-right: -16px;
                 padding-left: 16px;
@@ -893,7 +1133,7 @@
             }
             .feature-bento::-webkit-scrollbar { display: none; }
             .feature-tile {
-                flex: 0 0 78%;
+                flex: 0 0 80%;
                 scroll-snap-align: start;
                 padding: 16px 15px;
                 border-radius: 16px;
@@ -1266,12 +1506,38 @@
                 </p>
 
                 <div id="hero-cta-anchor" class="cta-stack">
-                    <a class="play-cta" href="https://play.google.com/store/apps/details?id=in.tracker.cycle.rhythm" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M3.609 1.814L13.792 12 3.61 22.186a1.99 1.99 0 0 1-.61-1.436V3.25c0-.56.23-1.066.609-1.436zm11.244 11.244l2.742 2.742-11.298 6.456 8.556-9.198zm3.74-3.74l2.14 1.223c.823.47.823 1.658 0 2.128l-2.14 1.223-3.035-3.035 3.035-1.539zM6.297 1.744l11.298 6.456-2.742 2.742-8.556-9.198z"/>
-                        </svg>
-                        Get it on Google Play
-                    </a>
+                    <div class="cta-row">
+                        <a class="play-cta" href="https://play.google.com/store/apps/details?id=in.tracker.cycle.rhythm" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M3.609 1.814L13.792 12 3.61 22.186a1.99 1.99 0 0 1-.61-1.436V3.25c0-.56.23-1.066.609-1.436zm11.244 11.244l2.742 2.742-11.298 6.456 8.556-9.198zm3.74-3.74l2.14 1.223c.823.47.823 1.658 0 2.128l-2.14 1.223-3.035-3.035 3.035-1.539zM6.297 1.744l11.298 6.456-2.742 2.742-8.556-9.198z"/>
+                            </svg>
+                            Get it on Google Play
+                        </a>
+
+                        <!-- Desktop Scan-to-Install QR Trigger -->
+                        <button type="button" class="ghost-cta desktop-only-btn" onclick="toggleQrModal(true)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                                <path d="M14 14h3v3h-3zM18 18h3v3h-3zM14 20h1M20 14h1"></path>
+                            </svg>
+                            Scan on Android
+                        </button>
+
+                        <!-- Native Mobile Share / Clipboard Fallback -->
+                        <button type="button" id="share-btn" class="ghost-cta" onclick="shareRhythm()" aria-label="Share Rhythm">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="18" cy="5" r="3"></circle>
+                                <circle cx="6" cy="12" r="3"></circle>
+                                <circle cx="18" cy="19" r="3"></circle>
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                            </svg>
+                            <span id="share-btn-label">Share</span>
+                        </button>
+                    </div>
+
                     <div class="trust-micro">
                         <span>&#10003; Free to use</span>
                         <span>&#10003; No Account</span>
@@ -1382,12 +1648,39 @@
                 <div id="shield-note" class="shield-note"></div>
             </div>
 
-            <!-- Zero-Reading Swipeable Feature Deck -->
+            <!-- Compact Rhythm vs. Cloud Trackers Proof -->
+            <div class="compare-card">
+                <span class="tile-tag" style="margin-bottom:2px;">Why Switch?</span>
+                <h3>Rhythm vs. Cloud Trackers</h3>
+                <div class="compare-grid" role="table" aria-label="Rhythm vs Cloud Trackers">
+                    <div class="compare-cell head">Privacy Check</div>
+                    <div class="compare-cell head rhythm-col">Rhythm</div>
+                    <div class="compare-cell head">Typical Apps</div>
+
+                    <div class="compare-cell metric">Account Required</div>
+                    <div class="compare-cell"><span class="badge-good">&#10003; None</span></div>
+                    <div class="compare-cell"><span class="badge-bad">&#10007; Sign-up</span></div>
+
+                    <div class="compare-cell metric">Cloud Servers</div>
+                    <div class="compare-cell"><span class="badge-good">&#10003; Zero</span></div>
+                    <div class="compare-cell"><span class="badge-bad">&#10007; Synced</span></div>
+
+                    <div class="compare-cell metric">Internet Permission</div>
+                    <div class="compare-cell"><span class="badge-good">&#10003; Stripped</span></div>
+                    <div class="compare-cell"><span class="badge-bad">&#10007; Always On</span></div>
+
+                    <div class="compare-cell metric">Ads &amp; Trackers</div>
+                    <div class="compare-cell"><span class="badge-good">&#10003; Zero</span></div>
+                    <div class="compare-cell"><span class="badge-bad">&#10007; Analytics</span></div>
+                </div>
+            </div>
+
+            <!-- Zero-Reading Swipeable Feature Deck + Live Pagination Dots -->
             <div class="bento-header-mobile">
                 <span>INSIDE RHYTHM</span>
                 <span>Swipe &rarr;</span>
             </div>
-            <div class="feature-bento">
+            <div id="feature-bento" class="feature-bento">
                 <div class="feature-tile">
                     <div>
                         <span class="tile-tag">Daily Logging</span>
@@ -1443,6 +1736,12 @@
                     </div>
                 </div>
             </div>
+            <div id="carousel-dots" class="carousel-dots" aria-label="Feature slides">
+                <button type="button" class="carousel-dot active" aria-label="Slide 1" onclick="scrollFeatureTo(0)"></button>
+                <button type="button" class="carousel-dot" aria-label="Slide 2" onclick="scrollFeatureTo(1)"></button>
+                <button type="button" class="carousel-dot" aria-label="Slide 3" onclick="scrollFeatureTo(2)"></button>
+                <button type="button" class="carousel-dot" aria-label="Slide 4" onclick="scrollFeatureTo(3)"></button>
+            </div>
 
             <!-- Final Download Conversion Card -->
             <div class="final-cta-card">
@@ -1477,7 +1776,7 @@
                 <h1>Privacy Policy</h1>
                 <p>How Rhythm Cycle Tracker stores your data locally, protects your privacy on-device, and handles peer-to-peer Partner Companion sync.</p>
                 <div class="meta-bar">
-                    <div class="meta-item"><strong>Effective &amp; Last Updated:</strong> November 20, 2026</div>
+                    <div class="meta-item"><strong>Effective &amp; Last Updated:</strong> November 21, 2026</div>
                     <div class="meta-item"><strong>Package ID:</strong> <code>in.tracker.cycle.rhythm</code></div>
                     <div class="meta-item"><strong>Contact:</strong> <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a></div>
                 </div>
@@ -1508,7 +1807,7 @@
                 <summary>
                     <div class="clause-summary-left">
                         <div class="clause-title-row"><span class="sec-num">02</span> Information Stored Locally on Your Device</div>
-                        <div class="clause-takeaway">Cycle logs live in an AES-256 SQLCipher database; settings, widget values &amp; partner-sync cache live in sandboxed DataStore; OS cloud backups are disabled.</div>
+                        <div class="clause-takeaway">Cycle logs live in an AES-256 SQLCipher database; age, optional profile settings, widget values &amp; partner-sync cache live in sandboxed DataStore; OS cloud backups are disabled.</div>
                     </div>
                     <span class="clause-chevron">&#9662;</span>
                 </summary>
@@ -1516,7 +1815,7 @@
                     <p>All cycle and wellness information you enter into Rhythm is stored exclusively on your physical device:</p>
                     <ul>
                         <li><strong>Cycle &amp; Wellness Logs (Encrypted Database):</strong> Period start and end dates, period irregularity flags, flow intensity, flow texture (such as fluid, spotting, or clots), menstrual product used, pain levels, physical symptoms, mood, energy levels, sleep quality, digestion, skin observations, physical activity levels, medication notes, medication-effectiveness checkboxes, hydration counts, cervical mucus observations, and personal daily notes are stored in a local Room SQLite database encrypted at rest using <strong>SQLCipher (256-bit AES)</strong> with keys managed by the Android Hardware Keystore.</li>
-                        <li><strong>Profile, Settings, Partner-Sync Cache, Custom Avatar &amp; Widget Summary Storage (Private Sandbox):</strong> Optional profile details (such as display name, age, gender/sex, height, weight, wellness goals, and cycle tracking mode), app settings (such as PIN configuration and reminder preferences), current cycle status values displayed on home-screen widgets (current cycle day, phase name, days until next period, and companion icon), and imported Partner Companion Mode predictions, cadence metrics, and care notes are kept in the application's private, OS-sandboxed Android Jetpack DataStore storage, which is separate from the SQLCipher-encrypted database. If you select a custom profile picture, the selected image is copied into the app's private internal file directory (<code>filesDir</code>).</li>
+                        <li><strong>Profile, Settings, Partner-Sync Cache, Custom Avatar &amp; Widget Summary Storage (Private Sandbox):</strong> Your <strong>age</strong> is requested during initial setup to apply Rhythm's age limits. Optional profile details (such as display name, gender/sex, height, weight, wellness goals, and cycle tracking mode), app settings (such as PIN configuration and reminder preferences), current cycle status values displayed on home-screen widgets (current cycle day, phase name, days until next period, and companion icon), and imported Partner Companion Mode predictions, cadence metrics, and care notes are kept in the application's private, OS-sandboxed Android Jetpack DataStore storage, which is separate from the SQLCipher-encrypted database. If you select a custom profile picture, the selected image is copied into the app's private internal file directory (<code>filesDir</code>).</li>
                         <li><strong>OS Cloud Backups Disabled:</strong> Automatic operating-system cloud backups (Google Drive device backup) and ADB device-to-device transfers are explicitly disabled (<code>allowBackup="false"</code>) for Rhythm's database and preference directories so your logs are not uploaded to cloud storage without your knowledge.</li>
                     </ul>
                 </div>
@@ -1735,9 +2034,9 @@
                     <span class="clause-chevron">&#9662;</span>
                 </summary>
                 <div class="clause-body">
-                    <p>Rhythm is intended for users aged <strong>13 and older</strong>. We do not direct the application toward children under 13. <strong>Partner Companion Mode is available only to users aged 18 and older.</strong></p>
+                    <p>Rhythm is intended for users aged <strong>13 and older</strong>. Rhythm asks for your age during initial setup; if you enter an age under 13, the app does not let you continue. Rhythm relies on the age you enter and does not independently verify it. You can update your age later in Settings, except while Partner Companion Mode is active. <strong>Partner Companion Mode is available only when the age entered is 18 or older.</strong></p>
                     <ul>
-                        <li><strong>Minors (Ages 13 to 17):</strong> If you are under the age of 18 (or the age of legal majority in your jurisdiction), please review this Privacy Policy, the Terms of Use, and the Medical Disclaimer with a parent or legal guardian before using the app. Users under 18 may not enable Partner Companion Mode or share cycle data through it. Optional tips via Google Play Billing require the permission of a parent or the legal account holder.</li>
+                        <li><strong>Minors (Ages 13 to 17):</strong> If you enter an age under 18, all Partner Companion Mode features are hidden, including generating or scanning sync QR codes. You can still back up your data and export CSV or PDF summaries—for example, to share with a doctor. Please review this Privacy Policy, the Terms of Use, and the Medical Disclaimer with a parent or legal guardian before using the app. Because age is self-declared, parents and guardians remain responsible for how Rhythm is used by a minor in their care. Optional tips via Google Play Billing require the permission of a parent or the legal account holder.</li>
                         <li><strong>No Server Collection or Profiling of Minors:</strong> Because Rhythm stores all logs locally on the user's device and includes no analytics, advertising, or network transmission capabilities, we do not collect, store on external servers, or behaviorally profile personal data from users of any age.</li>
                     </ul>
                 </div>
@@ -1764,7 +2063,7 @@
                 <h1>Terms of Use &amp; Legal Disclaimers</h1>
                 <p>Informational wellness scope, Partner Companion Mode consent rules, open-source licenses, and governing jurisdiction.</p>
                 <div class="meta-bar">
-                    <div class="meta-item"><strong>Effective &amp; Last Updated:</strong> November 20, 2026</div>
+                    <div class="meta-item"><strong>Effective &amp; Last Updated:</strong> November 21, 2026</div>
                     <div class="meta-item"><strong>Jurisdiction:</strong> Nagpur, Maharashtra, India</div>
                     <div class="meta-item"><strong>Contact:</strong> <a href="mailto:admin.rhythm@gmail.com">admin.rhythm@gmail.com</a></div>
                 </div>
@@ -1883,6 +2182,18 @@
             </span>
         </footer>
     </main>
+
+    <!-- Desktop Scan-to-Install QR Modal -->
+    <div id="qr-modal-backdrop" class="qr-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="qr-modal-title" onclick="if(event.target === this) toggleQrModal(false)">
+        <div class="qr-modal">
+            <h3 id="qr-modal-title">Install on Android</h3>
+            <p>Point your phone camera at the code to open Rhythm on Google Play.</p>
+            <div class="qr-box">
+                <img src="play-qr.png" alt="Google Play QR code for Rhythm Cycle Tracker" onerror="if(!this.dataset.fallback){this.dataset.fallback=1;this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Din.tracker.cycle.rhythm';}">
+            </div>
+            <button type="button" class="qr-close-btn" onclick="toggleQrModal(false)">Close</button>
+        </div>
+    </div>
 
     <!-- Sticky Mobile Download Bar (Appears on Product Tab After Scrolling Past Hero) -->
     <div id="sticky-download" class="sticky-download-bar" aria-label="Download Rhythm">
@@ -2143,7 +2454,62 @@
             document.getElementById('shield-note').textContent = shieldData[mode].note;
         }
 
-        /* 4. Legal Search & Expand/Collapse All */
+        /* 4. Desktop QR Modal & Native Mobile Share */
+        function toggleQrModal(open) {
+            const modal = document.getElementById('qr-modal-backdrop');
+            modal.classList.toggle('open', open);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') toggleQrModal(false);
+        });
+
+        async function shareRhythm() {
+            const shareUrl = window.location.origin + window.location.pathname;
+            const labelEl = document.getElementById('share-btn-label');
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Rhythm Cycle Tracker',
+                        text: '100% offline-first menstrual cycle tracker with AES-256 encryption, zero cloud servers, and zero ads.',
+                        url: shareUrl
+                    });
+                    return;
+                } catch (err) {
+                    if (err && err.name === 'AbortError') return;
+                }
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                try {
+                    await navigator.clipboard.writeText(shareUrl);
+                    labelEl.textContent = 'Copied!';
+                    setTimeout(() => { labelEl.textContent = 'Share'; }, 1800);
+                } catch (_) {}
+            }
+        }
+
+        /* 5. Mobile Feature Carousel Live Pagination Dots */
+        const featureBento = document.getElementById('feature-bento');
+        const carouselDots = document.querySelectorAll('#carousel-dots .carousel-dot');
+
+        function scrollFeatureTo(index) {
+            const tiles = featureBento.querySelectorAll('.feature-tile');
+            if (tiles[index]) {
+                tiles[index].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+            }
+        }
+
+        if (featureBento && carouselDots.length) {
+            featureBento.addEventListener('scroll', () => {
+                const tiles = featureBento.querySelectorAll('.feature-tile');
+                if (!tiles.length) return;
+                const tileWidth = tiles[0].offsetWidth + 10;
+                const activeIdx = Math.max(0, Math.min(tiles.length - 1, Math.round(featureBento.scrollLeft / tileWidth)));
+                carouselDots.forEach((dot, i) => dot.classList.toggle('active', i === activeIdx));
+            }, { passive: true });
+        }
+
+        /* 6. Legal Search & Expand/Collapse All */
         function filterClauses(panelId, query) {
             const panel = document.getElementById(panelId);
             const cards = panel.querySelectorAll('details.clause-card');
@@ -2169,7 +2535,7 @@
             btnEl.textContent = allOpen ? 'Expand All' : 'Collapse All';
         }
 
-        /* 5. Scroll Progress & Sticky Mobile Download Bar */
+        /* 7. Scroll Progress & Sticky Mobile Download Bar */
         const progressBar = document.getElementById('scroll-progress');
         const stickyBar = document.getElementById('sticky-download');
         const heroCta = document.getElementById('hero-cta-anchor');
